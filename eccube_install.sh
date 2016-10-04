@@ -206,6 +206,9 @@ case "${DBTYPE}" in
     echo "dropdb..."
     ${PSQL} -h ${DBSERVER} -U ${PGUSER} -c "drop database ${DBNAME}"
 
+    echo "createuser..."
+    ${PSQL} -h ${DBSERVER} -U ${PGUSER} -c "create role ${DBUSER} with login PASSWORD '${DBPASS}'"
+
     echo "createdb..."
     ${PSQL} -h ${DBSERVER} -U ${PGUSER} -c "create database ${DBNAME} owner ${DBUSER}"
 
