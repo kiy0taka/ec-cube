@@ -79,6 +79,8 @@ export MAIL_PORT=${MAIL_PORT:-"25"}
 export MAIL_USER=${MAIL_USER:-""}
 export MAIL_PASS=${MAIL_PASS:-""}
 
+export COMPOSER_VENDOR_DIR=${COMPOSER_VENDOR_DIR:-"./vendor"}
+
 DBTYPE=$1;
 GET_COMPOSER=$2;
 
@@ -213,7 +215,7 @@ case "${DBTYPE}" in
     ${PSQL} -h ${DBSERVER} -U ${PGUSER} -c "create database ${DBNAME} owner ${DBUSER}"
 
     echo "create table..."
-    ./vendor/bin/doctrine orm:schema-tool:create || exit 1
+    ${COMPOSER_VENDOR_DIR}/bin/doctrine orm:schema-tool:create || exit 1
 
     echo "migration..."
     php app/console migrations:migrate --no-interaction || exit 1
@@ -239,7 +241,7 @@ case "${DBTYPE}" in
     ${MYSQL} -h ${DBSERVER} -u ${ROOTUSER} ${PASSOPT} -e "GRANT ALL ON \`${DBNAME}\`.* TO '${DBUSER}'@'%' IDENTIFIED BY '${DBPASS}'"
 
     echo "create table..."
-    ./vendor/bin/doctrine orm:schema-tool:create || exit 1
+    ${COMPOSER_VENDOR_DIR}/bin/doctrine orm:schema-tool:create || exit 1
 
     echo "migration..."
     php app/console migrations:migrate  --no-interaction || exit 1
@@ -252,7 +254,7 @@ case "${DBTYPE}" in
     echo "removedb..."
     rm -v ${DBPATH}
     echo "create table..."
-   ./vendor/bin/doctrine orm:schema-tool:create || exit 1
+   ${COMPOSER_VENDOR_DIR}/bin/doctrine orm:schema-tool:create || exit 1
 
     echo "migration..."
     php app/console migrations:migrate --no-interaction || exit 1

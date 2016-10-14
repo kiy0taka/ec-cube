@@ -12,7 +12,7 @@ if (extension_loaded('wincache')) {
     ini_set('wincache.fcenabled', 1);
 }
 
-$autoload = __DIR__.'/vendor/autoload.php';
+$autoload = (getenv('COMPOSER_VENDOR_DIR') ?: (__DIR__ . '/vendor')).'/autoload.php';
 
 if (file_exists($autoload) && is_readable($autoload)) {
     $loader = require $autoload;
