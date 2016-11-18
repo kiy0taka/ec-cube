@@ -24,6 +24,8 @@
 
 namespace Eccube\Entity;
 
+use Symfony\Component\Intl\Exception\NotImplementedException;
+
 class Cart extends \Eccube\Entity\AbstractEntity
 {
     /**
@@ -95,21 +97,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
      */
     public function setCartItem(\Eccube\Entity\CartItem $AddCartItem)
     {
-        $find = false;
-        foreach ($this->CartItems as $CartItem) {
-            if ($CartItem->getClassName() === $AddCartItem->getClassName() && $CartItem->getClassId() === $AddCartItem->getClassId()) {
-                $find = true;
-                $CartItem
-                    ->setPrice($AddCartItem->getPrice())
-                    ->setQuantity($AddCartItem->getQuantity());
-            }
-        }
-
-        if (!$find) {
-            $this->addCartItem($AddCartItem);
-        }
-
-        return $this;
+        throw new NotImplementedException("TODO");
     }
 
     /**
@@ -118,9 +106,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
      */
     public function addCartItem(CartItem $CartItem)
     {
-        $this->CartItems[] = $CartItem;
-
-        return $this;
+        throw new NotImplementedException("TODO");
     }
 
     /**
@@ -184,12 +170,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
      */
     public function getTotalPrice()
     {
-        $totalPrice = 0;
-        foreach ($this->CartItems as $CartItem) {
-            $totalPrice += $CartItem->getTotalPrice();
-        }
-
-        return $totalPrice;
+        throw new NotImplementedException("TODO");
     }
 
     /**
@@ -197,12 +178,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
      */
     public function getTotalQuantity()
     {
-        $totalQuantity = 0;
-        foreach ($this->CartItems as $CartItem) {
-            $totalQuantity += $CartItem->getQuantity();
-        }
-
-        return $totalQuantity;
+        throw new NotImplementedException("TODO");
     }
 
     /**
