@@ -24,6 +24,10 @@
 
 namespace Eccube\Entity;
 
+/**
+ * Class CartItem カート商品
+ * @package Eccube\Entity
+ */
 class CartItem extends \Eccube\Entity\AbstractEntity
 {
 
@@ -43,8 +47,9 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @param  string   $class_name
-     * @return CartItem
+     * 規格名を設定
+     * @param  string   $class_name 規格名
+     * @return CartItem このカート商品自身
      */
     public function setClassName($class_name)
     {
@@ -54,7 +59,8 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return string
+     * 規格名を取得
+     * @return string 規格名
      */
     public function getClassName()
     {
@@ -62,8 +68,9 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @param  string   $class_id
-     * @return CartItem
+     * 規格IDを設定
+     * @param  string   $class_id 規格ID
+     * @return CartItem このカート商品自身
      */
     public function setClassId($class_id)
     {
@@ -73,7 +80,8 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return string
+     * 規格IDを取得
+     * @return string 規格ID
      */
     public function getClassId()
     {
@@ -81,8 +89,9 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @param  integer  $price
-     * @return CartItem
+     * 価格を設定
+     * @param  integer  $price 価格
+     * @return CartItem このカート商品自身
      */
     public function setPrice($price)
     {
@@ -92,7 +101,8 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return integer
+     * 価格を取得
+     * @return integer 価格
      */
     public function getPrice()
     {
@@ -100,8 +110,9 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @param  integer  $quantity
-     * @return CartItem
+     * 数量を設定
+     * @param  integer  $quantity 数量
+     * @return CartItem このカート商品自身
      */
     public function setQuantity($quantity)
     {
@@ -111,7 +122,8 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return integer
+     * 数量を取得
+     * @return integer 数量
      */
     public function getQuantity()
     {
@@ -119,7 +131,8 @@ class CartItem extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return integer
+     * 合計金額を取得
+     * @return integer 合計金額
      */
     public function getTotalPrice()
     {

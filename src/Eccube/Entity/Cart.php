@@ -27,6 +27,10 @@ namespace Eccube\Entity;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 
 class Cart extends \Eccube\Entity\AbstractEntity
+/**
+ * Class Cart ショッピングカート
+ * @package Eccube\Entity
+ */
 {
     /**
      * @var bool
@@ -34,7 +38,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
     private $lock = false;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var CartItem[]
      */
     private $CartItems;
 
@@ -92,17 +96,19 @@ class Cart extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @param  \Eccube\Entity\CartItem $AddCartItem
-     * @return \Eccube\Entity\Cart
+     * このカートに入っている商品の金額と数量を変更します。
+     * @param  CartItem $CartItem 変更するカート商品
+     * @return Cart このカート自身
      */
-    public function setCartItem(\Eccube\Entity\CartItem $AddCartItem)
+    public function setCartItem(\Eccube\Entity\CartItem $CartItem)
     {
         throw new NotImplementedException("TODO");
     }
 
     /**
-     * @param  CartItem            $CartItem
-     * @return \Eccube\Entity\Cart
+     * カートに商品を追加。
+     * @param  CartItem $CartItem 追加するカート商品
+     * @return Cart このカート自身
      */
     public function addCartItem(CartItem $CartItem)
     {
@@ -166,7 +172,8 @@ class Cart extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * @return integer
+     * このカートに入っている商品の合計金額を取得。
+     * @return integer 合計金額
      */
     public function getTotalPrice()
     {
@@ -174,6 +181,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
     }
 
     /**
+     * このカートに入っている商品の合計数を取得。
      * @return integer
      */
     public function getTotalQuantity()
