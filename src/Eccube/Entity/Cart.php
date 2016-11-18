@@ -182,17 +182,29 @@ class Cart extends AbstractEntity
      */
     public function addCartItem(CartItem $CartItem)
     {
-        throw new NotImplementedException("TODO");
+        $this->CartItems->add($CartItem);
+        return $this;
     }
 
     /**
      * このカートに入っている商品の金額と数量を変更します。
-     * @param  CartItem $CartItem 変更するカート商品
+     * @param  CartItem $update 変更するカート商品
      * @return Cart このカート自身
      */
-    public function setCartItem(CartItem $CartItem)
+    public function setCartItem(CartItem $update)
     {
-        throw new NotImplementedException("TODO");
+        $found = false;
+        foreach ($this->CartItems as $CartItem)
+        {
+            if ($update->getClassId() == $CartItem->getClassId()) {
+                $CartItem->setPrice($update->getPrice());
+                $CartItem->setQuantity($update->getQuantity());
+                $found = true;
+            }
+        }
+        if (!$found) {
+            $this->addCartItem($update);
+        }
     }
 
     /**
@@ -201,7 +213,7 @@ class Cart extends AbstractEntity
      */
     public function getTotalPrice()
     {
-        throw new NotImplementedException("TODO");
+        return $this->calcTotal('getTotalPrice');
     }
 
     /**
@@ -210,6 +222,13 @@ class Cart extends AbstractEntity
      */
     public function getTotalQuantity()
     {
-        throw new NotImplementedException("TODO");
+        return $this->calcTotal('getQuantity');
+    }
+
+    private function calcTotal($func)
+    {
+        return array_reduce($this->CartItems->toArray(), function($sum, $item) use ($func) {
+            return $sum + $item->$func();
+        }, 0);
     }
 }
