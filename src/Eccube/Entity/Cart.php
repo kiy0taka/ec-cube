@@ -24,13 +24,14 @@
 
 namespace Eccube\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 
-class Cart extends \Eccube\Entity\AbstractEntity
 /**
  * Class Cart ショッピングカート
  * @package Eccube\Entity
  */
+class Cart extends AbstractEntity
 {
     /**
      * @var bool
@@ -54,7 +55,7 @@ class Cart extends \Eccube\Entity\AbstractEntity
 
     public function __construct()
     {
-        $this->CartItems = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->CartItems = new ArrayCollection();
     }
 
     /**
@@ -96,29 +97,9 @@ class Cart extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * このカートに入っている商品の金額と数量を変更します。
-     * @param  CartItem $CartItem 変更するカート商品
-     * @return Cart このカート自身
-     */
-    public function setCartItem(\Eccube\Entity\CartItem $CartItem)
-    {
-        throw new NotImplementedException("TODO");
-    }
-
-    /**
-     * カートに商品を追加。
-     * @param  CartItem $CartItem 追加するカート商品
-     * @return Cart このカート自身
-     */
-    public function addCartItem(CartItem $CartItem)
-    {
-        throw new NotImplementedException("TODO");
-    }
-
-    /**
      * @param  string                  $class_name
      * @param  string                  $class_id
-     * @return \Eccube\Entity\CartItem
+     * @return CartItem
      */
     public function getCartItemByIdentifier($class_name, $class_id)
     {
@@ -172,24 +153,6 @@ class Cart extends \Eccube\Entity\AbstractEntity
     }
 
     /**
-     * このカートに入っている商品の合計金額を取得。
-     * @return integer 合計金額
-     */
-    public function getTotalPrice()
-    {
-        throw new NotImplementedException("TODO");
-    }
-
-    /**
-     * このカートに入っている商品の合計数を取得。
-     * @return integer
-     */
-    public function getTotalQuantity()
-    {
-        throw new NotImplementedException("TODO");
-    }
-
-    /**
      * Get Payments
      *
      * @return array
@@ -212,4 +175,41 @@ class Cart extends \Eccube\Entity\AbstractEntity
         return $this;
     }
 
+    /**
+     * カートに商品を追加。
+     * @param  CartItem $CartItem 追加するカート商品
+     * @return Cart このカート自身
+     */
+    public function addCartItem(CartItem $CartItem)
+    {
+        throw new NotImplementedException("TODO");
+    }
+
+    /**
+     * このカートに入っている商品の金額と数量を変更します。
+     * @param  CartItem $CartItem 変更するカート商品
+     * @return Cart このカート自身
+     */
+    public function setCartItem(CartItem $CartItem)
+    {
+        throw new NotImplementedException("TODO");
+    }
+
+    /**
+     * このカートに入っている商品の合計金額を取得。
+     * @return integer 合計金額
+     */
+    public function getTotalPrice()
+    {
+        throw new NotImplementedException("TODO");
+    }
+
+    /**
+     * このカートに入っている商品の合計数を取得。
+     * @return integer
+     */
+    public function getTotalQuantity()
+    {
+        throw new NotImplementedException("TODO");
+    }
 }
