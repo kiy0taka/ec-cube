@@ -176,23 +176,38 @@ class Cart extends AbstractEntity
     }
 
     /**
-     * カートに商品を追加。
-     * @param  CartItem $CartItem 追加するカート商品
-     * @return Cart このカート自身
-     */
-    public function addCartItem(CartItem $CartItem)
-    {
-        throw new NotImplementedException("TODO");
-    }
-
-    /**
      * このカートに入っている商品の金額と数量を変更します。
      * @param  CartItem $CartItem 変更するカート商品
      * @return Cart このカート自身
      */
     public function setCartItem(CartItem $CartItem)
     {
-        throw new NotImplementedException("TODO");
+        $find = false;
+        foreach ($this->CartItems as $CartItem) {
+            if ($CartItem->getClassName() === $AddCartItem->getClassName() && $CartItem->getClassId() === $AddCartItem->getClassId()) {
+                $find = true;
+                $CartItem
+                    ->setPrice($AddCartItem->getPrice())
+                    ->setQuantity($AddCartItem->getQuantity());
+            }
+        }
+
+        if (!$find) {
+            $this->addCartItem($AddCartItem);
+        }
+
+        return $this;
+    }
+
+    /**
+     * カートに商品を追加。
+     * @param  CartItem $CartItem 追加するカート商品
+     * @return Cart このカート自身
+     */
+    public function addCartItem(CartItem $CartItem)
+    {
+        // TODO 実装する
+        return $this;
     }
 
     /**
@@ -201,15 +216,17 @@ class Cart extends AbstractEntity
      */
     public function getTotalPrice()
     {
-        throw new NotImplementedException("TODO");
+        // TODO 実装する
+        return 0;
     }
 
     /**
      * このカートに入っている商品の合計数を取得。
-     * @return integer
+     * @return integer 商品の合計数
      */
     public function getTotalQuantity()
     {
-        throw new NotImplementedException("TODO");
+        // TODO 実装する
+        return 0;
     }
 }
