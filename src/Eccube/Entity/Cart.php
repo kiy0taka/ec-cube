@@ -211,20 +211,20 @@ class Cart extends AbstractEntity
     }
 
     /**
-     * このカートに入っている商品の合計金額を取得。
-     * @return integer 合計金額
+     * このカートに入っている商品の合計数を取得。
+     * @return integer 商品の合計数
      */
-    public function getTotalPrice()
+    public function getTotalQuantity()
     {
         // TODO 実装する
         return 0;
     }
 
     /**
-     * このカートに入っている商品の合計数を取得。
-     * @return integer 商品の合計数
+     * このカートに入っている商品の合計金額を取得。
+     * @return integer 合計金額
      */
-    public function getTotalQuantity()
+    public function getTotalPrice()
     {
         // TODO 実装する
         return 0;
