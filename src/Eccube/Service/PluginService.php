@@ -25,7 +25,9 @@
 namespace Eccube\Service;
 
 use Eccube\Common\Constant;
+use Eccube\Entity\Plugin;
 use Eccube\Exception\PluginException;
+use Eccube\Repository\PluginRepository;
 use Eccube\Util\Cache;
 use Eccube\Util\Str;
 use Symfony\Component\Filesystem\Filesystem;
@@ -250,7 +252,7 @@ class PluginService
             $em->getConnection()->commit();
         } catch (\Exception $e) {
             $em->getConnection()->rollback();
-            throw new PluginException($e->getMessage());
+            throw new PluginException($e->getMessage(), $e->getCode(), $e);
         }
 
         return $p;
@@ -436,5 +438,48 @@ class PluginService
             $em->getConnection()->rollback();
             throw $e;
         }
+    }
+
+    /**
+     * 指定したプラグインに依存しているインストール済みプラグインの一覧を取得.
+     * @param Plugin $Plugin
+     * @param null $pluginFilter
+     * @return array
+     */
+    public function getDependedPlugins(Plugin $Plugin, $pluginFilter = '')
+    {
+        $result = array();
+
+        /** @var PluginRepository $pluginRepository */
+        $pluginRepository = $this->app['eccube.repository.plugin'];
+
+        /** @var Plugin $p */
+        foreach ($pluginRepository->findAll() as $p) {
+            if ($p->getCode() !== $Plugin->getCode()) {
+                $dir = $this->calcPluginDir($p->getCode());
+                $jsonText = @file_get_contents($dir.'/composer.json');
+                if ($jsonText) {
+                    $json = json_decode($jsonText, true);
+                    $find = array_key_exists('ec-cube/'.$Plugin->getCode(), $json['require']);
+                    if ($find && (!$pluginFilter || $pluginFilter($p))) {
+                        $result[] = $p->getName();
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+
+    public function afterInstalled($code, $version, $source)
+    {
+        $configYml = Yaml::parse(file_get_contents($this->app['config']['plugin_realdir'].'/'.$code.'/config.yml'));
+        $eventYml = Yaml::parse(file_get_contents($this->app['config']['plugin_realdir'].'/'.$code.'/event.yml'));
+        /** @var Plugin $Plugin */
+        $Plugin = $this->registerPlugin($configYml, $eventYml, $source);
+
+        // ダウンロード完了通知処理(正常終了時)/*
+//        $this->app['eccube.service.ownersstore']->doCommit($request, $source, $version);
     }
 }

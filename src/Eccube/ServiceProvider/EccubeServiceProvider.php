@@ -25,6 +25,8 @@
 namespace Eccube\ServiceProvider;
 
 use Eccube\Application;
+use Eccube\Service\ComposerService;
+use Eccube\Service\OwnersStoreService;
 use Silex\Application as BaseApplication;
 use Silex\ServiceProviderInterface;
 
@@ -76,6 +78,12 @@ class EccubeServiceProvider implements ServiceProviderInterface
         });
         $app['eccube.service.shopping'] = $app->share(function () use ($app) {
             return new \Eccube\Service\ShoppingService($app, $app['eccube.service.cart'], $app['eccube.service.order']);
+        });
+        $app['eccube.service.ownersstore'] = $app->share(function() use ($app) {
+            return new OwnersStoreService($app);
+        });
+        $app['eccube.service.composer'] = $app->share(function() use ($app) {
+            return new ComposerService($app);
         });
 
         // Repository

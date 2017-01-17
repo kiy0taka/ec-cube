@@ -27,15 +27,19 @@ namespace Eccube\Controller\Admin\Store;
 use Eccube\Application;
 use Eccube\Common\Constant;
 use Eccube\Controller\AbstractController;
+use Eccube\Entity\Plugin;
 use Eccube\Exception\PluginException;
+use Eccube\Repository\PluginRepository;
+use Eccube\Service\ComposerService;
+use Eccube\Service\PluginService;
 use Eccube\Util\Str;
-use Monolog\Logger;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Yaml\Yaml;
 
 class PluginController extends AbstractController
 {
@@ -104,8 +108,7 @@ class PluginController extends AbstractController
         if (!is_null($authKey)) {
 
             // オーナーズストア通信
-            $url = $app['config']['owners_store_url'].'?method=list';
-            list($json, $info) = $this->getRequestApi($request, $authKey, $url, $app);
+            list($json, $info) = $app['eccube.service.ownersstore']->doList($request);
 
             if ($json) {
 
@@ -228,16 +231,37 @@ class PluginController extends AbstractController
     {
         $this->isTokenValid($app);
 
-        $Plugin = $app['eccube.repository.plugin']->find($id);
+        /** @var PluginRepository $pluginRepository */
+        $pluginRepository = $app['eccube.repository.plugin'];
+        /** @var Plugin $Plugin */
+        $Plugin = $pluginRepository->find($id);
 
         if (!$Plugin) {
             throw new NotFoundHttpException();
         }
 
+        /** @var PluginService $pluginService */
+        $pluginService = $app['eccube.service.plugin'];
+        $pluginDir = $pluginService->calcPluginDir($Plugin->getCode());
+        $composerJson = @file_get_contents($pluginDir.'/composer.json');
+        if ($composerJson) {
+            /** @var ComposerService $composerService */
+            $composerService = $app['eccube.service.composer'];
+            $json = json_decode($composerJson, true);
+            $composerService->foreachRequires($json['name'], function ($pluginPackage) use ($pluginRepository, $pluginService) {
+                $arr = array();
+                if (preg_match('/^.+\/(.+?)\/(\d+)\/(\d+?)\/(.+?)\/(.+?)$/', $pluginPackage['dist'], $arr)) {
+                    $id = $arr[2];
+                    $RequirePlugin = $pluginRepository->getBySource($id);
+                    $pluginService->enable($RequirePlugin);
+                }
+            }, 'eccube-plugin');
+        }
+
         if ($Plugin->getEnable() == Constant::ENABLED) {
             $app->addError('admin.plugin.already.enable', 'admin');
         } else {
-            $app['eccube.service.plugin']->enable($Plugin);
+            $pluginService->enable($Plugin);
             $app->addSuccess('admin.plugin.enable.complete', 'admin');
         }
 
@@ -260,6 +284,16 @@ class PluginController extends AbstractController
             throw new NotFoundHttpException();
         }
 
+        /** @var PluginService $pluginService */
+        $pluginService = $app['eccube.service.plugin'];
+        $dependedPlugins = $pluginService->getDependedPlugins($Plugin, function(Plugin $p) {
+            return $p->getEnable() == Constant::ENABLED;
+        });
+        if ($dependedPlugins) {
+            $app->addError('依存しているプラグインがあるため無効化できません。'.implode($dependedPlugins), 'admin');
+            return $app->redirect($app->url('admin_store_plugin'));
+        }
+
         if ($Plugin->getEnable() == Constant::ENABLED) {
             $app['eccube.service.plugin']->disable($Plugin);
             $app->addSuccess('admin.plugin.disable.complete', 'admin');
@@ -269,7 +303,6 @@ class PluginController extends AbstractController
 
         return $app->redirect($app->url('admin_store_plugin'));
     }
-
 
     /**
      * 対象のプラグインを削除します。
@@ -281,14 +314,33 @@ class PluginController extends AbstractController
     {
         $this->isTokenValid($app);
 
-        $Plugin = $app['eccube.repository.plugin']->find($id);
+        /** @var PluginRepository $pluginRepository */
+        $pluginRepository = $app['eccube.repository.plugin'];
+        /** @var Plugin $Plugin */
+        $Plugin = $pluginRepository->find($id);
 
         if (!$Plugin) {
             $app->deleteMessage();
             return $app->redirect($app->url('admin_store_plugin'));
         }
 
-        $app['eccube.service.plugin']->uninstall($Plugin);
+        /** @var PluginService $pluginService */
+        $pluginService = $app['eccube.service.plugin'];
+        $pluginDir = $pluginService->calcPluginDir($Plugin->getCode());
+        $composerJson = @file_get_contents($pluginDir.'/composer.json');
+        if ($composerJson) {
+
+            $dependedPlugins = $pluginService->getDependedPlugins($Plugin);
+            if ($dependedPlugins) {
+                $app->addError('このプラグインに依存しているプラグインがあるため削除できません。'.implode($dependedPlugins), 'admin');
+                return $app->redirect($app->url('admin_store_plugin'));
+            }
+
+            $json = json_decode($composerJson, true);
+            /** @var ComposerService $composerService */
+            $composerService = $app['eccube.service.composer'];
+            $composerService->execRemove($json['name']);
+        }
 
         $app->addSuccess('admin.plugin.uninstall.complete', 'admin');
 
@@ -411,8 +463,7 @@ class PluginController extends AbstractController
         if (!is_null($authKey)) {
 
             // オーナーズストア通信
-            $url = $app['config']['owners_store_url'].'?method=list';
-            list($json, $info) = $this->getRequestApi($request, $authKey, $url, $app);
+            list($json, $info) = $app['eccube.service.ownersstore']->doList($request);
 
             if ($json === false) {
                 // 接続失敗時
@@ -516,7 +567,7 @@ class PluginController extends AbstractController
      * @param $id
      * @param $version
      */
-    public function upgrade(Application $app, Request $request, $action, $id, $version)
+    public function upgrade(Application $app, Request $request, $action, $id, $code, $version)
     {
 
         $BaseInfo = $app['eccube.repository.base_info']->get();
@@ -526,80 +577,33 @@ class PluginController extends AbstractController
 
         if (!is_null($authKey)) {
 
-            // オーナーズストア通信
-            $url = $app['config']['owners_store_url'].'?method=download&product_id='.$id;
-            list($json, $info) = $this->getRequestApi($request, $authKey, $url, $app);
+            /** @var ComposerService $composerService */
+            $composerService = $app['eccube.service.composer'];
 
-            if ($json === false) {
-                // 接続失敗時
-
-                $message = $this->getResponseErrorMessage($info);
-
-            } else {
-                // 接続成功時
-
-                $data = json_decode($json, true);
-
-                if (isset($data['success'])) {
-                    $success = $data['success'];
-                    if ($success == '1') {
-                        $tmpDir = null;
-                        try {
-                            $service = $app['eccube.service.plugin'];
-
-                            $item = $data['item'];
-                            $file = base64_decode($item['data']);
-                            $extension = pathinfo($item['file_name'], PATHINFO_EXTENSION);
-
-                            $tmpDir = $service->createTempDir();
-                            $tmpFile = sha1(Str::random(32)).'.'.$extension;
-
-                            // ファイル作成
-                            $fs = new Filesystem();
-                            $fs->dumpFile($tmpDir.'/'.$tmpFile, $file);
-
-                            if ($action == 'install') {
-
-                                $service->install($tmpDir.'/'.$tmpFile, $id);
-                                $app->addSuccess('admin.plugin.install.complete', 'admin');
-
-                            } else if ($action == 'update') {
-
-                                $Plugin = $app['eccube.repository.plugin']->findOneBy(array('source' => $id));
-
-                                $service->update($Plugin, $tmpDir.'/'.$tmpFile);
-                                $app->addSuccess('admin.plugin.update.complete', 'admin');
-                            }
-
-                            $fs = new Filesystem();
-                            $fs->remove($tmpDir);
-
-                            // ダウンロード完了通知処理(正常終了時)
-                            $url = $app['config']['owners_store_url'].'?method=commit&product_id='.$id.'&status=1&version='.$version;
-                            $this->getRequestApi($request, $authKey, $url, $app);
-
-                            return $app->redirect($app->url('admin_store_plugin'));
-
-                        } catch (PluginException $e) {
-                            if (!empty($tmpDir) && file_exists($tmpDir)) {
-                                $fs = new Filesystem();
-                                $fs->remove($tmpDir);
-                            }
-                            $message = $e->getMessage();
-                        }
-
-                    } else {
-                        $message = $data['error_code'].' : '.$data['error_message'];
-                    }
-                } else {
-                    $message = "EC-CUBEオーナーズストアにエラーが発生しています。";
-                }
+            // composerのリポジトリ情報を追加
+            $composerConfig = $composerService->getConfig();
+            if (!isset($composerConfig['repositories']['eccube'])) {
+                // TODO URL
+                $composerService->execConfig('repositories.eccube', array('composer', 'http://10.254.254.254:8081'));
+                $composerService->execConfig('repositories.eccube.options', array(json_encode(array(
+                    'http' => array(
+                        'header' => array('X-API-KEY: '.$authKey)
+                    )
+                ))));
             }
+            // TODO これは消す
+            if (@$composerConfig['secure-http'] !== 'false') {
+                $composerService->execConfig('secure-http', array('false'));
+            }
+
+            // インストール
+            $composerService->execRequire('ec-cube/'.$code.':'.$version);
+
+            return $app->redirect($app->url('admin_store_plugin'));
         }
 
         // ダウンロード完了通知処理(エラー発生時)
-        $url = $app['config']['owners_store_url'].'?method=commit&product_id='.$id.'&status=0&version='.$version.'&message='.urlencode($message);
-        $this->getRequestApi($request, $authKey, $url, $app);
+        $app['eccube.service.ownersstore']->doCommit($request, $id, $version, $message);
 
         $app->addError($message, 'admin');
 

@@ -72,7 +72,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                             {% else %}
                                 {% if Plugin.updateStatus == 3 %}
                                     <p>新バージョンのプラグインが利用可能です。
-                                        <a class="btn btn-default btn-xs" href="{{ url('admin_store_plugin_upgrade', {'action': 'update', 'id': Plugin.source, 'version': Plugin.version}) }}">今すぐ更新</a>
+                                        <a class="btn btn-default btn-xs" href="{{ url('admin_store_plugin_upgrade', {'action': 'update', 'id': Plugin.source, 'code': Plugin.code, 'version': Plugin.version}) }}">今すぐ更新</a>
                                     </p>
                                     <ul class="plugin-meta dl-horizontal">
                                         <li class="plugin-version">プラグインバージョン : {{ Plugin.newVersion }}</li>

@@ -25,6 +25,7 @@
 namespace Eccube\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Eccube\Entity\Plugin;
 
 /**
  * PluginRepository
@@ -34,4 +35,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class PluginRepository extends EntityRepository
 {
+    /**
+     * @param string|$source
+     * @return Plugin|object
+     */
+    public function getBySource($source)
+    {
+        return $this->findOneBy(array(
+            'source' => $source
+        ));
+    }
 }

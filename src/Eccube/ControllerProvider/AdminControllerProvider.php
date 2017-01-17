@@ -218,7 +218,7 @@ class AdminControllerProvider implements ControllerProviderInterface
         $c->match('/store/plugin', '\Eccube\Controller\Admin\Store\PluginController::index')->bind('admin_store_plugin');
         $c->match('/store/plugin/owners_install', '\Eccube\Controller\Admin\Store\PluginController::ownersInstall')->bind('admin_store_plugin_owners_install');
         $c->match('/store/plugin/install', '\Eccube\Controller\Admin\Store\PluginController::install')->bind('admin_store_plugin_install');
-        $c->match('/store/plugin/upgrade/{action}/{id}/{version}', '\Eccube\Controller\Admin\Store\PluginController::upgrade')->assert('id', '\d+')->bind('admin_store_plugin_upgrade');
+        $c->match('/store/plugin/upgrade/{action}/{id}/{code}/{version}', '\Eccube\Controller\Admin\Store\PluginController::upgrade')->assert('id', '\d+')->bind('admin_store_plugin_upgrade');
         $c->match('/store/plugin/handler', '\Eccube\Controller\Admin\Store\PluginController::handler')->bind('admin_store_plugin_handler');
         $c->match('/store/plugin/manage', '\Eccube\Controller\Admin\Store\PluginController::manage')->bind('admin_store_plugin_manage');
         $c->put('/store/plugin/{id}/enable', '\Eccube\Controller\Admin\Store\PluginController::enable')->assert('id', '\d+')->bind('admin_store_plugin_enable');
