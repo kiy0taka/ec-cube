@@ -1,13 +1,18 @@
 node {
     try {
+
+        stage 'Git checkout'
+        checkout scm
+
         stage 'Start containers'
-        postgres = docker.image("--name ${JOB_NAME}-${BUILD_NUMBER}-db -e TZ=Asia/Tokyo postgres:latest").run()
-        mailcacher = docker.image('--name ${JOB_NAME}-${BUILD_NUMBER}-mail schickling/mailcatcher').run()
+        containerPrefix = "${JOB_BASE_NAME}-${BUILD_NUMBER}"
+        postgres = docker.image("--name ${containerPrefix}-db -e TZ=Asia/Tokyo postgres:latest").run()
+        mailcacher = docker.image("--name ${containerPrefix}-mail schickling/mailcatcher").run()
         sleep 3
 
         docker.image('eccube/php7-ext-apache').inside("""
                 -e TZ=Asia/Tokyo -e DBSERVER=db -e DBUSER=postgres -e MAIL_HOST=mail
-                --link ${JOB_NAME}-${BUILD_NUMBER}-db:db --link ${JOB_NAME}-${BUILD_NUMBER}-mail:mail""") {
+                --link ${containerPrefix}-db:db --link ${containerPrefix}-mail:mail""") {
 
             stage 'Composer install'
             sh 'composer install --dev --no-interaction -o'
