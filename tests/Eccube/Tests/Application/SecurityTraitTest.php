@@ -107,6 +107,9 @@ class SecurityTraitTest extends EccubeTestCase
                     'users' => $users,
                 ),
             ),
+            'security.default_encoder' => function ($app) {
+                return $app['security.encoder.digest'];
+            }
         ));
 
         $app->initialize();
