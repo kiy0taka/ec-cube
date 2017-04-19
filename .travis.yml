@@ -15,6 +15,8 @@ php:
   - 5.6
   - 5.5
 
+sudo: false
+
 matrix:
   fast_finish: true
   include:
