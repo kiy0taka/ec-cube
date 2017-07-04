@@ -288,4 +288,12 @@ class Cart extends \Eccube\Entity\AbstractEntity implements PurchaseInterface, I
     {
         return $this->errors;
     }
+
+    /**
+     * @param ItemInterface $item
+     */
+    public function addItem(ItemInterface $item)
+    {
+        $this->CartItems->add($item);
+    }
 }

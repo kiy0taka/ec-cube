@@ -21,10 +21,37 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-namespace Eccube\Service;
+namespace Eccube\Service\PurchaseFlow\Processor;
 
 
-class ItemValidateException extends \Exception
+use Eccube\Entity\ItemHolderInterface;
+use Eccube\Service\PurchaseFlow\ItemValidateException;
+use Eccube\Service\PurchaseFlow\ValidatableItemHolderProcessor;
+
+/**
+ * 購入金額上限チェック.
+ */
+class PaymentTotalLimitValidator extends ValidatableItemHolderProcessor
 {
+    /**
+     * @var int
+     */
+    private $maxTotalFee;
 
+    /**
+     * PaymentTotalLimitValidator constructor.
+     * @param $maxTotalFee
+     */
+    public function __construct($maxTotalFee)
+    {
+        $this->maxTotalFee = $maxTotalFee;
+    }
+
+    protected function validate(ItemHolderInterface $item)
+    {
+        $totalPrice = $item->getTotal();
+        if ($totalPrice > $this->maxTotalFee) {
+            throw new ItemValidateException();
+        }
+    }
 }

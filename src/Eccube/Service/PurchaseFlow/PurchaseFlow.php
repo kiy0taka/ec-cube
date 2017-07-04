@@ -1,9 +1,10 @@
 <?php
 
-namespace Eccube\Service;
+namespace Eccube\Service\PurchaseFlow;
 
 
 use Eccube\Entity\ItemHolderInterface;
+use Eccube\Entity\ItemInterface;
 
 class PurchaseFlow
 {
@@ -19,6 +20,9 @@ class PurchaseFlow
     protected $itemProsessors = [];
 
     public function execute(ItemHolderInterface $itemHolder) {
+
+        $this->calculateTotal($itemHolder);
+
         foreach ($itemHolder->getItems() as $item) {
             foreach ($this->itemProsessors as $itemProsessor) {
                 $result = $itemProsessor->process($item);
@@ -45,5 +49,17 @@ class PurchaseFlow
     public function addItemProcessor(ItemProcessor $prosessor)
     {
         $this->itemProsessors[] = $prosessor;
+    }
+
+    /**
+     * @param ItemHolderInterface $itemHolder
+     */
+    private function calculateTotal(ItemHolderInterface $itemHolder)
+    {
+        $total = array_reduce($itemHolder->getItems()->toArray(), function ($sum, ItemInterface $item) {
+            $sum += $item->getPrice() * $item->getQuantity();
+            return $sum;
+        }, 0);
+        $itemHolder->setTotal($total);
     }
 }

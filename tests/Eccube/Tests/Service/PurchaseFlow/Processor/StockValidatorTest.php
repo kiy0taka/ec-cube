@@ -3,8 +3,7 @@
 namespace Eccube\Tests\Service;
 
 use Eccube\Entity\CartItem;
-use Eccube\Service\ItemValidateException;
-use Eccube\Service\StockValidator;
+use Eccube\Service\PurchaseFlow\Processor\StockValidator;
 use Eccube\Tests\EccubeTestCase;
 
 class StockValidatorTest extends EccubeTestCase
@@ -44,12 +43,10 @@ class StockValidatorTest extends EccubeTestCase
     public function testValidStockFail()
     {
         $this->cartItem->setQuantity(PHP_INT_MAX);
-        try {
-            $this->validator->process($this->cartItem);
-            self::fail('エラーチェックに失敗しました');
-        } catch (ItemValidateException $e) {
-            self::assertEquals($this->ProductClass->getStock(), $this->cartItem->getQuantity());
-        }
+        $result = $this->validator->process($this->cartItem);
+
+        self::assertEquals($this->ProductClass->getStock(), $this->cartItem->getQuantity());
+        self::assertTrue($result->isError());
     }
 
     public function testValidStockOrder()

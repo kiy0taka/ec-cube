@@ -1,9 +1,14 @@
 <?php
 
-namespace Eccube\Service;
+namespace Eccube\Service\PurchaseFlow\Processor;
 
 use Eccube\Entity\ItemInterface;
+use Eccube\Service\PurchaseFlow\ItemValidateException;
+use Eccube\Service\PurchaseFlow\ValidatableItemProcessor;
 
+/**
+ * 在庫制限チェック.
+ */
 class StockValidator extends ValidatableItemProcessor
 {
     protected function validate(ItemInterface $item)

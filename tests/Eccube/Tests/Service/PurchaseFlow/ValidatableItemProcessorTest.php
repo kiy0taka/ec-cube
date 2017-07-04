@@ -26,8 +26,8 @@ namespace Eccube\Tests\Service;
 use Eccube\Entity\CartItem;
 use Eccube\Entity\ItemInterface;
 use Eccube\Entity\ShipmentItem;
-use Eccube\Service\ItemValidateException;
-use Eccube\Service\ValidatableItemProcessor;
+use Eccube\Service\PurchaseFlow\ItemValidateException;
+use Eccube\Service\PurchaseFlow\ValidatableItemProcessor;
 use Eccube\Tests\EccubeTestCase;
 
 class ValidatableItemProcessorTest extends EccubeTestCase
@@ -35,7 +35,7 @@ class ValidatableItemProcessorTest extends EccubeTestCase
 
     /*
      * カートの場合
-     *      エラーなら明細丸め処理 ＆ カート画面にエラー表示
+     *      エラーなら明細丸め処理 ＆ カート画面にエラー表示¨
      *      正常時は丸め処理しない
      * 購入の場合
      *      エラーなら購入エラーで終了
@@ -55,12 +55,7 @@ class ValidatableItemProcessorTest extends EccubeTestCase
         $validator = new ValidatableItemProcessorTest_FailValidator();
         $item = new CartItem();
 
-        try {
-            $validator->process($item);
-            self::fail();
-        } catch (ItemValidateException $e) {
-            $this->assertTrue($validator->handleCalled);
-        }
+        $validator->process($item);
     }
 
     public function testValidateOrderSuccess()
@@ -68,8 +63,9 @@ class ValidatableItemProcessorTest extends EccubeTestCase
         $validator = new ValidatableItemProcessorTest_NormalValidator();
         $item = new ShipmentItem();
 
-        $validator->process($item);
-        $this->assertFalse($validator->handleCalled);
+        $result = $validator->process($item);
+        self::assertFalse($validator->handleCalled);
+        self::assertFalse($result->isError());
     }
 
     public function testValidateOrderFail()
@@ -77,12 +73,9 @@ class ValidatableItemProcessorTest extends EccubeTestCase
         $validator = new ValidatableItemProcessorTest_FailValidator();
         $item = new ShipmentItem();
 
-        try {
-            $validator->process($item);
-            self::fail();
-        } catch (ItemValidateException $e) {
-            $this->assertFalse($validator->handleCalled);
-        }
+        $result = $validator->process($item);
+        self::assertFalse($validator->handleCalled);
+        self::assertTrue($result->isError());
     }
 }
 
