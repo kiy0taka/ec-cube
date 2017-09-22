@@ -55,11 +55,21 @@ class ProductClassType extends AbstractType
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     public function __construct()
     {

@@ -57,11 +57,21 @@ class TemplateController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("monolog")
@@ -69,11 +79,21 @@ class TemplateController extends AbstractController
      */
     protected $logger;
 
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(TemplateRepository::class)
@@ -81,11 +101,21 @@ class TemplateController extends AbstractController
      */
     protected $templateRepository;
 
+    public function setTemplateRepository(TemplateRepository $templateRepository)
+    {
+        $this->templateRepository = $templateRepository;
+    }
+
     /**
      * @Inject(DeviceTypeRepository::class)
      * @var DeviceTypeRepository
      */
     protected $deviceTypeRepository;
+
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
 
     /**
      * テンプレート一覧画面

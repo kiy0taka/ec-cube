@@ -44,11 +44,21 @@ class EditController
      */
     protected $shipmentItemRepository;
 
+    public function setShipmentItemRepository(ShipmentItemRepository $shipmentItemRepository)
+    {
+        $this->shipmentItemRepository = $shipmentItemRepository;
+    }
+
     /**
      * @Inject(CategoryRepository::class)
      * @var CategoryRepository
      */
     protected $categoryRepository;
+
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @Inject("session")
@@ -56,11 +66,21 @@ class EditController
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject("monolog")
@@ -68,11 +88,21 @@ class EditController
      */
     protected $logger;
 
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Inject("serializer")
      * @var Serializer
      */
     protected $serializer;
+
+    public function setSerializer(Serializer $serializer)
+    {
+        $this->serializer = $serializer;
+    }
 
     /**
      * @Inject(DeliveryRepository::class)
@@ -80,11 +110,21 @@ class EditController
      */
     protected $deliveryRepository;
 
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
     /**
      * @Inject(TaxRuleService::class)
      * @var TaxRuleService
      */
     protected $taxRuleService;
+
+    public function setTaxRuleService(TaxRuleService $taxRuleService)
+    {
+        $this->taxRuleService = $taxRuleService;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -92,11 +132,21 @@ class EditController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject(ShippingRepository::class)
@@ -104,17 +154,32 @@ class EditController
      */
     protected $shippingRepository;
 
+    public function setShippingRepository(ShippingRepository $shippingRepository)
+    {
+        $this->shippingRepository = $shippingRepository;
+    }
+
     /**
      * @Inject(ShippingStatusRepository::class)
      * @var ShippingStatusRepository
      */
     protected $shippingStatusReposisotry;
 
+    public function setShippingStatusReposisotry(ShippingStatusRepository $shippingStatusReposisotry)
+    {
+        $this->shippingStatusReposisotry = $shippingStatusReposisotry;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * 出荷登録/編集画面.

@@ -29,11 +29,21 @@ class ShippingType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @var DeliveryRepository
@@ -41,11 +51,21 @@ class ShippingType extends AbstractType
      */
     protected $deliveryRepository;
 
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
     /**
      * @var DeliveryFeeRepository
      * @Inject("eccube.repository.delivery_fee")
      */
     protected $deliveryFeeRepository;
+
+    public function setDeliveryFeeRepository(DeliveryFeeRepository $deliveryFeeRepository)
+    {
+        $this->deliveryFeeRepository = $deliveryFeeRepository;
+    }
 
     public function __construct()
     {

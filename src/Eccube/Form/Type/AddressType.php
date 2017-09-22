@@ -46,6 +46,11 @@ class AddressType extends AbstractType
      */
     protected $config;
 
+    public function setConfig(array $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -38,6 +38,11 @@ class AbstractShoppingController extends AbstractController
      */
     protected $purchaseFlow;
 
+    public function setPurchaseFlow(PurchaseFlow $purchaseFlow)
+    {
+        $this->purchaseFlow = $purchaseFlow;
+    }
+
 
     /**
      * @var string 非会員用セッションキー

@@ -44,6 +44,11 @@ class CartController
      */
     protected $cartService;
 
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     /**
      * @Route("/block/cart", name="block_cart")
      * @Template("Block/cart.twig")

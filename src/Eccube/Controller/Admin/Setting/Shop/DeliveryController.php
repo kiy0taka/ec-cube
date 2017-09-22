@@ -58,11 +58,21 @@ class DeliveryController extends AbstractController
      */
     protected $paymentOptionRepository;
 
+    public function setPaymentOptionRepository(PaymentOptionRepository $paymentOptionRepository)
+    {
+        $this->paymentOptionRepository = $paymentOptionRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("form.factory")
@@ -70,11 +80,21 @@ class DeliveryController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(DeliveryFeeRepository::class)
      * @var DeliveryFeeRepository
      */
     protected $deliveryFeeRepository;
+
+    public function setDeliveryFeeRepository(DeliveryFeeRepository $deliveryFeeRepository)
+    {
+        $this->deliveryFeeRepository = $deliveryFeeRepository;
+    }
 
     /**
      * @Inject(PrefRepository::class)
@@ -82,17 +102,32 @@ class DeliveryController extends AbstractController
      */
     protected $prefRepository;
 
+    public function setPrefRepository(PrefRepository $prefRepository)
+    {
+        $this->prefRepository = $prefRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject(DeliveryRepository::class)
      * @var DeliveryRepository
      */
     protected $deliveryRepository;
+
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/shop/delivery", name="admin_setting_shop_delivery")

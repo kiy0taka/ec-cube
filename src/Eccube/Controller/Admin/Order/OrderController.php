@@ -63,11 +63,21 @@ class OrderController extends AbstractController
      */
     protected $csvExportService;
 
+    public function setCsvExportService(CsvExportService $csvExportService)
+    {
+        $this->csvExportService = $csvExportService;
+    }
+
     /**
      * @Inject(CustomerRepository::class)
      * @var CustomerRepository
      */
     protected $customerRepository;
+
+    public function setCustomerRepository(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
 
     /**
      * @Inject("orm.em")
@@ -75,11 +85,21 @@ class OrderController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(PaymentRepository::class)
      * @var PaymentRepository
      */
     protected $paymentRepository;
+
+    public function setPaymentRepository(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     /**
      * @Inject(SexRepository::class)
@@ -87,11 +107,21 @@ class OrderController extends AbstractController
      */
     protected $sexRepository;
 
+    public function setSexRepository(SexRepository $sexRepository)
+    {
+        $this->sexRepository = $sexRepository;
+    }
+
     /**
      * @Inject(OrderStatusRepository::class)
      * @var OrderStatusRepository
      */
     protected $orderStatusRepository;
+
+    public function setOrderStatusRepository(OrderStatusRepository $orderStatusRepository)
+    {
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
 
     /**
      * @Inject("config")
@@ -99,11 +129,21 @@ class OrderController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(PageMaxRepository::class)
      * @var PageMaxRepository
      */
     protected $pageMaxRepository;
+
+    public function setPageMaxRepository(PageMaxRepository $pageMaxRepository)
+    {
+        $this->pageMaxRepository = $pageMaxRepository;
+    }
 
     /**
      * @Inject(DispRepository::class)
@@ -111,11 +151,21 @@ class OrderController extends AbstractController
      */
     protected $dispRepository;
 
+    public function setDispRepository(DispRepository $dispRepository)
+    {
+        $this->dispRepository = $dispRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -123,11 +173,21 @@ class OrderController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(OrderRepository::class)
      * @var OrderRepository
      */
     protected $orderRepository;
+
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
 
     /**
      * @Route("/{_admin}/order", name="admin_order")

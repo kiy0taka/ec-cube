@@ -47,6 +47,11 @@ class ShippingItemType extends AbstractType
      */
     protected $shoppingService;
 
+    public function setShoppingService(ShoppingService $shoppingService)
+    {
+        $this->shoppingService = $shoppingService;
+    }
+
     public $app;
 
     public function __construct(\Eccube\Application $app)

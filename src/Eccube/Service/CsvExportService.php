@@ -56,16 +56,31 @@ class CsvExportService
      */
     protected $convertEncodingCallBack;
 
+    public function setConvertEncodingCallBack(\Closure $convertEncodingCallBack)
+    {
+        $this->convertEncodingCallBack = $convertEncodingCallBack;
+    }
+
     /**
      * @Inject("orm.em")
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
 
+    public function setEm(\Doctrine\ORM\EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
-     * @var \Doctrine\ORM\QueryBuilder;
+     * @var \Doctrine\ORM\QueryBuilder
      */
     protected $qb;
+
+    public function setQb(\Doctrine\ORM\QueryBuilder $qb)
+    {
+        $this->qb = $qb;
+    }
 
     /**
      * @Inject("config")
@@ -78,10 +93,20 @@ class CsvExportService
      */
     protected $CsvType;
 
+    public function setCsvType(\Eccube\Entity\Master\CsvType $CsvType)
+    {
+        $this->CsvType = $CsvType;
+    }
+
     /**
-     * @var \Eccube\Entity\Csv[]
+     * @var \Eccube\Entity\Csv
      */
     protected $Csvs;
+
+    public function setCsvs($Csvs)
+    {
+        $this->Csvs = $Csvs;
+    }
 
     /**
      * @Inject(CsvRepository::class)

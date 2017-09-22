@@ -49,17 +49,32 @@ class ContactController
      */
     protected $mailService;
 
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * お問い合わせ画面.

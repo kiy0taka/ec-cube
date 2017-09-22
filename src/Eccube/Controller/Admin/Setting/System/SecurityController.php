@@ -50,11 +50,21 @@ class SecurityController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Route("/{_admin}/setting/system/security", name="admin_setting_system_security")

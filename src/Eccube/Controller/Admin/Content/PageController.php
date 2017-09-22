@@ -59,11 +59,21 @@ class PageController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("form.factory")
@@ -71,11 +81,21 @@ class PageController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject(PageLayoutRepository::class)
@@ -83,11 +103,21 @@ class PageController extends AbstractController
      */
     protected $pageLayoutRepository;
 
+    public function setPageLayoutRepository(PageLayoutRepository $pageLayoutRepository)
+    {
+        $this->pageLayoutRepository = $pageLayoutRepository;
+    }
+
     /**
      * @Inject(DeviceTypeRepository::class)
      * @var DeviceTypeRepository
      */
     protected $deviceTypeRepository;
+
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
 
     /**
      * @Route("/{_admin}/content/page", name="admin_content_page")

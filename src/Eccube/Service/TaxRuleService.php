@@ -38,6 +38,11 @@ class TaxRuleService
      */
     protected $taxRuleRepository;
 
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
+
     /**
      * 設定情報に基づいて税金の金額を返す
      *

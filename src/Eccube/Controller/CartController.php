@@ -52,11 +52,21 @@ class CartController extends AbstractController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject(ProductClassRepository::class)
      * @var ProductClassRepository
      */
     protected $productClassRepository;
+
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
 
     /**
      * @Inject("eccube.purchase.flow.cart")
@@ -64,11 +74,21 @@ class CartController extends AbstractController
      */
     protected $purchaseFlow;
 
+    public function setPurchaseFlow(PurchaseFlow $purchaseFlow)
+    {
+        $this->purchaseFlow = $purchaseFlow;
+    }
+
     /**
      * @Inject(CartService::class)
      * @var CartService
      */
     protected $cartService;
+
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
     /**
      * カート画面.

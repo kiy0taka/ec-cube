@@ -52,11 +52,21 @@ class AuthorityController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -64,11 +74,21 @@ class AuthorityController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(AuthorityRoleRepository::class)
      * @var AuthorityRoleRepository
      */
     protected $authorityRoleRepository;
+
+    public function setAuthorityRoleRepository(AuthorityRoleRepository $authorityRoleRepository)
+    {
+        $this->authorityRoleRepository = $authorityRoleRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/system/authority", name="admin_setting_system_authority")

@@ -54,11 +54,21 @@ class CustomerRepository extends AbstractRepository implements UserProviderInter
      */
     protected $queries;
 
+    public function setQueries(Queries $queries)
+    {
+        $this->queries = $queries;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject(OrderRepository::class)
@@ -66,17 +76,32 @@ class CustomerRepository extends AbstractRepository implements UserProviderInter
      */
     protected $orderRepository;
 
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("security.encoder_factory")
      * @var EncoderFactory
      */
     protected $encoderFactory;
+
+    public function setEncoderFactory(EncoderFactory $encoderFactory)
+    {
+        $this->encoderFactory = $encoderFactory;
+    }
 
     public function newCustomer()
     {

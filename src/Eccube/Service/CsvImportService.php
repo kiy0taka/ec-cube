@@ -70,6 +70,11 @@ class CsvImportService implements \Iterator, \SeekableIterator, \Countable
      */
     protected $file;
 
+    public function setFile(\SplFileObject $file)
+    {
+        $this->file = $file;
+    }
+
     /**
      * Column headers as read from the CSV file
      *
@@ -86,12 +91,22 @@ class CsvImportService implements \Iterator, \SeekableIterator, \Countable
      */
     protected $headersCount;
 
+    public function setHeadersCount(integer $headersCount)
+    {
+        $this->headersCount = $headersCount;
+    }
+
     /**
      * Total number of rows in the CSV file
      *
      * @var integer
      */
     protected $count;
+
+    public function setCount(integer $count)
+    {
+        $this->count = $count;
+    }
 
     /**
      * Faulty CSV rows
@@ -106,6 +121,11 @@ class CsvImportService implements \Iterator, \SeekableIterator, \Countable
      * @var integer
      */
     protected $duplicateHeadersFlag;
+
+    public function setDuplicateHeadersFlag(integer $duplicateHeadersFlag)
+    {
+        $this->duplicateHeadersFlag = $duplicateHeadersFlag;
+    }
 
 
     /**

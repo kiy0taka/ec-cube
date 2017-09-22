@@ -50,11 +50,21 @@ class PluginService
      */
     protected $pluginEventHandlerRepository;
 
+    public function setPluginEventHandlerRepository(PluginEventHandlerRepository $pluginEventHandlerRepository)
+    {
+        $this->pluginEventHandlerRepository = $pluginEventHandlerRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject(PluginRepository::class)
@@ -62,17 +72,32 @@ class PluginService
      */
     protected $pluginRepository;
 
+    public function setPluginRepository(PluginRepository $pluginRepository)
+    {
+        $this->pluginRepository = $pluginRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(Application::class)
      * @var Application
      */
     protected $app;
+
+    public function setApp(Application $app)
+    {
+        $this->app = $app;
+    }
 
     const CONFIG_YML = 'config.yml';
     const EVENT_YML = 'event.yml';

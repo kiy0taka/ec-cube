@@ -63,11 +63,21 @@ class OrderType extends AbstractType
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(BaseInfo::class)
@@ -75,12 +85,22 @@ class OrderType extends AbstractType
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
 
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     public function __construct()
     {

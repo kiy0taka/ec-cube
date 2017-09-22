@@ -41,11 +41,21 @@ class AbstractController
      */
     protected $csrfTokenManager;
 
+    public function setCsrfTokenManager(CsrfTokenManager $csrfTokenManager)
+    {
+        $this->csrfTokenManager = $csrfTokenManager;
+    }
+
     /**
      * @Inject("security.token_storage")
      * @var TokenStorage
      */
     protected $tokenStorage;
+
+    public function setTokenStorage(TokenStorage $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
 
     /**
      * @Inject("request_stack")
@@ -53,11 +63,21 @@ class AbstractController
      */
     protected $requestStack;
 
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     protected function getSecurity($app)
     {

@@ -53,11 +53,21 @@ class OrderDetailType extends AbstractType
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(TaxRuleRepository::class)
@@ -65,11 +75,21 @@ class OrderDetailType extends AbstractType
      */
     protected $taxRuleRepository;
 
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
+
     /**
      * @Inject(ProductClassRepository::class)
      * @var ProductClassRepository
      */
     protected $productClassRepository;
+
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
 
     /**
      * @Inject("request_stack")
@@ -77,11 +97,21 @@ class OrderDetailType extends AbstractType
      */
     protected $requestStack;
 
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     public function __construct()
     {

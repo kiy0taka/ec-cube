@@ -44,16 +44,31 @@ class CartService
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @var EntityManager
      * @Inject("orm.em")
      */
     protected $em;
 
+    public function setEm(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @var ItemHolderInterface
      */
     protected $cart;
+
+    public function setCart(ItemHolderInterface $cart)
+    {
+        $this->cart = $cart;
+    }
 
     /**
      * @return ItemHolderInterface|Cart

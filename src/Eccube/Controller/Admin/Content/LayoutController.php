@@ -57,17 +57,32 @@ class LayoutController extends AbstractController
      */
     protected $blockRepository;
 
+    public function setBlockRepository(BlockRepository $blockRepository)
+    {
+        $this->blockRepository = $blockRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(LayoutRepository::class)
      * @var LayoutRepository
      */
     protected $layoutRepository;
+
+    public function setLayoutRepository(LayoutRepository $layoutRepository)
+    {
+        $this->layoutRepository = $layoutRepository;
+    }
 
     /**
      * @Route("/{_admin}/content/layout", name="admin_content_layout")

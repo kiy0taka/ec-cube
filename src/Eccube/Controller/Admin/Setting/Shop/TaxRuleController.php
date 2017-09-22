@@ -57,11 +57,21 @@ class TaxRuleController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -69,17 +79,32 @@ class TaxRuleController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject(TaxRuleRepository::class)
      * @var TaxRuleRepository
      */
     protected $taxRuleRepository;
+
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
 
     /**
      * 税率設定の初期表示・登録

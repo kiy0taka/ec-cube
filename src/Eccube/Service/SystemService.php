@@ -38,6 +38,11 @@ class SystemService
      */
     protected $em;
 
+    public function setEm(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     public function getDbversion()
     {
 

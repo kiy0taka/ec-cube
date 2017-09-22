@@ -63,11 +63,21 @@ class ProductController
      */
     protected $purchaseFlow;
 
+    public function setPurchaseFlow(PurchaseFlow $purchaseFlow)
+    {
+        $this->purchaseFlow = $purchaseFlow;
+    }
+
     /**
      * @Inject("session")
      * @var Session
      */
     protected $session;
+
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
 
     /**
      * @Inject(CustomerFavoriteProductRepository::class)
@@ -75,11 +85,21 @@ class ProductController
      */
     protected $customerFavoriteProductRepository;
 
+    public function setCustomerFavoriteProductRepository(CustomerFavoriteProductRepository $customerFavoriteProductRepository)
+    {
+        $this->customerFavoriteProductRepository = $customerFavoriteProductRepository;
+    }
+
     /**
      * @Inject(CartService::class)
      * @var CartService
      */
     protected $cartService;
+
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
     /**
      * @Inject(ProductRepository::class)
@@ -87,11 +107,21 @@ class ProductController
      */
     protected $productRepository;
 
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -99,17 +129,32 @@ class ProductController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     private $title;
 

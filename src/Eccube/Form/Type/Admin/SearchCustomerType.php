@@ -54,11 +54,21 @@ class SearchCustomerType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(CustomerStatusRepository::class)
      * @var CustomerStatusRepository
      */
     protected $customerStatusRepository;
+
+    public function setCustomerStatusRepository(CustomerStatusRepository $customerStatusRepository)
+    {
+        $this->customerStatusRepository = $customerStatusRepository;
+    }
 
     /**
      * {@inheritdoc}

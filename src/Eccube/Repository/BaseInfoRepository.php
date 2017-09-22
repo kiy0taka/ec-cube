@@ -44,6 +44,11 @@ class BaseInfoRepository extends AbstractRepository
      */
     protected $app;
 
+    public function setApp(Application $app)
+    {
+        $this->app = $app;
+    }
+
     public function get($id = 1)
     {
         $qb = $this->createQueryBuilder('e')

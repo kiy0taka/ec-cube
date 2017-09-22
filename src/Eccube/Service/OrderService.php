@@ -41,6 +41,11 @@ class OrderService
      */
     protected $shoppingService;
 
+    public function setShoppingService(ShoppingService $shoppingService)
+    {
+        $this->shoppingService = $shoppingService;
+    }
+
     /**
      * 合計数量を取得
      *

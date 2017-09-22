@@ -12,6 +12,11 @@ class PaymentService
      */
     protected $requestStack;
 
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;

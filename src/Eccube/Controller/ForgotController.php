@@ -54,11 +54,21 @@ class ForgotController extends AbstractController
      */
     protected $recursiveValidator;
 
+    public function setRecursiveValidator(RecursiveValidator $recursiveValidator)
+    {
+        $this->recursiveValidator = $recursiveValidator;
+    }
+
     /**
      * @Inject("monolog")
      * @var Logger
      */
     protected $logger;
+
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @Inject(MailService::class)
@@ -66,11 +76,21 @@ class ForgotController extends AbstractController
      */
     protected $mailService;
 
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("config")
@@ -78,11 +98,21 @@ class ForgotController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(CustomerRepository::class)
      * @var CustomerRepository
      */
     protected $customerRepository;
+
+    public function setCustomerRepository(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -90,11 +120,21 @@ class ForgotController extends AbstractController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * パスワードリマインダ.

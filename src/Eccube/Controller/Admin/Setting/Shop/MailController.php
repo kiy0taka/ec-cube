@@ -52,11 +52,21 @@ class MailController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -64,11 +74,21 @@ class MailController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(MailTemplateRepository::class)
      * @var MailTemplateRepository
      */
     protected $mailTemplateRepository;
+
+    public function setMailTemplateRepository(MailTemplateRepository $mailTemplateRepository)
+    {
+        $this->mailTemplateRepository = $mailTemplateRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/shop/mail", name="admin_setting_shop_mail")

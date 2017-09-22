@@ -72,11 +72,21 @@ class ProductController extends AbstractController
      */
     protected $csvExportService;
 
+    public function setCsvExportService(CsvExportService $csvExportService)
+    {
+        $this->csvExportService = $csvExportService;
+    }
+
     /**
      * @Inject(ProductClassRepository::class)
      * @var ProductClassRepository
      */
     protected $productClassRepository;
+
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
 
     /**
      * @Inject(ProductImageRepository::class)
@@ -84,11 +94,21 @@ class ProductController extends AbstractController
      */
     protected $productImageRepository;
 
+    public function setProductImageRepository(ProductImageRepository $productImageRepository)
+    {
+        $this->productImageRepository = $productImageRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject(TaxRuleRepository::class)
@@ -96,11 +116,21 @@ class ProductController extends AbstractController
      */
     protected $taxRuleRepository;
 
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
+
     /**
      * @Inject(CategoryRepository::class)
      * @var CategoryRepository
      */
     protected $categoryRepository;
+
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @Inject(ProductRepository::class)
@@ -108,11 +138,21 @@ class ProductController extends AbstractController
      */
     protected $productRepository;
 
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Inject("config")
@@ -120,11 +160,21 @@ class ProductController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(PageMaxRepository::class)
      * @var PageMaxRepository
      */
     protected $pageMaxRepository;
+
+    public function setPageMaxRepository(PageMaxRepository $pageMaxRepository)
+    {
+        $this->pageMaxRepository = $pageMaxRepository;
+    }
 
     /**
      * @Inject(DispRepository::class)
@@ -132,11 +182,21 @@ class ProductController extends AbstractController
      */
     protected $dispRepository;
 
+    public function setDispRepository(DispRepository $dispRepository)
+    {
+        $this->dispRepository = $dispRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -144,11 +204,21 @@ class ProductController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("session")
      * @var Session
      */
     protected $session;
+
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
 
     /**
      * @Route("/{_admin}/product", name="admin_product")

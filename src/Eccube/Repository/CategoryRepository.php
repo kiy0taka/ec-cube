@@ -44,6 +44,11 @@ class CategoryRepository extends AbstractRepository
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * 全カテゴリの合計を取得する.
      *

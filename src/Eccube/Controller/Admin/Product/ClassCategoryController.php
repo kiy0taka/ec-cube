@@ -55,11 +55,21 @@ class ClassCategoryController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(ProductClassRepository::class)
      * @var ProductClassRepository
      */
     protected $productClassRepository;
+
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -67,11 +77,21 @@ class ClassCategoryController extends AbstractController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject(ClassCategoryRepository::class)
@@ -79,11 +99,21 @@ class ClassCategoryController extends AbstractController
      */
     protected $classCategoryRepository;
 
+    public function setClassCategoryRepository(ClassCategoryRepository $classCategoryRepository)
+    {
+        $this->classCategoryRepository = $classCategoryRepository;
+    }
+
     /**
      * @Inject(ClassNameRepository::class)
      * @var ClassNameRepository
      */
     protected $classNameRepository;
+
+    public function setClassNameRepository(ClassNameRepository $classNameRepository)
+    {
+        $this->classNameRepository = $classNameRepository;
+    }
 
     /**
      * @Route("/{_admin}/product/class_category/{class_name_id}", requirements={"class_name_id" = "\d+"}, name="admin_product_class_category")

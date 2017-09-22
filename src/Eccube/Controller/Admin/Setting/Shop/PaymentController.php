@@ -57,11 +57,21 @@ class PaymentController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject("form.factory")
@@ -69,17 +79,32 @@ class PaymentController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject(PaymentRepository::class)
      * @var PaymentRepository
      */
     protected $paymentRepository;
+
+    public function setPaymentRepository(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/shop/payment", name="admin_setting_shop_payment")

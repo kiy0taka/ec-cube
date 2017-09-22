@@ -69,11 +69,21 @@ class EditController extends AbstractController
      */
     protected $taxRuleService;
 
+    public function setTaxRuleService(TaxRuleService $taxRuleService)
+    {
+        $this->taxRuleService = $taxRuleService;
+    }
+
     /**
      * @Inject(DeviceTypeRepository::class)
      * @var DeviceTypeRepository
      */
     protected $deviceTypeRepository;
+
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
 
     /**
      * @Inject(ProductRepository::class)
@@ -81,11 +91,21 @@ class EditController extends AbstractController
      */
     protected $productRepository;
 
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @Inject(CategoryRepository::class)
      * @var CategoryRepository
      */
     protected $categoryRepository;
+
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @Inject("session")
@@ -93,11 +113,21 @@ class EditController extends AbstractController
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(CustomerRepository::class)
@@ -105,11 +135,21 @@ class EditController extends AbstractController
      */
     protected $customerRepository;
 
+    public function setCustomerRepository(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
+
     /**
      * @Inject("monolog")
      * @var Logger
      */
     protected $logger;
+
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @Inject("serializer")
@@ -117,11 +157,21 @@ class EditController extends AbstractController
      */
     protected $serializer;
 
+    public function setSerializer(Serializer $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
     /**
      * @Inject(DeliveryRepository::class)
      * @var DeliveryRepository
      */
     protected $deliveryRepository;
+
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
 
     /**
      * @Inject("eccube.purchase.flow.order")
@@ -129,11 +179,21 @@ class EditController extends AbstractController
      */
     protected $purchaseFlow;
 
+    public function setPurchaseFlow(PurchaseFlow $purchaseFlow)
+    {
+        $this->purchaseFlow = $purchaseFlow;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -141,17 +201,32 @@ class EditController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(OrderRepository::class)
      * @var OrderRepository
      */
     protected $orderRepository;
 
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
 
     /**

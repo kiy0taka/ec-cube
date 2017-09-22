@@ -44,6 +44,11 @@ class HelpController extends AbstractController
      */
     protected $helpRepository;
 
+    public function setHelpRepository(HelpRepository $helpRepository)
+    {
+        $this->helpRepository = $helpRepository;
+    }
+
     /**
      * 特定商取引法.
      *

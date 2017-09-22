@@ -50,6 +50,11 @@ class SearchProductType extends AbstractType
      */
     protected $DispRepository;
 
+    public function setDispRepository(DispRepository $DispRepository)
+    {
+        $this->DispRepository = $DispRepository;
+    }
+
     /**
      * {@inheritdoc}
      */

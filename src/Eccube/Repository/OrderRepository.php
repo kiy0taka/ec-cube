@@ -46,11 +46,21 @@ class OrderRepository extends AbstractRepository
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("eccube.queries")
      * @var Queries
      */
     protected $queries;
+
+    public function setQueries(Queries $queries)
+    {
+        $this->queries = $queries;
+    }
 
     public function changeStatus($orderId, \Eccube\Entity\Master\OrderStatus $Status)
     {

@@ -53,11 +53,21 @@ class DeliveryController extends AbstractController
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -65,11 +75,21 @@ class DeliveryController extends AbstractController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject(CustomerAddressRepository::class)
@@ -77,11 +97,21 @@ class DeliveryController extends AbstractController
      */
     protected $customerAddressRepository;
 
+    public function setCustomerAddressRepository(CustomerAddressRepository $customerAddressRepository)
+    {
+        $this->customerAddressRepository = $customerAddressRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * お届け先一覧画面.

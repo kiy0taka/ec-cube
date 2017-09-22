@@ -45,6 +45,11 @@ class SystemController
      */
     protected $systemService;
 
+    public function setSystemService(SystemService $systemService)
+    {
+        $this->systemService = $systemService;
+    }
+
     /**
      * @Route("/{_admin}/setting/system/system", name="admin_setting_system_system")
      * @Template("Setting/System/system.twig")

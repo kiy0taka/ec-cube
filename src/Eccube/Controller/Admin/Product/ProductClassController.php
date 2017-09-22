@@ -70,11 +70,21 @@ class ProductClassController
      */
     protected $taxRuleRepository;
 
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(ProductTypeRepository::class)
@@ -82,11 +92,21 @@ class ProductClassController
      */
     protected $productTypeRepository;
 
+    public function setProductTypeRepository(ProductTypeRepository $productTypeRepository)
+    {
+        $this->productTypeRepository = $productTypeRepository;
+    }
+
     /**
      * @Inject(ClassCategoryRepository::class)
      * @var ClassCategoryRepository
      */
     protected $classCategoryRepository;
+
+    public function setClassCategoryRepository(ClassCategoryRepository $classCategoryRepository)
+    {
+        $this->classCategoryRepository = $classCategoryRepository;
+    }
 
     /**
      * @Inject(ProductClassRepository::class)
@@ -94,11 +114,21 @@ class ProductClassController
      */
     protected $productClassRepository;
 
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject(BaseInfo::class)
@@ -106,11 +136,21 @@ class ProductClassController
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -118,11 +158,21 @@ class ProductClassController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(ProductRepository::class)
      * @var ProductRepository
      */
     protected $productRepository;
+
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
 
     /**
      * 商品規格が登録されていなければ新規登録、登録されていれば更新画面を表示する

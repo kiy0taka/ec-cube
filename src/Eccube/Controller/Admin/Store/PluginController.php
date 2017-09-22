@@ -65,11 +65,21 @@ class PluginController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("monolog")
      * @var Logger
      */
     protected $logger;
+
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @Inject(PluginEventHandlerRepository::class)
@@ -77,11 +87,21 @@ class PluginController extends AbstractController
      */
     protected $pluginEventHandlerRepository;
 
+    public function setPluginEventHandlerRepository(PluginEventHandlerRepository $pluginEventHandlerRepository)
+    {
+        $this->pluginEventHandlerRepository = $pluginEventHandlerRepository;
+    }
+
     /**
      * @Inject(PluginService::class)
      * @var PluginService
      */
     protected $pluginService;
+
+    public function setPluginService(PluginService $pluginService)
+    {
+        $this->pluginService = $pluginService;
+    }
 
     /**
      * @Inject("config")
@@ -89,11 +109,21 @@ class PluginController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Inject("form.factory")
@@ -101,11 +131,21 @@ class PluginController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(PluginRepository::class)
      * @var PluginRepository
      */
     protected $pluginRepository;
+
+    public function setPluginRepository(PluginRepository $pluginRepository)
+    {
+        $this->pluginRepository = $pluginRepository;
+    }
 
 
     /**

@@ -53,11 +53,21 @@ class ClassNameController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -65,11 +75,21 @@ class ClassNameController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(ClassNameRepository::class)
      * @var ClassNameRepository
      */
     protected $classNameRepository;
+
+    public function setClassNameRepository(ClassNameRepository $classNameRepository)
+    {
+        $this->classNameRepository = $classNameRepository;
+    }
 
     /**
      * @Route("/{_admin}/product/class_name", name="admin_product_class_name")

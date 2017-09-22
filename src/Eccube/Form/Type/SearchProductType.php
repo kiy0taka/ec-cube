@@ -48,6 +48,11 @@ class SearchProductType extends AbstractType
      */
     protected $categoryRepository;
 
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * SearchProductType constructor.
      *

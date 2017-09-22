@@ -43,11 +43,21 @@ class OrderHelper
      */
     protected $orderItemTypeRepository;
 
+    public function setOrderItemTypeRepository(OrderItemTypeRepository $orderItemTypeRepository)
+    {
+        $this->orderItemTypeRepository = $orderItemTypeRepository;
+    }
+
     /**
      * @Inject(OrderStatusRepository::class)
      * @var OrderStatusRepository
      */
     protected $orderStatusRepository;
+
+    public function setOrderStatusRepository(OrderStatusRepository $orderStatusRepository)
+    {
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
 
     /**
      * @Inject(TaxRuleRepository::class)
@@ -55,11 +65,21 @@ class OrderHelper
      */
     protected $taxRuleRepository;
 
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
+
     /**
      * @Inject(DeliveryFeeRepository::class)
      * @var DeliveryFeeRepository
      */
     protected $deliveryFeeRepository;
+
+    public function setDeliveryFeeRepository(DeliveryFeeRepository $deliveryFeeRepository)
+    {
+        $this->deliveryFeeRepository = $deliveryFeeRepository;
+    }
 
     /**
      * @Inject(DeliveryRepository::class)
@@ -67,11 +87,21 @@ class OrderHelper
      */
     protected $deliveryRepository;
 
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
     /**
      * @Inject(PaymentRepository::class)
      * @var PaymentRepository
      */
     protected $paymentRepository;
+
+    public function setPaymentRepository(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     /**
      * @Inject(OrderRepository::class)
@@ -79,11 +109,21 @@ class OrderHelper
      */
     protected $orderRepository;
 
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * @Inject(ShippingStatusRepository::class)
      * @var ShippingStatusRepository
      */
     protected $shippingStatusRepository;
+
+    public function setShippingStatusRepository(ShippingStatusRepository $shippingStatusRepository)
+    {
+        $this->shippingStatusRepository = $shippingStatusRepository;
+    }
 
     /**
      * @Inject("orm.em")
@@ -91,11 +131,21 @@ class OrderHelper
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * 購入処理中の受注データを生成する.

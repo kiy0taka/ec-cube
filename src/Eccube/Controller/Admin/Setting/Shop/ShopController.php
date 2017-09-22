@@ -52,11 +52,21 @@ class ShopController extends AbstractController
      */
     protected $twigEnvironment;
 
+    public function setTwigEnvironment(Twig_Environment $twigEnvironment)
+    {
+        $this->twigEnvironment = $twigEnvironment;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("orm.em")
@@ -64,17 +74,32 @@ class ShopController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Route("/{_admin}/setting/shop", name="admin_setting_shop")

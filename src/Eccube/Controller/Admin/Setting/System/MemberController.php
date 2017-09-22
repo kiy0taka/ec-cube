@@ -55,11 +55,21 @@ class MemberController extends AbstractController
      */
     protected $tokenStorage;
 
+    public function setTokenStorage(TokenStorage $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("config")
@@ -67,11 +77,21 @@ class MemberController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -79,11 +99,21 @@ class MemberController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(MemberRepository::class)
      * @var MemberRepository
      */
     protected $memberRepository;
+
+    public function setMemberRepository(MemberRepository $memberRepository)
+    {
+        $this->memberRepository = $memberRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/system/member", name="admin_setting_system_member")

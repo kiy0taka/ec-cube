@@ -54,11 +54,21 @@ class CsvController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject(CsvRepository::class)
@@ -66,11 +76,21 @@ class CsvController extends AbstractController
      */
     protected $csvRepository;
 
+    public function setCsvRepository(CsvRepository $csvRepository)
+    {
+        $this->csvRepository = $csvRepository;
+    }
+
     /**
      * @Inject(CsvTypeRepository::class)
      * @var CsvTypeRepository
      */
     protected $csvTypeRepository;
+
+    public function setCsvTypeRepository(CsvTypeRepository $csvTypeRepository)
+    {
+        $this->csvTypeRepository = $csvTypeRepository;
+    }
 
     /**
      * @Route("/{_admin}/setting/shop/csv/{id}",

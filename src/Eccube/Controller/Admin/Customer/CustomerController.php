@@ -62,11 +62,21 @@ class CustomerController extends AbstractController
      */
     protected $csvExportService;
 
+    public function setCsvExportService(CsvExportService $csvExportService)
+    {
+        $this->csvExportService = $csvExportService;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject(MailService::class)
@@ -74,11 +84,21 @@ class CustomerController extends AbstractController
      */
     protected $mailService;
 
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
     /**
      * @Inject(PrefRepository::class)
      * @var PrefRepository
      */
     protected $prefRepository;
+
+    public function setPrefRepository(PrefRepository $prefRepository)
+    {
+        $this->prefRepository = $prefRepository;
+    }
 
     /**
      * @Inject(SexRepository::class)
@@ -86,11 +106,21 @@ class CustomerController extends AbstractController
      */
     protected $sexRepository;
 
+    public function setSexRepository(SexRepository $sexRepository)
+    {
+        $this->sexRepository = $sexRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(PageMaxRepository::class)
@@ -98,11 +128,21 @@ class CustomerController extends AbstractController
      */
     protected $pageMaxRepository;
 
+    public function setPageMaxRepository(PageMaxRepository $pageMaxRepository)
+    {
+        $this->pageMaxRepository = $pageMaxRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -110,11 +150,21 @@ class CustomerController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(CustomerRepository::class)
      * @var CustomerRepository
      */
     protected $customerRepository;
+
+    public function setCustomerRepository(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
 
     /**
      * @Route("/{_admin}/customer", name="admin_customer")

@@ -71,11 +71,21 @@ class ShoppingService
      */
     protected $mailTemplateRepository;
 
+    public function setMailTemplateRepository(MailTemplateRepository $mailTemplateRepository)
+    {
+        $this->mailTemplateRepository = $mailTemplateRepository;
+    }
+
     /**
      * @Inject(MailService::class)
      * @var MailService
      */
     protected $mailService;
+
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -83,11 +93,21 @@ class ShoppingService
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject(DeliveryFeeRepository::class)
@@ -95,11 +115,21 @@ class ShoppingService
      */
     protected $deliveryFeeRepository;
 
+    public function setDeliveryFeeRepository(DeliveryFeeRepository $deliveryFeeRepository)
+    {
+        $this->deliveryFeeRepository = $deliveryFeeRepository;
+    }
+
     /**
      * @Inject(TaxRuleRepository::class)
      * @var TaxRuleRepository
      */
     protected $taxRuleRepository;
+
+    public function setTaxRuleRepository(TaxRuleRepository $taxRuleRepository)
+    {
+        $this->taxRuleRepository = $taxRuleRepository;
+    }
 
     /**
      * @Inject(CustomerAddressRepository::class)
@@ -107,11 +137,21 @@ class ShoppingService
      */
     protected $customerAddressRepository;
 
+    public function setCustomerAddressRepository(CustomerAddressRepository $customerAddressRepository)
+    {
+        $this->customerAddressRepository = $customerAddressRepository;
+    }
+
     /**
      * @Inject(DeliveryRepository::class)
      * @var DeliveryRepository
      */
     protected $deliveryRepository;
+
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
 
     /**
      * @Inject(OrderStatusRepository::class)
@@ -119,11 +159,21 @@ class ShoppingService
      */
     protected $orderStatusRepository;
 
+    public function setOrderStatusRepository(OrderStatusRepository $orderStatusRepository)
+    {
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
+
     /**
      * @Inject(PaymentRepository::class)
      * @var PaymentRepository
      */
     protected $paymentRepository;
+
+    public function setPaymentRepository(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     /**
      * @Inject(DeviceTypeRepository::class)
@@ -131,11 +181,21 @@ class ShoppingService
      */
     protected $deviceTypeRepository;
 
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("config")
@@ -143,11 +203,21 @@ class ShoppingService
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(PrefRepository::class)
      * @var PrefRepository
      */
     protected $prefRepository;
+
+    public function setPrefRepository(PrefRepository $prefRepository)
+    {
+        $this->prefRepository = $prefRepository;
+    }
 
     /**
      * @Inject("session")
@@ -155,17 +225,32 @@ class ShoppingService
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Inject(OrderRepository::class)
      * @var OrderRepository
      */
     protected $orderRepository;
 
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Inject(Application::class)
@@ -179,12 +264,22 @@ class ShoppingService
      */
     protected $cartService;
 
+    public function setCartService(\Eccube\Service\CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     /**
      * @var \Eccube\Service\OrderService
      *
      * @deprecated
      */
     protected $orderService;
+
+    public function setOrderService(\Eccube\Service\OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
 
     /**
      * セッションにセットされた受注情報を取得

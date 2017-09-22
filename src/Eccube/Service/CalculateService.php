@@ -19,6 +19,11 @@ class CalculateService
     /** @var CalculateContext */
     protected $CalculateContext;
 
+    public function setCalculateContext(CalculateContext $CalculateContext)
+    {
+        $this->CalculateContext = $CalculateContext;
+    }
+
     public function __construct($Order, $Customer)
     {
         $this->Order = $Order;

@@ -45,6 +45,11 @@ class ShippingMultipleType extends AbstractType
      */
     protected $shippingRepository;
 
+    public function setShippingRepository(ShippingRepository $shippingRepository)
+    {
+        $this->shippingRepository = $shippingRepository;
+    }
+
 
     public $app;
 

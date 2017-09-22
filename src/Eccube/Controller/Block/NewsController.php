@@ -44,6 +44,11 @@ class NewsController
      */
     protected $newsRepository;
 
+    public function setNewsRepository(NewsRepository $newsRepository)
+    {
+        $this->newsRepository = $newsRepository;
+    }
+
     /**
      * @Route("/block/news", name="block_news")
      * @Template("Block/news.twig'")

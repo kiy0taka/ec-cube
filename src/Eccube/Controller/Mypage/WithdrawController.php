@@ -54,11 +54,21 @@ class WithdrawController extends AbstractController
      */
     protected $mailService;
 
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
     /**
      * @Inject(CustomerStatusRepository::class)
      * @var CustomerStatusRepository
      */
     protected $customerStatusRepository;
+
+    public function setCustomerStatusRepository(CustomerStatusRepository $customerStatusRepository)
+    {
+        $this->customerStatusRepository = $customerStatusRepository;
+    }
 
     /**
      * @Inject("orm.em")
@@ -66,17 +76,32 @@ class WithdrawController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * 退会画面.

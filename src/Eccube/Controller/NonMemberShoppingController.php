@@ -63,11 +63,21 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     protected $recursiveValidator;
 
+    public function setRecursiveValidator(RecursiveValidator $recursiveValidator)
+    {
+        $this->recursiveValidator = $recursiveValidator;
+    }
+
     /**
      * @Inject("monolog")
      * @var Logger
      */
     protected $logger;
+
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @Inject("orm.em")
@@ -75,11 +85,21 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(PrefRepository::class)
      * @var PrefRepository
      */
     protected $prefRepository;
+
+    public function setPrefRepository(PrefRepository $prefRepository)
+    {
+        $this->prefRepository = $prefRepository;
+    }
 
     /**
      * @Inject("session")
@@ -87,11 +107,21 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Inject(OrderHelper::class)
      * @var OrderHelper
      */
     protected $orderHelper;
+
+    public function setOrderHelper(OrderHelper $orderHelper)
+    {
+        $this->orderHelper = $orderHelper;
+    }
 
     /**
      * @Inject("config")
@@ -99,11 +129,21 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(ShoppingService::class)
      * @var ShoppingService
      */
     protected $shoppingService;
+
+    public function setShoppingService(ShoppingService $shoppingService)
+    {
+        $this->shoppingService = $shoppingService;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -111,17 +151,32 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(CartService::class)
      * @var CartService
      */
     protected $cartService;
+
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
 
     /**
@@ -336,7 +391,7 @@ class NonMemberShoppingController extends AbstractShoppingController
      */
     public function shippingEditChange(Application $app, Request $request, $id)
     {
-        $Order = $app['eccube.service.shopping']->getOrder($app['config']['order_processing']);
+        $Order = $this->shoppingService->getOrder($this->appConfig['order_processing']);
         if (!$Order) {
             $app->addError('front.shopping.order.error');
             return $app->redirect($app->url('shopping_error'));
@@ -346,7 +401,7 @@ class NonMemberShoppingController extends AbstractShoppingController
             return $app->redirect($app->url('shopping'));
         }
 
-        $builder = $app['eccube.service.shopping']->getShippingFormBuilder($Order);
+        $builder = $this->shoppingService->getShippingFormBuilder($Order);
 
         $event = new EventArgs(
             array(
@@ -355,7 +410,7 @@ class NonMemberShoppingController extends AbstractShoppingController
             ),
             $request
         );
-        $app['eccube.event.dispatcher']->dispatch(EccubeEvents::FRONT_SHOPPING_SHIPPING_EDIT_CHANGE_INITIALIZE, $event);
+        $this->eventDispatcher->dispatch(EccubeEvents::FRONT_SHOPPING_SHIPPING_EDIT_CHANGE_INITIALIZE, $event);
 
         $form = $builder->getForm();
 
@@ -366,7 +421,7 @@ class NonMemberShoppingController extends AbstractShoppingController
             $message = $data['message'];
             $Order->setMessage($message);
             // 受注情報を更新
-            $app['orm.em']->flush();
+            $this->entityManager->flush();
 
             // お届け先設定一覧へリダイレクト
             return $app->redirect($app->url('shopping_shipping_edit', array('id' => $id)));

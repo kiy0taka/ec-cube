@@ -59,11 +59,21 @@ class MypageController extends AbstractController
      */
     protected $productRepository;
 
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @Inject(CustomerFavoriteProductRepository::class)
      * @var CustomerFavoriteProductRepository
      */
     protected $customerFavoriteProductRepository;
+
+    public function setCustomerFavoriteProductRepository(CustomerFavoriteProductRepository $customerFavoriteProductRepository)
+    {
+        $this->customerFavoriteProductRepository = $customerFavoriteProductRepository;
+    }
 
     /**
      * @Inject(BaseInfo::class)
@@ -71,11 +81,21 @@ class MypageController extends AbstractController
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject(CartService::class)
      * @var CartService
      */
     protected $cartService;
+
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
     /**
      * @Inject("config")
@@ -83,11 +103,21 @@ class MypageController extends AbstractController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(OrderRepository::class)
      * @var OrderRepository
      */
     protected $orderRepository;
+
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
 
     /**
      * @Inject("orm.em")
@@ -95,17 +125,32 @@ class MypageController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * ログイン画面.

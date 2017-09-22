@@ -51,12 +51,22 @@ class CustomerAddressType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
 
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @param array $config

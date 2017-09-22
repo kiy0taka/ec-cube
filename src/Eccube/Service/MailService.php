@@ -44,11 +44,21 @@ class MailService
      */
     protected $mailTemplateRepository;
 
+    public function setMailTemplateRepository(MailTemplateRepository $mailTemplateRepository)
+    {
+        $this->mailTemplateRepository = $mailTemplateRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject(BaseInfo::class)
@@ -56,11 +66,21 @@ class MailService
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject(Application::class)
      * @var Application
      */
     protected $app;
+
+    public function setApp(Application $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * Send customer confirm mail.

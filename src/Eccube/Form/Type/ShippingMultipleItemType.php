@@ -48,11 +48,21 @@ class ShippingMultipleItemType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("session")
      * @var Session
      */
     protected $session;
+
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
 
 
     public $app;

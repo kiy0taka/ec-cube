@@ -55,11 +55,21 @@ class MainEditType extends AbstractType
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(DeviceTypeRepository::class)
      * @var DeviceTypeRepository
      */
     protected $deviceTypeRepository;
+
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
 
     /**
      * @Inject("config")
@@ -67,11 +77,21 @@ class MainEditType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     public function __construct()
     {

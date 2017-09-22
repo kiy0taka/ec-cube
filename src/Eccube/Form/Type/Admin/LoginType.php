@@ -45,6 +45,11 @@ class LoginType extends AbstractType
      */
     protected $session;
 
+    public function setSession(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     public function __construct()
     {
     }

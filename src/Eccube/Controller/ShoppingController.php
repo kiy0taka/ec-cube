@@ -66,11 +66,21 @@ class ShoppingController extends AbstractShoppingController
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject(OrderHelper::class)
      * @var OrderHelper
      */
     protected $orderHelper;
+
+    public function setOrderHelper(OrderHelper $orderHelper)
+    {
+        $this->orderHelper = $orderHelper;
+    }
 
     /**
      * @Inject(CartService::class)
@@ -78,11 +88,21 @@ class ShoppingController extends AbstractShoppingController
      */
     protected $cartService;
 
+    public function setCartService(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject("orm.em")
@@ -90,11 +110,21 @@ class ShoppingController extends AbstractShoppingController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(ShoppingService::class)
@@ -102,11 +132,21 @@ class ShoppingController extends AbstractShoppingController
      */
     protected $shoppingService;
 
+    public function setShoppingService(ShoppingService $shoppingService)
+    {
+        $this->shoppingService = $shoppingService;
+    }
+
     /**
      * @Inject(CustomerAddressRepository::class)
      * @var CustomerAddressRepository
      */
     protected $customerAddressRepository;
+
+    public function setCustomerAddressRepository(CustomerAddressRepository $customerAddressRepository)
+    {
+        $this->customerAddressRepository = $customerAddressRepository;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -114,17 +154,32 @@ class ShoppingController extends AbstractShoppingController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("session")
      * @var Session
      */
     protected $session;
 
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Inject("request_scope")
      * @var ParameterBag
      */
     protected $parameterBag;
+
+    public function setParameterBag(ParameterBag $parameterBag)
+    {
+        $this->parameterBag = $parameterBag;
+    }
 
     /**
      * 購入画面表示

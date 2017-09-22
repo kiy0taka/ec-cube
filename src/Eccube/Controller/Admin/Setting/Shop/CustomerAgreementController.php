@@ -50,11 +50,21 @@ class CustomerAgreementController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -62,11 +72,21 @@ class CustomerAgreementController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(HelpRepository::class)
      * @var HelpRepository
      */
     protected $helpRepository;
+
+    public function setHelpRepository(HelpRepository $helpRepository)
+    {
+        $this->helpRepository = $helpRepository;
+    }
 
     public $form;
 

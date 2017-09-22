@@ -46,6 +46,11 @@ class PriceType extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * {@inheritdoc}
      */

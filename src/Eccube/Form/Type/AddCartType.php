@@ -51,6 +51,11 @@ class AddCartType extends AbstractType
      */
     protected $congig;
 
+    public function setCongig(array $congig)
+    {
+        $this->congig = $congig;
+    }
+
     protected $Product = null;
 
     public function __construct() {

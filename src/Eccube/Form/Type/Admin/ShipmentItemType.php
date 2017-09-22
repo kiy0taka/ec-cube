@@ -56,11 +56,21 @@ class ShipmentItemType extends AbstractType
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(ProductClassRepository::class)
@@ -68,11 +78,21 @@ class ShipmentItemType extends AbstractType
      */
     protected $productClassRepository;
 
+    public function setProductClassRepository(ProductClassRepository $productClassRepository)
+    {
+        $this->productClassRepository = $productClassRepository;
+    }
+
     /**
      * @Inject(ShipmentItemRepository::class)
      * @var ShipmentItemRepository
      */
     protected $shipmentItemRepository;
+
+    public function setShipmentItemRepository(ShipmentItemRepository $shipmentItemRepository)
+    {
+        $this->shipmentItemRepository = $shipmentItemRepository;
+    }
 
     /**
      * @Inject("request_stack")
@@ -80,11 +100,21 @@ class ShipmentItemType extends AbstractType
      */
     protected $requestStack;
 
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     /**
      * @var \Eccube\Application $app
      * @Inject(Application::class)
      */
     protected $app;
+
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
 
     public function __construct()
     {

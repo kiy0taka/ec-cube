@@ -48,6 +48,11 @@ class Step4Type extends AbstractType
      */
     protected $requestStack;
 
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public $app;
 
     public function __construct(\Silex\Application $app)

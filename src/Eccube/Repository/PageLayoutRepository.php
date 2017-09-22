@@ -46,6 +46,11 @@ class PageLayoutRepository extends AbstractRepository
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     public function findUnusedBlocks(DeviceType $DeviceType, $pageId)
     {
         $em = $this

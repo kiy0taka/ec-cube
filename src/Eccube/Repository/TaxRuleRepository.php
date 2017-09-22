@@ -49,11 +49,21 @@ class TaxRuleRepository extends AbstractRepository
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Inject("security.authorization_checker")
@@ -61,17 +71,32 @@ class TaxRuleRepository extends AbstractRepository
      */
     protected $authorizationChecker;
 
+    public function setAuthorizationChecker(AuthorizationChecker $authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
     /**
      * @Inject("security.token_storage")
      * @var TokenStorage
      */
     protected $tokenStorage;
 
+    public function setTokenStorage(TokenStorage $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
     /**
      * @Inject(Application::class)
      * @var Application
      */
     protected $app;
+
+    public function setApp(Application $app)
+    {
+        $this->app = $app;
+    }
 
     private $rules = array();
 

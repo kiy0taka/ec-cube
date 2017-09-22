@@ -68,11 +68,21 @@ class CsvImportController
      */
     protected $deliveryDateRepository;
 
+    public function setDeliveryDateRepository(DeliveryDateRepository $deliveryDateRepository)
+    {
+        $this->deliveryDateRepository = $deliveryDateRepository;
+    }
+
     /**
      * @Inject(ProductTypeRepository::class)
      * @var ProductTypeRepository
      */
     protected $productTypeRepository;
+
+    public function setProductTypeRepository(ProductTypeRepository $productTypeRepository)
+    {
+        $this->productTypeRepository = $productTypeRepository;
+    }
 
     /**
      * @Inject(TagRepository::class)
@@ -80,11 +90,21 @@ class CsvImportController
      */
     protected $tagRepository;
 
+    public function setTagRepository(TagRepository $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * @Inject(CategoryRepository::class)
@@ -92,11 +112,21 @@ class CsvImportController
      */
     protected $categoryRepository;
 
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * @Inject(ClassCategoryRepository::class)
      * @var ClassCategoryRepository
      */
     protected $classCategoryRepository;
+
+    public function setClassCategoryRepository(ClassCategoryRepository $classCategoryRepository)
+    {
+        $this->classCategoryRepository = $classCategoryRepository;
+    }
 
     /**
      * @Inject(DispRepository::class)
@@ -104,11 +134,21 @@ class CsvImportController
      */
     protected $dispRepository;
 
+    public function setDispRepository(DispRepository $dispRepository)
+    {
+        $this->dispRepository = $dispRepository;
+    }
+
     /**
      * @Inject(ProductRepository::class)
      * @var ProductRepository
      */
     protected $productRepository;
+
+    public function setProductRepository(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
 
     /**
      * @Inject(BaseInfo::class)
@@ -116,17 +156,32 @@ class CsvImportController
      */
     protected $BaseInfo;
 
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
 
     private $errors = array();

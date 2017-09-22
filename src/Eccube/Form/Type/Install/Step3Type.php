@@ -51,11 +51,21 @@ class Step3Type extends AbstractType
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject("validator")
      * @var RecursiveValidator
      */
     protected $validator;
+
+    public function setValidator(RecursiveValidator $validator)
+    {
+        $this->validator = $validator;
+    }
 
     /**
      * {@inheritdoc}
@@ -138,11 +148,11 @@ class Step3Type extends AbstractType
             ))
             ->add('mail_backend', ChoiceType::class, array(
                 'label' => 'メーラーバックエンド',
-                'choices' => array(
+                'choices' => array_flip(array(
                     'mail（PHPの組み込み関数 mail() を使用してメールを送信）' => 'mail',
                     'SMTP（SMTPサーバに直接接続してメールを送信）' => 'smtp',
                     'sendmail（sendmailプログラムによりメールを送信）' => 'sendmail',
-                ),
+                )),
                 'expanded' => true,
                 'multiple' => false,
             ))

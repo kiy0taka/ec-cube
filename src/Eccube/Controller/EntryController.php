@@ -59,11 +59,21 @@ class EntryController extends AbstractController
      */
     protected $customerStatusRepository;
 
+    public function setCustomerStatusRepository(CustomerStatusRepository $customerStatusRepository)
+    {
+        $this->customerStatusRepository = $customerStatusRepository;
+    }
+
     /**
      * @Inject("validator")
      * @var RecursiveValidator
      */
     protected $recursiveValidator;
+
+    public function setRecursiveValidator(RecursiveValidator $recursiveValidator)
+    {
+        $this->recursiveValidator = $recursiveValidator;
+    }
 
     /**
      * @Inject(MailService::class)
@@ -71,11 +81,21 @@ class EntryController extends AbstractController
      */
     protected $mailService;
 
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
     /**
      * @Inject(BaseInfo::class)
      * @var BaseInfo
      */
     protected $BaseInfo;
+
+    public function setBaseInfo(BaseInfo $BaseInfo)
+    {
+        $this->BaseInfo = $BaseInfo;
+    }
 
     /**
      * @Inject("orm.em")
@@ -83,11 +103,21 @@ class EntryController extends AbstractController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @Inject("form.factory")
@@ -95,11 +125,21 @@ class EntryController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject(CustomerRepository::class)
      * @var CustomerRepository
      */
     protected $customerRepository;
+
+    public function setCustomerRepository(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
 
 
     /**

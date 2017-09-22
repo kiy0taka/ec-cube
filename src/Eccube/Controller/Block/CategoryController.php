@@ -44,6 +44,11 @@ class CategoryController
      */
     protected $categoryRepository;
 
+    public function setCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * @Route("/block/category", name="block_category")
      * @Template("Block/category.twig")

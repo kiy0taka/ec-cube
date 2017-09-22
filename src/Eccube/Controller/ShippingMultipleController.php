@@ -51,11 +51,21 @@ class ShippingMultipleController extends AbstractShoppingController
      */
     protected $prefRepository;
 
+    public function setPrefRepository(PrefRepository $prefRepository)
+    {
+        $this->prefRepository = $prefRepository;
+    }
+
     /**
      * @Inject("session")
      * @var Session
      */
     protected $session;
+
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
 
     /**
      * @Inject(OrderItemTypeRepository::class)
@@ -63,11 +73,21 @@ class ShippingMultipleController extends AbstractShoppingController
      */
     protected $orderItemTypeRepository;
 
+    public function setOrderItemTypeRepository(OrderItemTypeRepository $orderItemTypeRepository)
+    {
+        $this->orderItemTypeRepository = $orderItemTypeRepository;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
+
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -75,17 +95,32 @@ class ShippingMultipleController extends AbstractShoppingController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(ShoppingService::class)
      * @var ShoppingService
      */
     protected $shoppingService;
+
+    public function setShoppingService(ShoppingService $shoppingService)
+    {
+        $this->shoppingService = $shoppingService;
+    }
 
 
     /**

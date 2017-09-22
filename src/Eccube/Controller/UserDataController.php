@@ -51,11 +51,21 @@ class UserDataController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("twig.loader")
      * @var Twig_Loader_Chain
      */
     protected $twigLoaderChain;
+
+    public function setTwigLoaderChain(Twig_Loader_Chain $twigLoaderChain)
+    {
+        $this->twigLoaderChain = $twigLoaderChain;
+    }
 
     /**
      * @Inject("config")
@@ -63,17 +73,32 @@ class UserDataController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(PageLayoutRepository::class)
      * @var PageLayoutRepository
      */
     protected $pageLayoutRepository;
 
+    public function setPageLayoutRepository(PageLayoutRepository $pageLayoutRepository)
+    {
+        $this->pageLayoutRepository = $pageLayoutRepository;
+    }
+
     /**
      * @Inject(DeviceTypeRepository::class)
      * @var DeviceTypeRepository
      */
     protected $deviceTypeRepository;
+
+    public function setDeviceTypeRepository(DeviceTypeRepository $deviceTypeRepository)
+    {
+        $this->deviceTypeRepository = $deviceTypeRepository;
+    }
 
     /**
      * @Route("/{_user_data}/{route}", name="user_data", requirements={"route": "([0-9a-zA-Z_\-]+\/?)+(?<!\/)"})

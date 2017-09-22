@@ -50,6 +50,11 @@ class PaymentRegisterType extends AbstractType
      */
     protected $app;
 
+    public function setApp(\Eccube\Application $app)
+    {
+        $this->app = $app;
+    }
+
     public function __construct()
     {
     }

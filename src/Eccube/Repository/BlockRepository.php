@@ -45,6 +45,11 @@ class BlockRepository extends AbstractRepository
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @deprecated 呼び出し元で制御する
      * @param $block_id

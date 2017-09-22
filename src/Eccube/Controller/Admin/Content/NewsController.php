@@ -54,17 +54,32 @@ class NewsController extends AbstractController
      */
     protected $formFactory;
 
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject(NewsRepository::class)
      * @var NewsRepository
      */
     protected $newsRepository;
+
+    public function setNewsRepository(NewsRepository $newsRepository)
+    {
+        $this->newsRepository = $newsRepository;
+    }
 
     /**
      * 新着情報一覧を表示する。

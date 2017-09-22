@@ -43,11 +43,21 @@ class ShippingController
      */
     protected $orderStatusRepository;
 
+    public function setOrderStatusRepository(OrderStatusRepository $orderStatusRepository)
+    {
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
+
     /**
      * @Inject(ShippingRepository::class)
      * @var ShippingRepository
      */
     protected $shippingRepository;
+
+    public function setShippingRepository(ShippingRepository $shippingRepository)
+    {
+        $this->shippingRepository = $shippingRepository;
+    }
 
     /**
      * @Inject("config")
@@ -55,11 +65,21 @@ class ShippingController
      */
     protected $appConfig;
 
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
+
     /**
      * @Inject(PageMaxRepository::class)
      * @var PageMaxRepository
      */
     protected $pageMaxRepository;
+
+    public function setPageMaxRepository(PageMaxRepository $pageMaxRepository)
+    {
+        $this->pageMaxRepository = $pageMaxRepository;
+    }
 
     /**
      * @Inject(DispRepository::class)
@@ -67,17 +87,32 @@ class ShippingController
      */
     protected $dispRepository;
 
+    public function setDispRepository(DispRepository $dispRepository)
+    {
+        $this->dispRepository = $dispRepository;
+    }
+
     /**
      * @Inject("eccube.event.dispatcher")
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Route("/{_admin}/shipping", name="admin/shipping")

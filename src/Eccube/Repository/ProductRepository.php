@@ -48,17 +48,32 @@ class ProductRepository extends AbstractRepository
      */
     protected $queries;
 
+    public function setQueries(Queries $queries)
+    {
+        $this->queries = $queries;
+    }
+
     /**
      * @Inject("orm.em")
      * @var EntityManager
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject("config")
      * @var array
      */
     protected $appConfig;
+
+    public function setAppConfig(array $appConfig)
+    {
+        $this->appConfig = $appConfig;
+    }
 
     /**
      * get Product.

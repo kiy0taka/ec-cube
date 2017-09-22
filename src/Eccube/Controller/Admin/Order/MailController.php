@@ -54,11 +54,21 @@ class MailController
      */
     protected $entityManager;
 
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Inject(MailService::class)
      * @var MailService
      */
     protected $mailService;
+
+    public function setMailService(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
 
     /**
      * @Inject("eccube.event.dispatcher")
@@ -66,11 +76,21 @@ class MailController
      */
     protected $eventDispatcher;
 
+    public function setEventDispatcher(EventDispatcher $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Inject("form.factory")
      * @var FormFactory
      */
     protected $formFactory;
+
+    public function setFormFactory(FormFactory $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @Inject(MailHistoryRepository::class)
@@ -78,11 +98,21 @@ class MailController
      */
     protected $mailHistoryRepository;
 
+    public function setMailHistoryRepository(MailHistoryRepository $mailHistoryRepository)
+    {
+        $this->mailHistoryRepository = $mailHistoryRepository;
+    }
+
     /**
      * @Inject(OrderRepository::class)
      * @var OrderRepository
      */
     protected $orderRepository;
+
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
 
     /**
      * @Route("/{_admin}/order/{id}/mail", requirements={"id" = "\d+"}, name="admin_order_mail")

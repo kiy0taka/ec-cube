@@ -33,11 +33,21 @@ class OrderType extends AbstractType
      */
     protected $app;
 
+    public function setApp(Application $app)
+    {
+        $this->app = $app;
+    }
+
     /**
      * @var OrderRepository
      * @Inject("eccube.repository.order")
      */
     protected $orderRepository;
+
+    public function setOrderRepository(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
 
     /**
      * @var DeliveryRepository
@@ -45,11 +55,21 @@ class OrderType extends AbstractType
      */
     protected $deliveryRepository;
 
+    public function setDeliveryRepository(DeliveryRepository $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
     /**
      * @var PaymentRepository
      * @Inject("eccube.repository.payment")
      */
     protected $paymentRepository;
+
+    public function setPaymentRepository(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     public function __construct() {
     }
