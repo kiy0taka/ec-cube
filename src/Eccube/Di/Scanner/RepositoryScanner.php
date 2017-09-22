@@ -65,13 +65,10 @@ class RepositoryScanner extends ComponentScanner
         return $twig->createTemplate(
 '{% for component in components -%}
 $app["{{ component.id }}"] = function (\Pimple\Container $app) {
-    $class = new \ReflectionClass(\{{ component.className }}::class);
     $instance = $app["orm.em"]->getRepository(\{{ component.entityName }}::class);
 
     {% for dependency in component.dependencies -%}
-    $property = $class->getProperty("{{ dependency.propertyName }}");
-    $property->setAccessible(true);
-    $property->setValue($instance, {% if is_app(dependency.id) %}$app{% else %}$app["{{ dependency.id }}"]{% endif %});
+    $instance->set{{ dependency.propertyName|capitalize }}({% if is_app(dependency.id) %}$app{% else %}$app["{{ dependency.id }}"]{% endif %});
     {% endfor %}
 
     return $instance;
