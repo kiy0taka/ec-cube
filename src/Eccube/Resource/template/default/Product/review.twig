@@ -1,0 +1,100 @@
+{#
+/*
+ * This file is part of the ProductReview plugin
+ *
+ * Copyright (C) 2016 LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'product_review_page' %}
+
+{% block stylesheet %}
+    <style>
+        .product_review_page .dl_table {
+            margin: 0 0 16px;
+        }
+        .product_review_page .dl_table dt {
+            margin-bottom: 5px;
+        }
+        .product_review_page .dl_table dt label {
+            font-weight: bold;
+        }
+        .product_review_page textarea {
+            vertical-align: top;
+        }
+        .product_review_page #product_review_sex .radio {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .product_review_page #product_review_sex .radio input[type="radio"] {
+            margin-right: 10px;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block main %}
+<div class="ec-productReviewRole">
+    <div class="ec-pageHeader">
+        <h1>レビューを書く</h1>
+    </div>
+    <div class="ec-off1Grid">
+        <div class="ec-off1Grid__cell">
+            <p class="ec-para-nomal">商品について、お客様のご感想をお待ちしております。</p>
+            <form method="post" action="{{ url('plugin_product_review', { id : Product.id }) }}" class="h-adr">
+                <input type="hidden" name="mode" value="confirm">
+                {{ form_widget(form._token) }}
+                <div class="ec-borderedDefs">
+                    <dl>
+                        <dt>
+                            商品名
+                        </dt>
+                        <dd>
+                            {{ Product.name }}
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.reviewer_name) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-input{{ has_errors(form.reviewer_name) ? ' error' }}">
+                                {{ form_widget(form.reviewer_name) }}
+                                {{ form_errors(form.reviewer_name) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{{ form_label(form.recommend_level) }}</dt>
+                        <dd class="form-group">
+                            {{ form_widget(form.recommend_level) }}
+                            {{ form_errors(form.recommend_level) }}
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{{ form_label(form.comment) }}</dt>
+                        <dd class="form-group">
+                            <div class="column">
+                                {{ form_widget(form.comment, {'attr': {'rows': '6'}}) }}
+                                {{ form_errors(form.comment) }}
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="ec-productReviewRole__actions">
+                    <div class="ec-off4Grid">
+                        <div class="ec-off4Grid__cell">
+                            <button type="submit" class="ec-blockBtn--action" name="mode" value="confirm">登録する</button>
+                            <a href="{{ url('product_detail', {'id':Product.id}) }}" class="ec-blockBtn--cancel">戻る</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

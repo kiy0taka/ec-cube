@@ -1,0 +1,43 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) 2000-2015 LOCKON CO.,LTD. All Rights Reserved.
+
+http://www.lockon.co.jp/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#}
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+<div class="ec-role">
+    <div class="ec-pageHeader">
+        <h1>レビュー完了</h1>
+    </div>
+</div>
+<div class="ec-contactCompleteRole">
+    <div class="ec-off3Grid ec-text-ac">
+        <div class="ec-off3Grid__cell">
+            <div class="ec-reportHeading">
+                <h2>ありがとうございました。</h2>
+            </div>
+            <p class="ec-reportDescription">内容を確認後、反映させていただきます。<br/>今しばらくお待ちくださいませ。</p>
+            <div class="ec-off4Grid">
+                <div class="ec-off4Grid__cell"><a class="ec-blockBtn--cancel" href="{{ url('product_detail', {'id':id}) }}">商品ページに戻る</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -301,5 +301,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             <div class="ec-productRole__description">{{ include(template_from_string(Product.freearea)) }}
             </div>
         {% endif %}
+        <div class="ec-grid1">
+            <div class="ec-grid1__cell">
+                {% for ProductReview in Product.ProductReviews %}
+                    {{ ProductReview.comment }}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
