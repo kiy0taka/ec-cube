@@ -12,26 +12,26 @@ class PluginPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $plugins = $container->getParameter('eccube.plugins.disabled');
-
-        if (empty($plugins)) {
-            $container->log($this, 'disabled plugins not found.');
-
-            return;
-        }
-
-        $definitions = $container->getDefinitions();
-
-        foreach ($definitions as $definition) {
-            $class = $definition->getClass();
-
-            foreach ($plugins as $plugin) {
-                $namespace = 'Plugin\\'.$plugin['code'];
-
-                if (false !== \strpos($class, $namespace)) {
-                    $definition->clearTags();
-                }
-            }
-        }
+//        $plugins = $container->getParameter('eccube.plugins.disabled');
+//
+//        if (empty($plugins)) {
+//            $container->log($this, 'disabled plugins not found.');
+//
+//            return;
+//        }
+//
+//        $definitions = $container->getDefinitions();
+//
+//        foreach ($definitions as $definition) {
+//            $class = $definition->getClass();
+//
+//            foreach ($plugins as $plugin) {
+//                $namespace = 'Plugin\\'.$plugin['code'];
+//
+//                if (false !== \strpos($class, $namespace)) {
+//                    $definition->clearTags();
+//                }
+//            }
+//        }
     }
 }

@@ -128,8 +128,8 @@ class Kernel extends BaseKernel
         // 有効なプラグインのコンテナ定義をロードする.
         // $plugins = $container->getParameter('eccube.plugins.enabled');
         // TODO このタイミングではコンテナのeccube.plugins.enabledは未定義.
-        $dir = dirname(__DIR__).'/../app/Plugin/ProductReview/Resource/config';
-        $loader->load($dir.'/services'.self::CONFIG_EXTS, 'glob');
+//        $dir = dirname(__DIR__).'/../app/Plugin/ProductReview/Resource/config';
+//        $loader->load($dir.'/services'.self::CONFIG_EXTS, 'glob');
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes)
@@ -144,14 +144,14 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/routes'.self::CONFIG_EXTS, '/', 'glob');
 
         // 有効なプラグインのルーティングをインポートする.
-        $plugins = $this->getContainer()->getParameter('eccube.plugins.enabled');
-        $pluginDir = dirname(__DIR__).'/../app/Plugin';
-        foreach ($plugins as $plugin) {
-            $dir = $pluginDir.'/'.$plugin['code'].'/Controller';
-            if (file_exists($dir)) {
-                $routes->import($dir, '/', 'annotation');
-            }
-        }
+//        $plugins = $this->getContainer()->getParameter('eccube.plugins.enabled');
+//        $pluginDir = dirname(__DIR__).'/../app/Plugin';
+//        foreach ($plugins as $plugin) {
+//            $dir = $pluginDir.'/'.$plugin['code'].'/Controller';
+//            if (file_exists($dir)) {
+//                $routes->import($dir, '/', 'annotation');
+//            }
+//        }
     }
 
     protected function build(ContainerBuilder $container)

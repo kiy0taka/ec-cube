@@ -56,8 +56,8 @@ class EccubeExtension extends Extension implements PrependExtensionInterface
         });
 
         // 他で使いまわすため, パラメータで保持しておく.
-        $container->setParameter('eccube.plugins.enabled', $enabled);
-        $container->setParameter('eccube.plugins.disabled', $disabled);
+//        $container->setParameter('eccube.plugins.enabled', $enabled);
+//        $container->setParameter('eccube.plugins.disabled', $disabled);
 
         // mapping情報の構築
         $pluginDir = $container->getParameter('kernel.project_dir').'/app/Plugin';
