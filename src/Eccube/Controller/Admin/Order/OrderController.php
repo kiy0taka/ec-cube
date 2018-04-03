@@ -264,14 +264,13 @@ class OrderController extends AbstractController
                 ->find($order_id);
             if ($Order) {
                 $this->entityManager->remove($Order);
+                log_info('受注削除', array($Order->getId()));
             }
         }
 
         $this->entityManager->flush();
 
         $this->addSuccess('admin.order.delete.complete', 'admin');
-
-        log_info('受注削除完了', array($Order->getId()));
 
         return $this->redirect($this->generateUrl('admin_order', ['resume' => Constant::ENABLED]));
     }
