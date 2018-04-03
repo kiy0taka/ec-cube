@@ -253,6 +253,17 @@ class OrderController extends AbstractController
 
     /**
      * @Method("DELETE")
+     * @Route("/%eccube_admin_route%/order/bulk_delete", name="admin_order_bulk_delete")
+     */
+    public function bulkDelete(Request $request)
+    {
+        $this->isTokenValid();
+
+
+    }
+
+    /**
+     * @Method("DELETE")
      * @Route("/%eccube_admin_route%/order/{id}/delete", requirements={"id" = "\d+"}, name="admin_order_delete")
      */
     public function delete(Request $request, $id)
