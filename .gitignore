@@ -36,6 +36,7 @@ composer.phar
 .idea
 *.php~
 .env
+codeception/_support/
 
 ###> symfony/phpunit-bridge ###
 .phpunit

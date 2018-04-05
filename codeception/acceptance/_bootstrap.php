@@ -1,10 +1,14 @@
 <?php
+
 use Codeception\Util\Fixtures;
-use Faker\Factory as Faker;
+use Eccube\Common\EccubeConfig;
+use Eccube\Entity\Customer;
+use Eccube\Entity\Master\CustomerStatus;
 use Eccube\Kernel;
+use Faker\Factory as Faker;
 
 
-$config = parse_ini_file('tests/acceptance/config.ini',true);
+$config = parse_ini_file(__DIR__.'/config.ini',true);
 
 /**
  * create fixture
@@ -12,21 +16,21 @@ $config = parse_ini_file('tests/acceptance/config.ini',true);
  * よってCodeceptionの設定によってコントロールされず、テスト後もデータベース内にこのデータは残る
  * データの件数によって、作成するかどうか判定される
  */
-require_once $config['eccube_path'].'/vendor/autoload.php';
+if (file_exists($config['eccube_path'].'/vendor/autoload.php')) {
+    require_once $config['eccube_path'].'/vendor/autoload.php';
+}
+(new \Dotenv\Dotenv(__DIR__.'/../../'))->overload();
 $kernel = new Kernel('test', false);
 $kernel->boot();
 
 $container = $kernel->getContainer();
+/** @var \Doctrine\ORM\EntityManagerInterface $entityManager */
 $entityManager = $container->get('doctrine')->getManager();
+$conn = $entityManager->getConnection();
 Fixtures::add('entityManager', $entityManager);
 
 // // この Fixture は Cest ではできるだけ使用せず, 用途に応じた Fixture を使用すること
 // Fixtures::add('app', $app);
-
-use Eccube\Common\Constant;
-use Eccube\Entity\Customer;
-use Eccube\Common\EccubeConfig;
-use Eccube\Entity\Master\CustomerStatus;
 
 $faker = Faker::create('ja_JP');
 Fixtures::add('faker', $faker);
