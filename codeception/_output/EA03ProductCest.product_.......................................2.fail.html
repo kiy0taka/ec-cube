@@ -1,0 +1,639 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
+    <title>EC-CUBE SHOP - 管理画面</title>
+    <link rel="stylesheet" href="/html/template/admin/assets/css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/html/template/admin/assets/css/app.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/html/template/admin/assets/js/script.js"></script>
+    <script src="/html/template/admin/assets/js/function.js"></script>
+</head>
+<body id="page_admin_product_product_class">
+<header class="c-headerBar">
+    <div class="c-headerBar__container">
+        <div class="c-headerBar__logo">
+            <h1><img src="/html/template/admin/assets/img/logo@2x.png" /></h1>
+        </div>
+        <a class="c-headerBar__toggleBtn"><i class="fa fa-bars" aria-hidden="true"></i></a>
+        <a class="c-headerBar__shopTitle" href="http://eccube3/"><span>EC-CUBE SHOP</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a class="c-headerBar__userMenu" data-container="body" data-toggle="popover" data-placement="bottom" title="" data-content="&lt;p&gt;2018/03/13&lt;/p&gt;&lt;a href='http://eccube3/admin/change_password' class='btn btn-ec-regular btn-block'&gt;パスワード変更&lt;/a&gt;&lt;a href='http://eccube3/admin/logout' class='btn btn-ec-sub btn-block'&gt;ログアウト&lt;/a&gt;" data-html="true" data-original-title="最終ログイン"><i class="fa fa-user-circle" aria-hidden="true"></i><span>管理者 様</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    </div>
+</header>
+<div class="c-container">
+    <div class="c-mainNavArea">
+        <nav>
+    <ul class="c-mainNavArea__nav">
+        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle" href="http://eccube3/admin/"><i class="fa fa-home" aria-hidden="true"></i><span>ホーム</span></a>
+        </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle" data-toggle="collapse" href="#nav-product" aria-expanded="true" aria-controls="nav-product"><i class="fa fa-cube" aria-hidden="true"></i><span>商品管理</span></a>
+                    <ul class="collapse  show" id="nav-product">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/product" class="is-active">商品マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product/new">商品登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/class_name">規格登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category">カテゴリ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/tag">タグ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product_csv_upload">商品CSV登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category_csv_upload">カテゴリCSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-order" aria-expanded="false" aria-controls="nav-order"><i class="fa fa-inbox" aria-hidden="true"></i><span>受注管理</span></a>
+                    <ul class="collapse " id="nav-order">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/order">受注マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/order/new">受注登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-shipping" aria-expanded="false" aria-controls="nav-shipping"><i class="fa fa-truck" aria-hidden="true"></i><span>出荷管理</span></a>
+                    <ul class="collapse " id="nav-shipping">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/shipping">出荷マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/new">出荷登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/shipping_csv_upload">出荷CSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-customer" aria-expanded="false" aria-controls="nav-customer"><i class="fa fa-users" aria-hidden="true"></i><span>会員管理</span></a>
+                    <ul class="collapse " id="nav-customer">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/customer">会員マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/customer/new">会員登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-content" aria-expanded="false" aria-controls="nav-content"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>コンテンツ管理</span></a>
+                    <ul class="collapse " id="nav-content">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/content/news">新着情報管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/file_manager">ファイル管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/layout">レイアウト管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/page">ページ管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/block">ブロック管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/cache">キャッシュ管理</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-setting" aria-expanded="false" aria-controls="nav-setting"><i class="fa fa-cog" aria-hidden="true"></i><span>設定</span></a>
+                    <ul class="collapse " id="nav-setting">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-shop" aria-expanded="true" aria-controls="nav-shop"><span>基本情報設定</span></a>
+                                        <ul class="collapse" id="nav-shop">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop">ショップマスター</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/payment">支払方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/delivery">配送方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/tax">税率設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/mail">メール設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/csv">CSV出力項目設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-system" aria-expanded="true" aria-controls="nav-system"><span>システム情報設定</span></a>
+                                        <ul class="collapse" id="nav-system">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/system">システム情報</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/member">メンバー管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/authority">権限管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/security">セキュリティ管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/log">EC-CUBE ログ表示</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/masterdata">マスターデータ管理</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-store" aria-expanded="false" aria-controls="nav-store"><i class="fa fa-info-circle" aria-hidden="true"></i><span>オーナーズストア</span></a>
+                    <ul class="collapse " id="nav-store">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-plugin" aria-expanded="true" aria-controls="nav-plugin"><span>プラグイン</span></a>
+                                        <ul class="collapse" id="nav-plugin">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin">プラグイン一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin/handler">高度な設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-template" aria-expanded="true" aria-controls="nav-template"><span>テンプレート</span></a>
+                                        <ul class="collapse" id="nav-template">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template">テンプレート一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template/install">アップロード</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/store/plugin/authentication_setting">認証キー設定</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+        
+                        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#others" aria-expanded="false" aria-controls="others">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+                <span>その他</span>
+            </a>
+            <ul class="collapse" id="others">
+                <li>
+                    <a href="/styleguide/">スタイルガイド</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+    </div>
+    <div class="c-curtain"></div>
+    <div class="c-contentsArea">
+        <div class="c-pageTitle">
+            <div class="c-pageTitle__titles">
+                <h2 class="c-pageTitle__title">商品登録（規格設定）</h2><span class="c-pageTitle__subTitle">商品管理</span>
+            </div>
+        </div>
+
+        
+    <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-check fa-lg mr-2"></i>
+        <span class="font-weight-bold">商品規格を更新しました。</span>
+        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+
+
+
+
+            <form id="form" method="post">
+                    <input type="hidden" id="form__token" name="form[_token]" value="tMJAd-U5EUwrLxkImL8Zpmi9g6S2Akbrt0wqUPPBhNQ" />
+                <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8"><span class="card-title align-middle">商品名：規格なし商品</span>
+                                </div>
+                                                                    <div class="col-4 text-right">
+                                        <button class="btn btn-ec-delete" type="button" data-toggle="modal" data-target="#initializationConfirm">商品規格の初期化
+                                        </button>
+                                        <div class="modal fade" id="initializationConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirm" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title font-weight-bold">この商品の規格を初期化します</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="text-left">
+                                                            この商品に登録された規格を初期化します。これまでの販売データには影響はありませんが、この操作は取り消すことができません。初期化しますか？</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-ec-sub" type="button" data-dismiss="modal">
+                                                            キャンセル
+                                                        </button>
+                                                        <button class="btn btn-ec-delete" type="submit" name="mode" value="delete" data-action="http://eccube3/admin/product/product/class/edit/22">
+                                                            規格を初期化
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="d-inline-block mr-2">
+                                        <span>規格１</span></div>
+                                                                                                                    <div class="d-inline-block"><span>材質 [表示名：材質
+                                                ]</span>
+                                        </div>
+
+                                                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-inline-block mr-2">
+                                        <span>規格２</span></div>
+                                                                                                                    <div class="d-inline-block"><span> [表示名：
+                                                ]</span>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                                            <div class="card rounded border-0 mb-4">
+                            <div class="card-header">
+                                <div class="row justify-content-between">
+                                    <div class="col-6"><span class="align-middle">
+                                            
+                                            3 件の規格の組み合わせがあります</span>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <button id="copy" class="btn btn-ec-regular"><i class="fa fa-files-o mr-1"></i><span>一行目をすべての行に複製</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-sm">
+                                    <thead>
+                                    <tr><th class="pt-2 pb-2 pl-3">
+                                        <input type="checkbox" id="add-all" />
+                                    </th>
+                                    <th class="pt-2 pb-2">材質</th>
+                                    <th class="pt-2 pb-2"></th>
+                                    <th class="pt-2 pb-2">コード</th>
+                                    <th class="pt-2 pb-2">在庫数</th>
+                                    <th class="pt-2 pb-2">販売制限数</th>
+                                    <th class="pt-2 pb-2">通常価格</th>
+                                    <th class="pt-2 pb-2">送料</th>
+                                                                                                            <th class="pt-2 pb-2">お届け可能日</th>
+                                    <th class="pt-2 pb-2 pr-3">販売種別</th>
+                                    </tr></thead>
+                                                                            <tbody><tr>
+                                            <td class="align-middle pl-3">
+                                                <div class="form-check">        <input type="checkbox" id="form_product_classes_0_add" name="form[product_classes][0][add]" class="form-check-input" value="1" checked="checked" />
+        <label class="form-check-label" for="form_product_classes_0_add"></label></div>
+                                            </td>
+                                            <td class="align-middle">
+                                                プラチナ
+                                                <input type="hidden" id="form_product_classes_0_ClassCategory1" name="form[product_classes][0][ClassCategory1]" value="3" />
+                                            </td>
+                                            <td class="align-middle">
+                                                
+                                                <input type="hidden" id="form_product_classes_0_ClassCategory2" name="form[product_classes][0][ClassCategory2]" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <input type="text" id="form_product_classes_0_code" name="form[product_classes][0][code]" class="form-control" value="earum" />
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-5">
+                                                        <input type="text" id="form_product_classes_0_stock" name="form[product_classes][0][stock]" class="form-control" value="998" />
+                                                        
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="form-check form-check-inline">
+                                                            <div class="form-check">        <input type="checkbox" id="form_product_classes_0_stock_unlimited" name="form[product_classes][0][stock_unlimited]" class="form-check-input" value="1" />
+        <label class="form-check-label" for="form_product_classes_0_stock_unlimited">無制限</label></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-6">
+                                                        <input type="text" id="form_product_classes_0_sale_limit" name="form[product_classes][0][sale_limit]" class="form-control" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_0_price01" name="form[product_classes][0][price01]" class="form-control" /></div>
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_0_price02" name="form[product_classes][0][price02]" required="required" class="form-control" value="36,722" /></div>
+                                                
+                                            </td>
+                                                                                                                                    <td class="align-middle">
+                                                <select id="form_product_classes_0_delivery_duration" name="form[product_classes][0][delivery_duration]" class="form-control"><option value="">指定なし</option><option value="1" selected="selected">即日</option><option value="2">1～2日後</option><option value="3">3～4日後</option><option value="4">1週間以降</option><option value="5">2週間以降</option><option value="6">3週間以降</option><option value="7">1ヶ月以降</option><option value="8">2ヶ月以降</option><option value="9">お取り寄せ(商品入荷後)</option></select>
+                                                
+                                            </td>
+                                            <td class="align-middle pr-3">
+                                                <select id="form_product_classes_0_sale_type" name="form[product_classes][0][sale_type]" class="form-control"><option value="1" selected="selected">販売種別A</option><option value="2">販売種別B</option></select>
+                                                
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td class="align-middle pl-3">
+                                                <div class="form-check">        <input type="checkbox" id="form_product_classes_1_add" name="form[product_classes][1][add]" class="form-check-input" value="1" checked="checked" />
+        <label class="form-check-label" for="form_product_classes_1_add"></label></div>
+                                            </td>
+                                            <td class="align-middle">
+                                                銀
+                                                <input type="hidden" id="form_product_classes_1_ClassCategory1" name="form[product_classes][1][ClassCategory1]" value="2" />
+                                            </td>
+                                            <td class="align-middle">
+                                                
+                                                <input type="hidden" id="form_product_classes_1_ClassCategory2" name="form[product_classes][1][ClassCategory2]" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <input type="text" id="form_product_classes_1_code" name="form[product_classes][1][code]" class="form-control" value="earum" />
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-5">
+                                                        <input type="text" id="form_product_classes_1_stock" name="form[product_classes][1][stock]" class="form-control" value="998" />
+                                                        
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="form-check form-check-inline">
+                                                            <div class="form-check">        <input type="checkbox" id="form_product_classes_1_stock_unlimited" name="form[product_classes][1][stock_unlimited]" class="form-check-input" value="1" />
+        <label class="form-check-label" for="form_product_classes_1_stock_unlimited">無制限</label></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-6">
+                                                        <input type="text" id="form_product_classes_1_sale_limit" name="form[product_classes][1][sale_limit]" class="form-control" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_1_price01" name="form[product_classes][1][price01]" class="form-control" /></div>
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_1_price02" name="form[product_classes][1][price02]" required="required" class="form-control" value="36,722" /></div>
+                                                
+                                            </td>
+                                                                                                                                    <td class="align-middle">
+                                                <select id="form_product_classes_1_delivery_duration" name="form[product_classes][1][delivery_duration]" class="form-control"><option value="">指定なし</option><option value="1" selected="selected">即日</option><option value="2">1～2日後</option><option value="3">3～4日後</option><option value="4">1週間以降</option><option value="5">2週間以降</option><option value="6">3週間以降</option><option value="7">1ヶ月以降</option><option value="8">2ヶ月以降</option><option value="9">お取り寄せ(商品入荷後)</option></select>
+                                                
+                                            </td>
+                                            <td class="align-middle pr-3">
+                                                <select id="form_product_classes_1_sale_type" name="form[product_classes][1][sale_type]" class="form-control"><option value="1" selected="selected">販売種別A</option><option value="2">販売種別B</option></select>
+                                                
+                                            </td>
+                                        </tr>
+                                                                            <tr>
+                                            <td class="align-middle pl-3">
+                                                <div class="form-check">        <input type="checkbox" id="form_product_classes_2_add" name="form[product_classes][2][add]" class="form-check-input" value="1" checked="checked" />
+        <label class="form-check-label" for="form_product_classes_2_add"></label></div>
+                                            </td>
+                                            <td class="align-middle">
+                                                金
+                                                <input type="hidden" id="form_product_classes_2_ClassCategory1" name="form[product_classes][2][ClassCategory1]" value="1" />
+                                            </td>
+                                            <td class="align-middle">
+                                                
+                                                <input type="hidden" id="form_product_classes_2_ClassCategory2" name="form[product_classes][2][ClassCategory2]" />
+                                            </td>
+                                            <td class="align-middle">
+                                                <input type="text" id="form_product_classes_2_code" name="form[product_classes][2][code]" class="form-control" value="earum" />
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-5">
+                                                        <input type="text" id="form_product_classes_2_stock" name="form[product_classes][2][stock]" class="form-control" value="998" />
+                                                        
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="form-check form-check-inline">
+                                                            <div class="form-check">        <input type="checkbox" id="form_product_classes_2_stock_unlimited" name="form[product_classes][2][stock_unlimited]" class="form-check-input" value="1" />
+        <label class="form-check-label" for="form_product_classes_2_stock_unlimited">無制限</label></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="form-row">
+                                                    <div class="col-6">
+                                                        <input type="text" id="form_product_classes_2_sale_limit" name="form[product_classes][2][sale_limit]" class="form-control" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_2_price01" name="form[product_classes][2][price01]" class="form-control" /></div>
+                                                
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="input-group"><div class="input-group-prepend">
+                    <span class="input-group-text">￥ </span>
+                </div><input type="text" id="form_product_classes_2_price02" name="form[product_classes][2][price02]" required="required" class="form-control" value="36,722" /></div>
+                                                
+                                            </td>
+                                                                                                                                    <td class="align-middle">
+                                                <select id="form_product_classes_2_delivery_duration" name="form[product_classes][2][delivery_duration]" class="form-control"><option value="">指定なし</option><option value="1" selected="selected">即日</option><option value="2">1～2日後</option><option value="3">3～4日後</option><option value="4">1週間以降</option><option value="5">2週間以降</option><option value="6">3週間以降</option><option value="7">1ヶ月以降</option><option value="8">2ヶ月以降</option><option value="9">お取り寄せ(商品入荷後)</option></select>
+                                                
+                                            </td>
+                                            <td class="align-middle pr-3">
+                                                <select id="form_product_classes_2_sale_type" name="form[product_classes][2][sale_type]" class="form-control"><option value="1" selected="selected">販売種別A</option><option value="2">販売種別B</option></select>
+                                                
+                                            </td>
+                                        </tr>
+                                                                    </tbody></table>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem"><a class="c-beseLink" href="http://eccube3/admin/product?resume=1"><i class="fa fa-backward" aria-hidden="true"></i><span>商品マスター</span></a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                                                    <div class="row align-items-center justify-content-end">
+                                <div class="col-auto">
+                                                                            <button class="btn btn-ec-conversion px-5" type="submit" name="mode" value="update" data-action="http://eccube3/admin/product/product/class/edit/22">
+                                            更新
+                                        </button>
+                                                                    </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    </div>
+</div>
+
+    <script>
+        $(function () {
+
+            // 無制限チェックボックス初期表示
+            $('input[id$=_stock_unlimited]').each(function () {
+                var check = $(this).prop('checked');
+                var index = $(this).attr('id').match(/\d+/);
+
+                if (check) {
+                    $('#form_product_classes_' + index + '_stock').prop('disabled', true);
+                } else {
+                    $('#form_product_classes_' + index + '_stock').prop('disabled', false);
+                }
+            });
+
+
+            // 無制限チェックボックス
+            $('input[id$=_stock_unlimited]').click(function () {
+                var check = $(this).prop('checked');
+                var index = $(this).attr('id').match(/\d+/);
+
+                if (check) {
+                    $('#form_product_classes_' + index + '_stock').prop('disabled', true);
+                } else {
+                    $('#form_product_classes_' + index + '_stock').prop('disabled', false);
+                }
+            });
+
+            // 登録チェックボックス
+            $('#add-all').click(function () {
+                var addall = $('#add-all').prop('checked');
+                if (addall) {
+                    $('input[id$=_add]').prop('checked', true);
+                } else {
+                    $('input[id$=_add]').prop('checked', false);
+                }
+            });
+
+            // 1行目をコピーボタン
+            $('#copy').on('click', function (event) {
+                event.preventDefault();
+
+                var check = $('#form_product_classes_0_add').prop('checked');
+                $('input[id$=_add]').prop('checked', check);
+
+                var product_code = $('#form_product_classes_0_code').val();
+                $('input[id$=_code]').val(product_code);
+
+                var stock = $('#form_product_classes_0_stock').val();
+                $('input[id$=_stock]').val(stock);
+
+                var stock_unlimited = $('#form_product_classes_0_stock_unlimited').prop('checked');
+                // 無制限チェックボックス
+                $('input[id$=_stock_unlimited]').each(function () {
+                    var index = $(this).attr('id').match(/\d+/);
+
+                    if (stock_unlimited) {
+                        $(this).prop('checked', true);
+                        $('#form_product_classes_' + index + '_stock').prop('disabled', true);
+                    } else {
+                        $(this).prop('checked', false);
+                        $('#form_product_classes_' + index + '_stock').prop('disabled', false);
+                    }
+                });
+
+                var sale_limit = $('#form_product_classes_0_sale_limit').val();
+                $('input[id$=_sale_limit]').val(sale_limit);
+
+                var price01 = $('#form_product_classes_0_price01').val();
+                $('input[id$=_price01]').val(price01);
+
+                var price02 = $('#form_product_classes_0_price02').val();
+                $('input[id$=_price02]').val(price02);
+
+                var delivery_fee = $('#form_product_classes_0_delivery_fee').val();
+                $('input[id$=_delivery_fee]').val(delivery_fee);
+
+                var delivery_duration = $('#form_product_classes_0_delivery_duration').val();
+                $('select[id$=_delivery_duration]').val(delivery_duration);
+
+                var tax_rate = $('#form_product_classes_0_tax_rate').val();
+                $('input[id$=_tax_rate]').val(tax_rate);
+
+                var sale_type = $('#form_product_classes_0_sale_type_1').prop('checked');
+                if (sale_type) {
+                    $('input[id$=_sale_type_1]').prop('checked', true);
+                } else {
+                    $('input[id$=_sale_type_2]').prop('checked', true);
+                }
+
+            });
+
+            $(document).on('click', 'button[type=submit]', function (event) {
+                if ($(this).data('action')) {
+                    $(this).parents('form').attr('action', $(this).data('action'));
+                }
+            });
+        });
+    </script>
+
+
+
+</body></html>

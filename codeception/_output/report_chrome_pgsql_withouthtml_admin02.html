@@ -1,0 +1,3162 @@
+<html>
+ <head>
+	<title>Test results</title>
+	<meta charset='utf-8'>
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round&v2' rel='stylesheet' type='text/css'>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <style>
+		 .layout {
+		 margin: 0 auto;
+		 max-width: 1000px;
+
+		 }
+		 body { font-family: arial, serif; margin: 0; padding: 0; background: #ecf0f1; font-size: 20px; }
+		 h1,h2,h3 { font-family: arial, serif; color: #7f8c8d; }
+		 h1 { font-size: 2.5em; }
+		 h2 { font-size: 1.3em; }
+         h3 { font-size: 1em; color: #84BBDD; margin: 0.5em 0; }
+
+		 table { border: none; margin: 0; padding: 0; font-size: 0.9em;}
+		 .scenarioStepsTable .stepName { padding: 5px; }
+
+		 .scenarioStepsTable td {
+            background: #fff;
+		 }
+
+         .quiet {
+             color: #333;
+             font-size: 0.8em;
+         }
+
+         .screenshot {
+             max-height: 400px;
+             overflow-y: scroll;
+             display: block;
+         }
+         .screenshot img {
+             zoom: 0.5;
+         }
+
+         @media (max-width: 1200px) {
+           #toolbar-filter {
+             display: none !important;
+           }
+         }
+
+         .scenarioStepsTable .nostyle {
+             background: none;
+             border: none;
+         }
+
+		 p {
+		    cursor: pointer;
+		 }
+
+         .scenarioRow>td>p {
+             padding: 5px;
+         }
+
+         .scenarioStepsTable .failedStep {
+             padding: 10px;
+             background: #ecf0f1;
+             border: 2px solid #e74c3c;
+             border-radius: 0px;
+             color:  #e74c3c;
+         }
+
+         .scenarioStepsTable .error {
+             background:  #999;
+             padding: 10px;
+             color: #fff;
+             border-radius: 0px;
+         }
+
+         .scenarioStepsTable .error a {
+             color: #eef;
+         }
+
+         .scenarioStepsTable.substeps td {
+             background: #bdc3c7;
+         }
+
+		 .header { font-size: large; font-weight: bold; }
+		 p.scenarioSuccess {
+    		 background: rgb(157,213,58); /* Old browsers */
+		 }
+
+
+		 .scenario { color: black; }
+		 p.scenarioFailed, p.scenarioError { color: black;
+		   background: #e74c3c
+		 }
+
+		 table.scenarioFailed tr:last-child { font-weight: bold; }
+
+		 td.scenarioSuccess { color: green }
+		 td.scenarioFailed { color: red }
+		 .scenarioSkipped { color: teal; }
+		 .scenarioIncomplete { color: gray; }
+		 .scenarioStepsTable { margin-left: 10px; display: none; color: #333; }
+
+		 #stepContainerSummary {
+		 background: white;
+		 -webkit-border-radius: 5px;
+		 -moz-border-radius: 5px;
+		 border-radius: 5px;
+		 padding: 20px;
+		 }
+
+         .toggle {
+             background: rgba(255,255,255,0.5);
+             border-radius: 10px;
+             display: inline-block;
+             width: 20px;
+             height: 20px;
+             text-align: center;
+             margin: auto;
+             color: #666
+         }
+
+		 ul#toolbar-filter {
+            display: block;
+            position: fixed;
+            top: 20px;
+            left: 0px;
+            padding: 0px;
+		 }
+		 ul#toolbar-filter li {
+		    list-style: none;
+		    text-align: center;
+			padding: 20px;
+			background-color: #3498db;
+		 }
+		 ul#toolbar-filter li a, ul#toolbar-filter li a:hover, ul#toolbar-filter li a:visited {
+		    color: #34495e;
+		    text-decoration: none;
+		 }
+		 ul#toolbar-filter li.disabled {
+			background-color: #bdc3c7;
+		 }
+	 </style>
+
+  <script type="text/javascript">
+  var showAll = true;
+  function showHide(nodeId, linkObj)
+  {
+    var subObj = document.getElementById('stepContainer' + nodeId);
+    var toggle = linkObj.childNodes[0];
+    if (toggle.innerHTML != '-') {
+      toggle.innerHTML = '-';
+      subObj.style.display='block';
+      subObj.style.width = '100%';
+    } else {
+      toggle.innerHTML = '+';
+      subObj.style.display='none';
+    }
+  }
+
+  function showAllScenarios() {
+    var toolbar = document.getElementById('toolbar-filter');
+    for (var i = 0; i < toolbar.children.length; i++) {
+      toolbar.children[i].className = '';
+    }
+
+    var trs = document.getElementsByTagName('tr');
+    for(var z = 0; z < trs.length; z++) {
+      trs[z].style.display = '';
+    }
+    showAll = true;
+  }
+
+  function toggleScenarios(name, linkObj) {
+    var links = document.getElementById('toolbar-filter').children;
+    var rows = document.getElementsByClassName('scenarioRow');
+    if (showAll) {
+        for (var i = 0; i < links.length; i++) {
+            links[i].className = 'disabled';
+        }
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+    }
+    showAll = false;
+
+    if (linkObj.className == '') {
+        linkObj.className = 'disabled';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'none';
+          }
+        }
+        return;
+    }
+    if (linkObj.className == 'disabled') {
+        linkObj.className = '';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'table-row';
+          }
+        }
+        return;
+    }
+
+  }
+  </script>
+ </head>
+
+ <body>
+   <ul id="toolbar-filter">
+     <li> <a href="#" title="Show all" onClick="showAllScenarios()">◯</a></li>
+     <li> <a href="#" title="Successful" onClick="toggleScenarios('scenarioSuccess', this.parentElement)"><strong>✔</strong> 15</a></li>
+     <li> <a href="#" title="Failed" onClick="toggleScenarios('scenarioFailed', this.parentElement)"><strong>✗</strong> 0</a></li>
+     <li> <a href="#" title="Skipped" onClick="toggleScenarios('scenarioSkipped', this.parentElement)"><strong>S</strong> 0</a></li>
+     <li> <a href="#" title="Incomplete" onClick="toggleScenarios('scenarioIncomplete', this.parentElement)"><strong>I</strong> 0</a></li>
+   </ul>
+ <div class="layout">
+ <h1>Codeception Results <small><span style="color: green">OK</span> (90.8s)</small></h1>
+
+
+
+	 <table border="0" style="width: 100%;">
+		<tr>
+ <td>
+     <h3>Acceptance (chrome, pgsql) Tests</h3>
+ </td>
+</tr>   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('1', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc01-t01 検索 <span style="color: #34495e; font-size: 70%;">3.46s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer1">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe2938a1', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe2938a1">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe293aac', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe293aac">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe293bfe', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808609.5742.rika.tanabe@example.org&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe293bfe">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808609.5742.rika.tanabe@example.org&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;検索結果 1 件 が該当しました&quot;,&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-header.with-arrow &gt; h3&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('2', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc01-t02 検索 結果なし <span style="color: #34495e; font-size: 70%;">2.62s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer2">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe53d1d4', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe53d1d4">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe53d346', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe53d346">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebe53d4b3', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808612.0434.hiroshi87@example.com&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebe53d4b3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808612.0434.hiroshi87@example.com&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;検索条件に該当するデータがありませんでした。&quot;,&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-header.with-arrow &gt; h3&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('3', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0502-uc01-t02(&amp; uc01-t02) 会員登録 <span style="color: #34495e; font-size: 70%;">5.74s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer3">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb04b2d', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb04b2d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb04cb0', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb04cb0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer/new&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員登録・編集&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb04dfa', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_姓 <span style="color: #732E81">&quot;testuser&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb04dfa">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_name_name01&quot;},&quot;testuser&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb04f35', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_名 <span style="color: #732E81">&quot;testuser&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb04f35">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_name_name02&quot;},&quot;testuser&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0506b', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_セイ <span style="color: #732E81">&quot;テストユーザー&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0506b">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_kana_kana01&quot;},&quot;テストユーザー&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb051ab', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_メイ <span style="color: #732E81">&quot;テストユーザー&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb051ab">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_kana_kana02&quot;},&quot;テストユーザー&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb052fc', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_都道府県 <span style="color: #732E81">{&quot;27&quot;:&quot;大阪府&quot;}</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb052fc">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I select option <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_address_pref&quot;},{&quot;27&quot;:&quot;大阪府&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb05436', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_郵便番号1 <span style="color: #732E81">&quot;530&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb05436">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_zip_zip01&quot;},&quot;530&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0556a', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_郵便番号2 <span style="color: #732E81">&quot;0001&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0556a">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_zip_zip02&quot;},&quot;0001&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0569c', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_市区町村名 <span style="color: #732E81">&quot;大阪市北区梅田2-4-9&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0569c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_address_addr01&quot;},&quot;大阪市北区梅田2-4-9&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb057ce', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_番地_ビル名 <span style="color: #732E81">&quot;ブリーゼタワー13F&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb057ce">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_address_addr02&quot;},&quot;ブリーゼタワー13F&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0591b', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_eメール <span style="color: #732E81">&quot;1517808614.8808.nagisa.hiroshi@example.com&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0591b">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_email&quot;},&quot;1517808614.8808.nagisa.hiroshi@example.com&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb05d14', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_電話番号1 <span style="color: #732E81">&quot;111&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb05d14">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_tel_tel01&quot;},&quot;111&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb05ee7', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_電話番号2 <span style="color: #732E81">&quot;111&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb05ee7">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_tel_tel02&quot;},&quot;111&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0604e', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_電話番号3 <span style="color: #732E81">&quot;111&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0604e">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_tel_tel03&quot;},&quot;111&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb0619d', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_パスワード <span style="color: #732E81">&quot;password&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb0619d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_password_first&quot;},&quot;password&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb062f3', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_パスワード確認 <span style="color: #732E81">&quot;password&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb062f3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_password_second&quot;},&quot;password&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebeb063ff', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebeb063ff">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#button_box__insert_button &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員情報を保存しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('4', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0502-uc01-t02 会員登録_必須項目未入力 <span style="color: #34495e; font-size: 70%;">2.16s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer4">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebed39889', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebed39889">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebed39a20', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebed39a20">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer/new&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員登録・編集&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebed39b27', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebed39b27">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#button_box__insert_button &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see element <span style="color: #732E81">{&quot;css&quot;:&quot;#admin_customer_name_name01:invalid&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I don't see element <span style="color: #732E81">&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('5', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0502-uc02-t01 会員編集 <span style="color: #34495e; font-size: 70%;">4.73s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer5">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf206c66', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf206c66">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf206e0e', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf206e0e">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf206f71', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808622.679.kudo.rika@example.net&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf206f71">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808622.679.kudo.rika@example.net&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;検索結果 1 件 が該当しました&quot;,&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-header.with-arrow &gt; h3&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf207177', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_編集 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf207177">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(1) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf2072f3', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf2072f3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員登録・編集&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf20743e', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_姓 <span style="color: #732E81">&quot;testuser-1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf20743e">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_name_name01&quot;},&quot;testuser-1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_name_name01&quot;},&quot;&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf207556', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf207556">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#button_box__insert_button &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#button_box__insert_button &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員情報を保存しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('6', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0502-uc02-t02 会員編集_必須項目未入力 <span style="color: #34495e; font-size: 70%;">4.06s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer6">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf624f4c', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf624f4c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf6250c0', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf6250c0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf625215', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808627.5327.momoko.yoshimoto@example.net&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf625215">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808627.5327.momoko.yoshimoto@example.net&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;検索結果 1 件 が該当しました&quot;,&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-header.with-arrow &gt; h3&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf6253fa', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_編集 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf6253fa">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(1) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf625554', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf625554">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員登録・編集&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf62569d', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 入力_姓 <span style="color: #732E81">&quot;&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf62569d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_customer_name_name01&quot;},&quot;&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf6257a8', this)"><span class="toggle">+</span> Page\Admin\CustomerEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf6257a8">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#button_box__insert_button &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see element <span style="color: #732E81">{&quot;css&quot;:&quot;#admin_customer_name_name01:invalid&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I don't see element <span style="color: #732E81">&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('7', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc03-t01 会員削除 <span style="color: #34495e; font-size: 70%;">3.67s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer7">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf9cf525', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf9cf525">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf9cf690', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf9cf690">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf9cf7e0', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808631.6064.rika.yoshimoto@example.net&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf9cf7e0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808631.6064.rika.yoshimoto@example.net&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebf9cf951', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_削除 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebf9cf951">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;検索条件に該当するデータがありませんでした&quot;,&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-header.with-arrow &gt; h3&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('8', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc03-t02 会員削除キャンセル <span style="color: #34495e; font-size: 70%;">3.16s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer8">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebfd078e3', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebfd078e3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebfd07a77', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebfd07a77">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebfd07c0c', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808635.4226.suzuki.taro@example.com&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebfd07c0c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808635.4226.suzuki.taro@example.com&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebfd07da9', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_会員id <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebfd07da9">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.member_id&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.member_id&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ebfd07f37', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_削除 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ebfd07f37">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I cancel popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;17&quot;,&quot;17&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('9', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc05-t01 csv出力 <span style="color: #34495e; font-size: 70%;">6.01s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer9">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec030fc08', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec030fc08">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec030fdb6', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec030fdb6">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec030fecd', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec030fecd">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec030fffd', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: csvダウンロード</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec030fffd">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.row &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.row &gt; div &gt; ul &gt; li.dropdown.open &gt; ul &gt; li:nth-child(1) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec031014c', this)"><span class="toggle">+</span> I get last download file <span style="color: #732E81">&quot;/^customer_\d{14}\.csv$/&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec031014c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I wait <span style="color: #732E81">3</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">17,17</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('10', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc04-t01 csv出力項目設定 <span style="color: #34495e; font-size: 70%;">3.15s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer10">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec063bc26', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec063bc26">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec063bda3', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec063bda3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec063bef0', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec063bef0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec063c037', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: csv出力項目設定</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec063c037">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.row &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.row &gt; div &gt; ul &gt; li.dropdown.open &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec063c1f8', this)"><span class="toggle">+</span> Page\Admin\CsvSettingsPage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec063c1f8">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;システム設定CSV出力項目設定&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab value from <span style="color: #732E81">{&quot;id&quot;:&quot;csv-type&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;2&quot;,&quot;2&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('11', this)"><span class="toggle">+</span>
+          <span class="quiet">EA05CustomerCest &raquo;</span> Ea0501-uc06-t01(&amp; uc06-t02) 仮会員メール再送 <span style="color: #34495e; font-size: 70%;">12.98s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer11">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec133c61d', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec133c61d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I reset emails</td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec133c8c0', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec133c8c0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/customer&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;会員管理会員マスター&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec133ca59', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 検索 <span style="color: #732E81">&quot;1517808647.6349.yoshimoto.rika@example.net&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec133ca59">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_search_customer_multi&quot;},&quot;1517808647.6349.yoshimoto.rika@example.net&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.search-box &gt; div.row.btn_area &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec133cbc8', this)"><span class="toggle">+</span> Page\Admin\CustomerManagePage: 一覧_仮会員メール再送 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec133cbc8">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#search_form &gt; div.row &gt; div &gt; div &gt; div.box-body &gt; div.table_list &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(3) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I wait <span style="color: #732E81">10</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see email count <span style="color: #732E81">2</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see in last email subject to <span style="color: #732E81">&quot;1517808647.6349.yoshimoto.rika@example.net&quot;,&quot;会員登録のご確認&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see in last email to <span style="color: #732E81">&quot;1517808647.6349.yoshimoto.rika@example.net&quot;,&quot;笹田 晃 様&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see in last email subject to <span style="color: #732E81">&quot;admin@example.com&quot;,&quot;会員登録のご確認&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see in last email to <span style="color: #732E81">&quot;admin@example.com&quot;,&quot;笹田 晃 様&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('12', this)"><span class="toggle">+</span>
+          <span class="quiet">EA06ContentsManagementCest &raquo;</span> Ea0601-uc01-t01(&amp; uc02-t01/uc02-t02/uc03-t01) 新着情報管理（作成・編集・削除） <span style="color: #34495e; font-size: 70%;">7.48s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer12">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8594', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8594">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8741', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8741">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/news&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理新着情報管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab887d', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 新規登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab887d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#main &gt; div &gt; div &gt; div &gt; div.row &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8a36', this)"><span class="toggle">+</span> Page\Admin\NewsEditPage: of <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8a36">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理新着情報管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;新着情報登録・編集&quot;,&quot;#aside_wrap &gt; div.col-md-9 &gt; div.box &gt; div &gt; h3&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理新着情報管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;新着情報登録・編集&quot;,&quot;#aside_wrap &gt; div.col-md-9 &gt; div.box &gt; div &gt; h3&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8ba5', this)"><span class="toggle">+</span> Page\Admin\NewsEditPage: 入力_日付 <span style="color: #732E81">&quot;2018-02-05&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8ba5">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I execute js <span style="color: #732E81">&quot;$('#admin_news_date').val('2018-02-05').change();&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8d05', this)"><span class="toggle">+</span> Page\Admin\NewsEditPage: 入力_タイトル <span style="color: #732E81">&quot;news_title1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8d05">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_news_title&quot;},&quot;news_title1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_news_title&quot;},&quot;news_title2&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8e67', this)"><span class="toggle">+</span> Page\Admin\NewsEditPage: 入力_本文 <span style="color: #732E81">&quot;newsnewsnewsnewsnews&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8e67">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;admin_news_comment&quot;},&quot;newsnewsnewsnewsnews&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab8fdd', this)"><span class="toggle">+</span> Page\Admin\NewsEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab8fdd">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab9160', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab9160">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理新着情報管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理新着情報管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;新着情報を保存しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab9372', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 一覧_編集 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab9372">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(1) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;新着情報を保存しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab95c0', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 一覧_タイトル <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab95c0">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">{&quot;css&quot;:&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(3)&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">{&quot;css&quot;:&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(2) &gt; td:nth-child(3)&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">{&quot;css&quot;:&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(3)&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I grab text from <span style="color: #732E81">{&quot;css&quot;:&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(3)&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;news_title2&quot;,&quot;news_title2&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab97cf', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 一覧_下へ <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab97cf">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(3) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;news_title2&quot;,&quot;news_title2&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab99f1', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 一覧_上へ <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab99f1">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(3) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;news_title2&quot;,&quot;news_title2&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec1ab9c13', this)"><span class="toggle">+</span> Page\Admin\NewsManagePage: 一覧_削除 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec1ab9c13">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#form1 &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td.icon_edit &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert not equals <span style="color: #732E81">&quot;news_title2&quot;,&quot;サイトオープンいたしました!&quot;</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('13', this)"><span class="toggle">+</span>
+          <span class="quiet">EA06ContentsManagementCest &raquo;</span> Ea0602-uc01-t01(&amp; uc01-t02/uc01-t03/uc01-t04/uc01-t05/uc01-t06/uc01-t07) ファイル管理 <span style="color: #34495e; font-size: 70%;">10.17s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer13">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254f5e2', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254f5e2">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254f77f', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254f77f">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/file_manager&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ファイル管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/file_manager&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ファイル管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/file_manager&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ファイル管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/file_manager&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ファイル管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254f8e3', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: 入力_ファイル <span style="color: #732E81">&quot;upload.txt&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254f8e3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I attach file <span style="color: #732E81">{&quot;id&quot;:&quot;form_file&quot;},&quot;upload.txt&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254fa03', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: アップロード</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254fa03">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/div[@id=\&quot;upload_box__file\&quot;]\/\/a&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;upload.txt&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(1)&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254fbe1', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: 一覧_ダウンロード <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254fbe1">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(5) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec254fdd3', this)"><span class="toggle">+</span> I get last download file <span style="color: #732E81">&quot;/^upload\.txt$/&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec254fdd3">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I wait <span style="color: #732E81">3</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I assert equals <span style="color: #732E81">&quot;This is uploaded file.&quot;,&quot;This is uploaded file.&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec255002e', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: 一覧_表示 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec255002e">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(4) &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(4) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec255011d', this)"><span class="toggle">+</span> I switch to new window</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec255011d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I wait <span style="color: #732E81">1</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I execute in selenium <span style="color: #732E81">&quot;Closure&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;This is uploaded file.&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec255030b', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: 一覧_削除 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec255030b">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(6) &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(6) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I don't see <span style="color: #732E81">&quot;upload.txt&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(1)&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec2550560', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: 入力_フォルダ名 <span style="color: #732E81">&quot;folder1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec2550560">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;form_create_file&quot;},&quot;folder1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec255069e', this)"><span class="toggle">+</span> Page\Admin\FileManagePage: フォルダ作成</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec255069e">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-header.form-horizontal &gt; div.form-group.form-inline &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;folder1&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div &gt; div.box-body &gt; div &gt; div &gt; table &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(1)&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;folder1&quot;,&quot;#bread &gt; a:nth-child(3)&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/file_manager&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ファイル管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('14', this)"><span class="toggle">+</span>
+          <span class="quiet">EA06ContentsManagementCest &raquo;</span> Ea0603-uc01-t01(&amp; uc01-t02/uc01-t03/uc01-t04/uc01-t05) ページ管理 <span style="color: #34495e; font-size: 70%;">11.37s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer14">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3124974', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3124974">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3124af5', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3124af5">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3124c1c', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: 新規入力</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3124c1c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#main &gt; div &gt; div &gt; div &gt; div.row.btn_area2 &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3124d6b', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3124d6b">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ページ詳細編集&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div:nth-child(1) &gt; div.box-header &gt; h3&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ページ詳細編集&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div:nth-child(1) &gt; div.box-header &gt; h3&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理レイアウト管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理レイアウト管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3124f10', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: 入力_名称 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3124f10">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;main_edit_name&quot;},&quot;page1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125079', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: 入力_ファイル名 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125079">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;main_edit_file_name&quot;},&quot;page1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec31251e9', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: 入力_url <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec31251e9">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;main_edit_url&quot;},&quot;page1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125346', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: 入力_内容 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125346">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;main_edit_tpl_data&quot;},&quot;page1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;main_edit_tpl_data&quot;},&quot;{% extends 'default_frame.twig' %}&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec312544f', this)"><span class="toggle">+</span> Page\Admin\PageEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec312544f">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-3 &gt; div &gt; div.box.no-header &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;登録が完了しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/user_data/page1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;page1&quot;,&quot;body&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125780', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: ページ編集 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125780">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/ul\/li[2]\/a&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;登録が完了しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/user_data/page1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;EC-CUBE SHOP&quot;,&quot;#header &gt; div &gt; div.header_logo_area &gt; h1 &gt; a&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125ab4', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: レイアウト編集 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125ab4">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/ul\/li[1]\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/ul\/li[1]\/a&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I drag and drop <span style="color: #732E81">&quot;#position_0 &gt; div:nth-child(1)&quot;,&quot;#position_5&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;登録が完了しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/user_data/page1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;EC-CUBE SHOP&quot;,&quot;#header &gt; div &gt; div.header_logo_area &gt; h1 &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I drag and drop <span style="color: #732E81">&quot;#detail_box__layout_item--7&quot;,&quot;#position_0&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125ee5', this)"><span class="toggle">+</span> Page\Admin\LayoutEditPage: プレビュー</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125ee5">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#preview_box__preview_button &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3125fda', this)"><span class="toggle">+</span> I switch to new window</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3125fda">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I wait <span style="color: #732E81">1</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I execute in selenium <span style="color: #732E81">&quot;Closure&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec312614d', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: 削除 <span style="color: #732E81">&quot;page1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec312614d">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'page1')]\/parent::node()\/div[@class='icon_edit td']\/div\/ul\/li[3]\/a&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('15', this)"><span class="toggle">+</span>
+          <span class="quiet">EA06ContentsManagementCest &raquo;</span> Ea0603-uc01-t01(&amp; uc01-t02/uc01-t03) ブロック管理 <span style="color: #34495e; font-size: 70%;">10.07s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer15">
+
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3f75f', this)"><span class="toggle">+</span> I login as admin</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3f75f">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I submit form <span style="color: #732E81">&quot;#form1&quot;,{&quot;login_id&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;password&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ホーム&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3f8ed', this)"><span class="toggle">+</span> Page\Admin\BlockManagePage: go <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3f8ed">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/block&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ブロック管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/page&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ページ管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/block&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ブロック管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/admin/content/block&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ブロック管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3f9f6', this)"><span class="toggle">+</span> Page\Admin\BlockManagePage: 新規入力</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3f9f6">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#content_block_form &gt; div &gt; div &gt; div.row.btn_area2 &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3fb58', this)"><span class="toggle">+</span> Page\Admin\BlockEditPage: at <span style="color: #732E81">&quot;AcceptanceTester&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3fb58">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ブロック管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ブロック編集&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div.box.form-horizontal &gt; div.box-header &gt; h3&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理レイアウト管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;コンテンツ管理ブロック管理&quot;,&quot;#main .page-header&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;ブロック編集&quot;,&quot;#aside_wrap &gt; form &gt; div.col-md-9 &gt; div.box.form-horizontal &gt; div.box-header &gt; h3&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3fc8c', this)"><span class="toggle">+</span> Page\Admin\BlockEditPage: 入力_ブロック名 <span style="color: #732E81">&quot;block1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3fc8c">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;block_name&quot;},&quot;block1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3fdc9', this)"><span class="toggle">+</span> Page\Admin\BlockEditPage: 入力_ファイル名 <span style="color: #732E81">&quot;block1&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3fdc9">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;block_file_name&quot;},&quot;block1&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b3feea', this)"><span class="toggle">+</span> Page\Admin\BlockEditPage: 入力_データ <span style="color: #732E81">&quot;&lt;div id='block1'&gt;block1&lt;/div&gt;&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b3feea">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;block_block_html&quot;},&quot;&lt;div id='block1'&gt;block1&lt;/div&gt;&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I fill field <span style="color: #732E81">{&quot;id&quot;:&quot;block_block_html&quot;},&quot;&lt;div id='block1'&gt;welcome&lt;/div&gt;&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b40015', this)"><span class="toggle">+</span> Page\Admin\BlockEditPage: 登録</p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b40015">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_wrap &gt; form &gt; div.col-md-3 &gt; div &gt; div.box.no-header &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#aside_column &gt; div &gt; div &gt; div &gt; div &gt; div &gt; button&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;登録が完了しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b40211', this)"><span class="toggle">+</span> Page\Admin\PageManagePage: レイアウト編集 <span style="color: #732E81">&quot;TOPページ&quot;</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b40211">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'TOPページ')]\/parent::node()\/div[@class='icon_edit td']\/div\/a&quot;}</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">{&quot;xpath&quot;:&quot;\/\/*[@id='sortable_list_box__list']\/\/div[@class='item_box tr']\/div[@class='item_pattern td'][contains(text(),'TOPページ')]\/parent::node()\/div[@class='icon_edit td']\/div\/ul\/li[1]\/a&quot;}</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I drag and drop <span style="color: #732E81">&quot;#position_0 &gt; div:nth-child(1) &gt; label&quot;,&quot;#position_1&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;block1&quot;,{&quot;id&quot;:&quot;block1&quot;}</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b40587', this)"><span class="toggle">+</span> Page\Admin\BlockManagePage: 編集 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b40587">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#content_block_form &gt; div &gt; div &gt; div.col-md-12 &gt; div &gt; div.box-body.no-padding.no-border &gt; div &gt; div &gt; div:nth-child(1) &gt; div.icon_edit.td &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#content_block_form &gt; div &gt; div &gt; div.col-md-12 &gt; div &gt; div.box-body.no-padding.no-border &gt; div &gt; div &gt; div:nth-child(1) &gt; div.icon_edit.td &gt; div &gt; ul &gt; li:nth-child(1) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;登録が完了しました。&quot;,&quot;#main .container-fluid div:nth-child(1) .alert-success&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I see <span style="color: #732E81">&quot;welcome&quot;,{&quot;id&quot;:&quot;block1&quot;}</span></td>
+      </tr>
+
+<tr>
+ <td class="stepName " ><p onclick="showHide('5a77ec3b408f7', this)"><span class="toggle">+</span> Page\Admin\BlockManagePage: 削除 <span style="color: #732E81">1</span></p>
+
+     </td>
+</tr>
+<tr>
+ <td class="nostyle">
+  <table border="0" width="100%" class="substeps scenarioStepsTable" id="stepContainer5a77ec3b408f7">
+          <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#content_block_form &gt; div &gt; div &gt; div.col-md-12 &gt; div &gt; div.box-body.no-padding.no-border &gt; div &gt; div &gt; div:nth-child(1) &gt; div.icon_edit.td &gt; div &gt; a&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I click <span style="color: #732E81">&quot;#content_block_form &gt; div &gt; div &gt; div.col-md-12 &gt; div &gt; div.box-body.no-padding.no-border &gt; div &gt; div &gt; div:nth-child(1) &gt; div.icon_edit.td &gt; div &gt; ul &gt; li:nth-child(2) &gt; a&quot;</span></td>
+      </tr>
+
+
+  </table>
+ </td>
+</tr>
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I accept popup</td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I am on page <span style="color: #732E81">&quot;/&quot;</span></td>
+      </tr>
+
+      <tr>
+       <td class="stepName ">&nbsp;&nbsp;&nbsp;&nbsp;I don't see element <span style="color: #732E81">{&quot;id&quot;:&quot;block1&quot;}</span></td>
+      </tr>
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+
+   <tr>
+    <td>
+	    <h2>Summary</h2>
+     <div id="stepContainerSummary">
+      <table border="0">
+       <tr>
+        <td width="250" class="scenarioSuccess">Successful scenarios:</td>
+        <td class="scenarioSuccessValue"><strong>15</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioFailed">Failed scenarios:</td>
+        <td class="scenarioFailedValue"><strong>0</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioSkipped">Skipped scenarios:</td>
+        <td class="scenarioSkippedValue"><strong>0</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioIncomplete">Incomplete scenarios:</td>
+        <td class="scenarioIncompleteValue"><strong>0</strong></td>
+       </tr>
+      </table>
+     </div>
+    </td>
+   </tr>
+  </table>
+ </div>
+ </body>
+</html>

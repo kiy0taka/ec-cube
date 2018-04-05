@@ -1,0 +1,609 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
+    <title>EC-CUBE SHOP - 管理画面</title>
+    <link rel="stylesheet" href="/html/template/admin/assets/css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/html/template/admin/assets/css/app.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/html/template/admin/assets/js/script.js"></script>
+    <script src="/html/template/admin/assets/js/function.js"></script>
+</head>
+<body id="page_admin_homepage" class="pc_view">
+<header class="c-headerBar">
+    <div class="c-headerBar__container">
+        <div class="c-headerBar__logo">
+            <h1><img src="/html/template/admin/assets/img/logo@2x.png" /></h1>
+        </div>
+        <a class="c-headerBar__toggleBtn"><i class="fa fa-bars" aria-hidden="true"></i></a>
+        <a class="c-headerBar__shopTitle" href="http://eccube3/"><span>EC-CUBE SHOP</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a class="c-headerBar__userMenu" data-container="body" data-toggle="popover" data-placement="bottom" title="" data-content="&lt;p&gt;2018/03/13&lt;/p&gt;&lt;a href='http://eccube3/admin/change_password' class='btn btn-ec-regular btn-block'&gt;パスワード変更&lt;/a&gt;&lt;a href='http://eccube3/admin/logout' class='btn btn-ec-sub btn-block'&gt;ログアウト&lt;/a&gt;" data-html="true" data-original-title="最終ログイン"><i class="fa fa-user-circle" aria-hidden="true"></i><span>管理者 様</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    </div>
+</header>
+<div class="c-container">
+    <div class="c-mainNavArea">
+        <nav>
+    <ul class="c-mainNavArea__nav">
+        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle" href="http://eccube3/admin/"><i class="fa fa-home" aria-hidden="true"></i><span>ホーム</span></a>
+        </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-product" aria-expanded="false" aria-controls="nav-product"><i class="fa fa-cube" aria-hidden="true"></i><span>商品管理</span></a>
+                    <ul class="collapse " id="nav-product">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/product">商品マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product/new">商品登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/class_name">規格登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category">カテゴリ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/tag">タグ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product_csv_upload">商品CSV登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category_csv_upload">カテゴリCSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-order" aria-expanded="false" aria-controls="nav-order"><i class="fa fa-inbox" aria-hidden="true"></i><span>受注管理</span></a>
+                    <ul class="collapse " id="nav-order">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/order">受注マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/order/new">受注登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-shipping" aria-expanded="false" aria-controls="nav-shipping"><i class="fa fa-truck" aria-hidden="true"></i><span>出荷管理</span></a>
+                    <ul class="collapse " id="nav-shipping">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/shipping">出荷マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/new">出荷登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/shipping_csv_upload">出荷CSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-customer" aria-expanded="false" aria-controls="nav-customer"><i class="fa fa-users" aria-hidden="true"></i><span>会員管理</span></a>
+                    <ul class="collapse " id="nav-customer">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/customer">会員マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/customer/new">会員登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-content" aria-expanded="false" aria-controls="nav-content"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>コンテンツ管理</span></a>
+                    <ul class="collapse " id="nav-content">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/content/news">新着情報管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/file_manager">ファイル管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/layout">レイアウト管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/page">ページ管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/block">ブロック管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/cache">キャッシュ管理</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-setting" aria-expanded="false" aria-controls="nav-setting"><i class="fa fa-cog" aria-hidden="true"></i><span>設定</span></a>
+                    <ul class="collapse " id="nav-setting">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-shop" aria-expanded="true" aria-controls="nav-shop"><span>基本情報設定</span></a>
+                                        <ul class="collapse" id="nav-shop">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop">ショップマスター</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/payment">支払方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/delivery">配送方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/tax">税率設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/mail">メール設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/csv">CSV出力項目設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-system" aria-expanded="true" aria-controls="nav-system"><span>システム情報設定</span></a>
+                                        <ul class="collapse" id="nav-system">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/system">システム情報</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/member">メンバー管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/authority">権限管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/security">セキュリティ管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/log">EC-CUBE ログ表示</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/masterdata">マスターデータ管理</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-store" aria-expanded="false" aria-controls="nav-store"><i class="fa fa-info-circle" aria-hidden="true"></i><span>オーナーズストア</span></a>
+                    <ul class="collapse " id="nav-store">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-plugin" aria-expanded="true" aria-controls="nav-plugin"><span>プラグイン</span></a>
+                                        <ul class="collapse" id="nav-plugin">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin">プラグイン一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin/handler">高度な設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-template" aria-expanded="true" aria-controls="nav-template"><span>テンプレート</span></a>
+                                        <ul class="collapse" id="nav-template">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template">テンプレート一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template/install">アップロード</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/store/plugin/authentication_setting">認証キー設定</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+        
+                        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#others" aria-expanded="false" aria-controls="others">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+                <span>その他</span>
+            </a>
+            <ul class="collapse" id="others">
+                <li>
+                    <a href="/styleguide/">スタイルガイド</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+    </div>
+    <div class="c-curtain"></div>
+    <div class="c-contentsArea">
+        <div class="c-pageTitle">
+            <div class="c-pageTitle__titles">
+                <h2 class="c-pageTitle__title">ホーム</h2><span class="c-pageTitle__subTitle"></span>
+            </div>
+        </div>
+
+        
+
+
+
+
+
+            <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip">
+                            <span class="card-title">ようこそ、EC-CUBEへ――基本的な設定</span><i class="fa fa-question-circle fa-lg ml-1" aria-hidden="true"></i></div>
+                    </div><!-- /.card-header -->
+                    <div class="card-body pt-0 pr-0 pl-0">
+                        <div class="row border border-top-0 border-left-0 border-right-0 p-3 align-items-center">
+                            <div class="col-1 align-middle text-center">
+                                <i class="fa fa-flag fa-4x text-secondary" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-9">
+                                <span class="font-weight-bold align-middle">特定商取引法に関する表記を設定しましょう</span>
+                                <p>商品マスターに最初の商品を登録してみましょう。商品の画像を用意してください。</p>
+                            </div>
+                            <div class="col-2 text-right align-middle">
+                                <a class="btn btn-ec-conversion px-4" href="http://eccube3/admin/setting/shop">設定する</a>
+                            </div>
+                        </div>
+                        <div class="row border border-top-0 border-left-0 border-right-0 p-3 align-items-center">
+                            <div class="col-1 align-middle text-center">
+                                <i class="fa fa-cubes fa-4x text-secondary" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-9">
+                                <span class="font-weight-bold align-middle">特定商取引法に関する表記を設定しましょう</span>
+                                <p>商品マスターに最初の商品を登録してみましょう。商品の画像を用意してください。</p>
+                            </div>
+                            <div class="col-2 text-right align-middle">
+                                <a class="btn btn-ec-conversion px-4" href="http://eccube3/admin/product/product/new">設定する</a>
+                            </div>
+                        </div>
+                        <div class="row border border-top-0 border-left-0 border-right-0 p-2 align-items-center mb-3">
+                            <div class="col-1 align-middle text-center">
+                                <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-11">
+                                <span class="font-weight-bold text-muted align-middle">お店の基本情報を設定しましょう</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center align-middle">
+                                                                <a class="btn btn-ec-regular" href="/tutorial/complete">すべてスキップ</a>
+                            </div>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div><!-- /.card.rounded -->
+                <div class="row">
+                    <div class="col-4 mb-4">
+
+                        <div id="order-status" class="card rounded border-0 h-100">
+                            <div class="card-header">
+                                <a href="http://eccube3/admin/order"><span class="card-title">受注状況</span></a>
+                            </div>
+                            <form id="order-state" name="form1" action="http://eccube3/admin/order" method="post">
+                                <input type="hidden" id="admin_search_order__token" name="admin_search_order[_token]" value="5_Ea_7PMTg3RPx7hmSWVHS0gWmqqPUNgl46oVE5SwiE" />
+                                <input type="hidden" id="admin_search_order_status" name="admin_search_order[multi_status]" value="" />
+                            </form>
+                            <div class="card-body p-0">
+                                                                                                    <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 align-middle text-center">
+                                                <i class="fa fa-inbox fa-2x text-secondary" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <a href="#" class="order-summary-detail" data-order-status="1"><span class="align-middle">新規受付</span></a>
+                                            </div>
+                                            <div class="col-auto text-right align-middle">
+                                                <span class="h4 align-middle font-weight-normal">2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                    <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 align-middle text-center">
+                                                <i class="fa fa-inbox fa-2x text-secondary" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <a href="#" class="order-summary-detail" data-order-status="2"><span class="align-middle">入金待ち</span></a>
+                                            </div>
+                                            <div class="col-auto text-right align-middle">
+                                                <span class="h4 align-middle font-weight-normal">5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                    <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 align-middle text-center">
+                                                <i class="fa fa-inbox fa-2x text-secondary" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <a href="#" class="order-summary-detail" data-order-status="6"><span class="align-middle">入金済み</span></a>
+                                            </div>
+                                            <div class="col-auto text-right align-middle">
+                                                <span class="h4 align-middle font-weight-normal">4</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                    <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 align-middle text-center">
+                                                <i class="fa fa-inbox fa-2x text-secondary" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col p-0">
+                                                <a href="#" class="order-summary-detail" data-order-status="4"><span class="align-middle">取り寄せ中</span></a>
+                                            </div>
+                                            <div class="col-auto text-right align-middle">
+                                                <span class="h4 align-middle font-weight-normal">2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                            </div>
+                        </div><!-- /#order-status -->
+                    </div>
+                    <div class="col-8 mb-4">
+                        <div id="chart-statistics" class="card rounded border-0 h-100">
+                                                        <div class="card-header">
+                                <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip">
+                                    <span class="card-title">売上状況</span>
+                                    <i class="fa fa-question-circle fa-lg ml-1" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <div class="btn-group nav d-inline-flex" id="pills-tab" role="tablist">
+                                            <a class="nav-link active btn btn-ec-tab py-2 pl-4 pr-4" id="pills-daily-tab" data-toggle="pill" href="#pills-daily" role="tab" aria-controls="pills-daily" aria-selected="true">日別</a><a class="nav-link btn btn-ec-tab py-2 pl-4 pr-4" id="pills-weekly-tab" data-toggle="pill" href="#pills-weekly" role="tab" aria-controls="pills-weekly" aria-selected="false">週別</a><a class="nav-link btn btn-ec-tab py-2 pl-4 pr-4" id="pills-monthly-ta" data-toggle="pill" href="#pills-monthly" role="tab" aria-controls="pills-monthly" aria-selected="false">月別</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-daily" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <div class="c-graf--week">
+                                                    <div class="c-graf--week__container">
+                                                        <div class="c-graf--week__labelVertical">
+                                                            <div class="c-graf__label">100,000</div>
+                                                            <div class="c-graf__label">90,000</div>
+                                                            <div class="c-graf__label">80,000</div>
+                                                            <div class="c-graf__label">70,000</div>
+                                                            <div class="c-graf__label">60,000</div>
+                                                            <div class="c-graf__label">50,000</div>
+                                                            <div class="c-graf__label">40,000</div>
+                                                            <div class="c-graf__label">30,000</div>
+                                                            <div class="c-graf__label">20,000</div>
+                                                            <div class="c-graf__label">10,000</div>
+                                                            <div class="c-graf__label">0</div>
+                                                        </div>
+                                                        <div class="c-graf--week__graph">
+                                                            <hr style="top: 26px;" />
+                                                            <hr style="top: 52px;" />
+                                                            <hr style="top: 78px;" />
+                                                            <hr style="top: 104px;" />
+                                                            <hr style="top: 130px;" />
+                                                            <hr style="top: 156px;" />
+                                                            <hr style="top: 182px;" />
+                                                            <hr style="top: 208px;" />
+                                                            <hr style="top: 234px;" />
+                                                            <hr style="top: 260px;" />
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 166px; margin-top: 95px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-graf--week__labelHorizontal">
+                                                        <div class="c-graf__label">月</div>
+                                                        <div class="c-graf__label">火</div>
+                                                        <div class="c-graf__label">水</div>
+                                                        <div class="c-graf__label">木</div>
+                                                        <div class="c-graf__label">金</div>
+                                                        <div class="c-graf__label">土</div>
+                                                        <div class="c-graf__label">日</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-weekly" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="c-graf--week">
+                                                    <div class="c-graf--week__container">
+                                                        <div class="c-graf--week__labelVertical">
+                                                            <div class="c-graf__label">100,000</div>
+                                                            <div class="c-graf__label">90,000</div>
+                                                            <div class="c-graf__label">80,000</div>
+                                                            <div class="c-graf__label">70,000</div>
+                                                            <div class="c-graf__label">60,000</div>
+                                                            <div class="c-graf__label">50,000</div>
+                                                            <div class="c-graf__label">40,000</div>
+                                                            <div class="c-graf__label">30,000</div>
+                                                            <div class="c-graf__label">20,000</div>
+                                                            <div class="c-graf__label">10,000</div>
+                                                            <div class="c-graf__label">0</div>
+                                                        </div>
+                                                        <div class="c-graf--week__graph">
+                                                            <hr style="top: 26px;" />
+                                                            <hr style="top: 52px;" />
+                                                            <hr style="top: 78px;" />
+                                                            <hr style="top: 104px;" />
+                                                            <hr style="top: 130px;" />
+                                                            <hr style="top: 156px;" />
+                                                            <hr style="top: 182px;" />
+                                                            <hr style="top: 208px;" />
+                                                            <hr style="top: 234px;" />
+                                                            <hr style="top: 260px;" />
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 166px; margin-top: 95px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-graf--week__labelHorizontal">
+                                                        <div class="c-graf__label">月</div>
+                                                        <div class="c-graf__label">火</div>
+                                                        <div class="c-graf__label">水</div>
+                                                        <div class="c-graf__label">木</div>
+                                                        <div class="c-graf__label">金</div>
+                                                        <div class="c-graf__label">土</div>
+                                                        <div class="c-graf__label">日</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-monthly" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                <div class="c-graf--week">
+                                                    <div class="c-graf--week__container">
+                                                        <div class="c-graf--week__labelVertical">
+                                                            <div class="c-graf__label">100,000</div>
+                                                            <div class="c-graf__label">90,000</div>
+                                                            <div class="c-graf__label">80,000</div>
+                                                            <div class="c-graf__label">70,000</div>
+                                                            <div class="c-graf__label">60,000</div>
+                                                            <div class="c-graf__label">50,000</div>
+                                                            <div class="c-graf__label">40,000</div>
+                                                            <div class="c-graf__label">30,000</div>
+                                                            <div class="c-graf__label">20,000</div>
+                                                            <div class="c-graf__label">10,000</div>
+                                                            <div class="c-graf__label">0</div>
+                                                        </div>
+                                                        <div class="c-graf--week__graph">
+                                                            <hr style="top: 26px;" />
+                                                            <hr style="top: 52px;" />
+                                                            <hr style="top: 78px;" />
+                                                            <hr style="top: 104px;" />
+                                                            <hr style="top: 130px;" />
+                                                            <hr style="top: 156px;" />
+                                                            <hr style="top: 182px;" />
+                                                            <hr style="top: 208px;" />
+                                                            <hr style="top: 234px;" />
+                                                            <hr style="top: 260px;" />
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 166px; margin-top: 95px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 165px; margin-top: 96px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 82px; margin-top: 179px;" data-original-title="Tooltip"></div>
+                                                            <div class="c-graf__bar" data-toggle="tooltip" data-placement="top" title="" style="height: 200px; margin-top: 61px;" data-original-title="Tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="c-graf--week__labelHorizontal">
+                                                        <div class="c-graf__label">月</div>
+                                                        <div class="c-graf__label">火</div>
+                                                        <div class="c-graf__label">水</div>
+                                                        <div class="c-graf__label">木</div>
+                                                        <div class="c-graf__label">金</div>
+                                                        <div class="c-graf__label">土</div>
+                                                        <div class="c-graf__label">日</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /#chart-statistics -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-4">
+                        <div id="shop-statistical" class="card rounded border-0 h-100">
+                            <form id="shop-state-stock" name="form2" action="http://eccube3/admin/nonstock" method="post">
+                                <input type="hidden" id="admin_search_product__token" name="admin_search_product[_token]" value="LNsewWCfTfLAPfHvIXEIAKBKJpSGqwOFi5tEll3sW0Q" />
+                            </form>
+                            <form id="shop-state-member" name="form3" action="http://eccube3/admin/customer" method="post">
+                                <input type="hidden" id="admin_search_customer__token" name="admin_search_customer[_token]" value="rnqzCfD-GZYFoxAk7UulUu-KAKFQry4wXdTvHettPR0" />
+                                <input type="hidden" id="admin_search_customer_status_1" name="admin_search_customer[customer_status]" value="2" />
+                            </form>
+
+                            <div class="card-header">
+                                <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip">
+                                    <span class="card-title">ショップ状況</span>
+                                    <i class="fa fa-question-circle fa-lg ml-1" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-2 align-middle text-center">
+                                            <i class="fa fa-inbox fa-2x text-secondary" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col p-0"><a href="#" class="shop-stock-detail">
+                                                <span class="align-middle">在庫切れ商品数</span></a>
+                                        </div>
+                                        <div class="col-auto text-right align-middle">
+                                            <span class="h4 align-middle font-weight-normal">1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                                                        <div class="row align-items-center">
+                                        <div class="col-2 align-middle text-center">
+                                            <i class="fa fa-cubes fa-2x text-secondary" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col p-0">
+                                            <a href="/product/master"><span class="align-middle">取扱商品数</span></a>
+                                        </div>
+                                        <div class="col-auto text-right align-middle">
+                                            <span class="h4 align-middle font-weight-normal">263</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-block p-3 border border-top-0 border-left-0 border-right-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-2 align-middle text-center">
+                                            <i class="fa fa-users fa-2x text-secondary" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col p-0">
+                                            <a href="#" class="shop-member-detail"><span class="align-middle">会員数</span></a>
+                                        </div>
+                                        <div class="col-auto text-check align-middle">
+                                            <span class="h4 align-middle font-weight-normal">10</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /#shop-statistical -->
+                    </div>
+                    <div class="col mb-4">
+                        <div id="ec-cube-news" class="card rounded border-0 h-100">
+                            <div class="card-header">
+                                <div class="d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip"><span class="card-title">お知らせ</span></div>
+                            </div>
+                            <div class="card-body p-0">
+                                <iframe name="information" class="link_list_wrap" src="https://www.ec-cube.net/info/3/" style="width:100%; border:0; min-height:300px;"></iframe>
+                            </div>
+                        </div><!-- /#ec-cube-news -->
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.c-primaryCol -->
+        </div><!-- /.c-contentsArea__primaryCol -->
+    </div><!-- /.c-contentsArea__cols -->
+
+
+    </div>
+</div>
+
+    <script>
+        $(function () {
+            $('.order-summary-detail').click(function () {
+                $('#admin_search_order_status').val($(this).attr('data-order-status'));
+                $('#order-state').submit();
+                return false;
+            });
+            $('.shop-stock-detail').click(function () {
+                $('#shop-state-stock').submit();
+                return false;
+            });
+            $('.shop-member-detail').click(function () {
+                $('#shop-state-member').submit();
+                return false;
+            });
+        });
+    </script>
+
+
+
+</body></html>

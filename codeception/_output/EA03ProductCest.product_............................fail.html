@@ -1,0 +1,556 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
+    <meta name="x-csrf-token" content="81XztV3riwO4tsCwjduXC1ycRpyoK4ILuX0ExWaPDwk" />
+    <title>EC-CUBE SHOP - 管理画面</title>
+    <link rel="stylesheet" href="/html/template/admin/assets/css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/html/template/admin/assets/css/app.css" />
+        <link rel="stylesheet" href="/html/template/admin/assets/css/bootstrap-datetimepicker.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/html/template/admin/assets/js/script.js"></script>
+    <script src="/html/template/admin/assets/js/function.js"></script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                'headers': {
+                    'x-csrf-token': $('meta[name="x-csrf-token"]').attr('content')
+                }
+            });
+        });
+    </script>
+</head>
+<body id="page_admin_product">
+<header class="c-headerBar">
+    <div class="c-headerBar__container">
+        <div class="c-headerBar__logo">
+            <h1><img src="/html/template/admin/assets/img/logo@2x.png" /></h1>
+        </div>
+        <a class="c-headerBar__toggleBtn"><i class="fa fa-bars" aria-hidden="true"></i></a>
+        <a class="c-headerBar__shopTitle" href="http://eccube3/"><span>EC-CUBE SHOP</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a class="c-headerBar__userMenu" data-container="body" data-toggle="popover" data-placement="bottom" title="" data-content="&lt;p&gt;2018/04/02&lt;/p&gt;&lt;a href='http://eccube3/admin/change_password' class='btn btn-ec-regular btn-block'&gt;パスワード変更&lt;/a&gt;&lt;a href='http://eccube3/admin/logout' class='btn btn-ec-sub btn-block'&gt;ログアウト&lt;/a&gt;" data-html="true" data-original-title="最終ログイン"><i class="fa fa-user-circle" aria-hidden="true"></i><span>管理者 様</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    </div>
+</header>
+<div class="c-container">
+    <div class="c-mainNavArea">
+        <nav>
+    <ul class="c-mainNavArea__nav">
+        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle" href="http://eccube3/admin/"><i class="fa fa-home" aria-hidden="true"></i><span>ホーム</span></a>
+        </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle" data-toggle="collapse" href="#nav-product" aria-expanded="true" aria-controls="nav-product"><i class="fa fa-cube" aria-hidden="true"></i><span>商品管理</span></a>
+                    <ul class="collapse  show" id="nav-product">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/product" class="is-active">商品マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product/new">商品登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/class_name">規格登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category">カテゴリ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/tag">タグ登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/product_csv_upload">商品CSV登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/product/category_csv_upload">カテゴリCSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-order" aria-expanded="false" aria-controls="nav-order"><i class="fa fa-inbox" aria-hidden="true"></i><span>受注管理</span></a>
+                    <ul class="collapse " id="nav-order">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/order">受注マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/order/new">受注登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-shipping" aria-expanded="false" aria-controls="nav-shipping"><i class="fa fa-truck" aria-hidden="true"></i><span>出荷管理</span></a>
+                    <ul class="collapse " id="nav-shipping">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/shipping">出荷マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/new">出荷登録</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/shipping/shipping_csv_upload">出荷CSV登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-customer" aria-expanded="false" aria-controls="nav-customer"><i class="fa fa-users" aria-hidden="true"></i><span>会員管理</span></a>
+                    <ul class="collapse " id="nav-customer">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/customer">会員マスター</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/customer/new">会員登録</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-content" aria-expanded="false" aria-controls="nav-content"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>コンテンツ管理</span></a>
+                    <ul class="collapse " id="nav-content">
+                                                                                                                        <li>
+                                        <a href="http://eccube3/admin/content/news">新着情報管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/file_manager">ファイル管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/layout">レイアウト管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/page">ページ管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/block">ブロック管理</a>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/content/cache">キャッシュ管理</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-setting" aria-expanded="false" aria-controls="nav-setting"><i class="fa fa-cog" aria-hidden="true"></i><span>設定</span></a>
+                    <ul class="collapse " id="nav-setting">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-shop" aria-expanded="true" aria-controls="nav-shop"><span>基本情報設定</span></a>
+                                        <ul class="collapse" id="nav-shop">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop">ショップマスター</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/payment">支払方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/delivery">配送方法設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/tax">税率設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/mail">メール設定</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/shop/csv">CSV出力項目設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-system" aria-expanded="true" aria-controls="nav-system"><span>システム情報設定</span></a>
+                                        <ul class="collapse" id="nav-system">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/system">システム情報</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/member">メンバー管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/authority">権限管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/security">セキュリティ管理</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/log">EC-CUBE ログ表示</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/setting/system/masterdata">マスターデータ管理</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+                    <li class="c-mainNavArea__navItem">
+                                    <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#nav-store" aria-expanded="false" aria-controls="nav-store"><i class="fa fa-info-circle" aria-hidden="true"></i><span>オーナーズストア</span></a>
+                    <ul class="collapse " id="nav-store">
+                                                                                                                        <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-plugin" aria-expanded="true" aria-controls="nav-plugin"><span>プラグイン</span></a>
+                                        <ul class="collapse" id="nav-plugin">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin">プラグイン一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/plugin/handler">高度な設定</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a class="c-mainNavArea__navItemSubTitle collapsed" data-toggle="collapse" href="#nav-template" aria-expanded="true" aria-controls="nav-template"><span>テンプレート</span></a>
+                                        <ul class="collapse" id="nav-template">
+                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template">テンプレート一覧</a>
+                                                    </li>
+                                                                                                                                                                                                <li>
+                                                        <a href="http://eccube3/admin/store/template/install">アップロード</a>
+                                                    </li>
+                                                                                                                                    </ul>
+                                    </li>
+                                                                                                                                                                                    <li>
+                                        <a href="http://eccube3/admin/store/plugin/authentication_setting">認証キー設定</a>
+                                    </li>
+                                                                                                        </ul>
+                            </li>
+        
+                        <li class="c-mainNavArea__navItem">
+            <a class="c-mainNavArea__navItemTitle collapsed" data-toggle="collapse" href="#others" aria-expanded="false" aria-controls="others">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+                <span>その他</span>
+            </a>
+            <ul class="collapse" id="others">
+                <li>
+                    <a href="/styleguide/">スタイルガイド</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+    </div>
+    <div class="c-curtain"></div>
+    <div class="c-contentsArea">
+        <div class="c-pageTitle">
+            <div class="c-pageTitle__titles">
+                <h2 class="c-pageTitle__title">商品マスター</h2><span class="c-pageTitle__subTitle">商品管理</span>
+            </div>
+        </div>
+
+        
+
+
+
+
+
+            <div class="c-outsideBlock">
+        <form id="search_form" method="post" action="http://eccube3/admin/product">
+            <input type="hidden" id="admin_search_product__token" name="admin_search_product[_token]" value="MBvyRajh5Z85PSNMtPEoPQItNoFZuFHMJn7RbOzaQ7Q" />
+            <div class="c-outsideBlock__contents">
+                <div class="row justify-content-start">
+
+                    <div class="col-6">
+                        <div class="mb-2">
+                            <label class="col-form-label">商品名・商品ID・商品コード</label>
+                            <input type="text" id="admin_search_product_id" name="admin_search_product[id]" class="form-control" value="を赤く見えました。カムパネルラもぼんやり見え。" />
+                        </div>
+                        <div class="d-inline-block mb-3" data-toggle="collapse" href="#searchDetail" aria-expanded="false" aria-controls="searchDetail"><a><i class="fa fa-plus-square-o font-weight-bold mr-1"></i><span class="font-weight-bold">詳細検索</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-subContents collapse ec-collapse" id="searchDetail">
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <div class="form-row mb-2">
+                            <div class="col-6">
+                                <label class="col-form-label">カテゴリ</label>
+                                <select id="admin_search_product_category_id" name="admin_search_product[category_id]" class="form-control"><option value="">選択してください</option><option value="2">インテリア</option><option value="1">キッチンツール</option><option value="4">　調理器具</option><option value="3">　食器</option><option value="5">　　フォーク</option><option value="6">新入荷</option></select>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-12">
+                                <p class="col-form-label">ステータス</p>
+                                <div id="admin_search_product_status"><div class="form-check form-check-inline">        <input type="checkbox" id="admin_search_product_status_1" name="admin_search_product[status][]" class="form-check-input" value="1" checked="checked" />
+        <label class="form-check-label" for="admin_search_product_status_1">公開</label></div><div class="form-check form-check-inline">        <input type="checkbox" id="admin_search_product_status_2" name="admin_search_product[status][]" class="form-check-input" value="2" checked="checked" />
+        <label class="form-check-label" for="admin_search_product_status_2">非公開</label></div><div class="form-check form-check-inline">        <input type="checkbox" id="admin_search_product_status_3" name="admin_search_product[status][]" class="form-check-input" value="3" />
+        <label class="form-check-label" for="admin_search_product_status_3">廃止</label></div></div>
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="col-12">
+                                <p class="col-form-label">在庫</p>
+                                <div id="admin_search_product_stock"><div class="form-check form-check-inline">        <input type="checkbox" id="admin_search_product_stock_0" name="admin_search_product[stock][]" class="form-check-input" value="1" />
+        <label class="form-check-label" for="admin_search_product_stock_0">あり</label></div><div class="form-check form-check-inline">        <input type="checkbox" id="admin_search_product_stock_1" name="admin_search_product[stock][]" class="form-check-input" value="2" />
+        <label class="form-check-label" for="admin_search_product_stock_1">なし</label></div></div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-2">
+                            <label class="col-form-label" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip">
+                                登録日
+                                <i class="fa fa-question-circle fa-lg ml-1"></i>
+                            </label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                                                        <input type="date" id="admin_search_product_create_date_start" name="admin_search_product[create_date_start]" class="form-control" />
+                                </div>
+                                <div class="col-auto text-center"><span> 〜 </span>
+                                </div>
+                                <div class="col">
+                                    <input type="date" id="admin_search_product_create_date_end" name="admin_search_product[create_date_end]" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="col-form-label">更新日</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                                                        <input type="date" id="admin_search_product_update_date_start" name="admin_search_product[update_date_start]" class="form-control" />
+                                </div>
+                                <div class="col-auto"><span> 〜 </span></div>
+                                <div class="col">
+                                    <input type="date" id="admin_search_product_update_date_end" name="admin_search_product[update_date_end]" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block text-center">
+                    <button class="btn btn-ec-regular search-clear" type="button">検索条件をクリア</button>
+                </div>
+            </div>
+            <div class="c-outsideBlock__contents mb-5">
+                <button class="btn btn-ec-conversion px-5" type="submit">検索</button>
+                                    <span class="font-weight-bold ml-2">検索結果：0件が該当しました</span>
+                            </div>
+        </form>
+    </div>
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                                                                            <div class="card rounded border-0">
+                            <div class="card-body p-4">
+                                <div class="text-center text-muted mb-4 h5">検索条件に合致するデータが見つかりませんでした</div>
+                                <div class="text-center text-muted">検索条件を変えて、再度検索をお試しください。</div>
+                                <div class="text-center text-muted">[詳細検索]も試してみましょう。</div>
+                            </div>
+                        </div>
+                                                </div>
+
+            <div class="modal fade" id="bulkDeleteModal" tabindex="-1" role="dialog" aria-labelledby="discontinuance" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title font-weight-bold">一括削除</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body text-left">
+                            <p class="text-left">商品情報を削除してもよろしいですか？</p>
+                            <ul id="bulkErrors"></ul>
+                            <div class="progress" style="display: none">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-ec-sub" type="button" data-dismiss="modal">キャンセル</button>
+                            <button class="btn btn-ec-delete" type="button" id="bulkDelete">完全に削除</button>
+                            <button class="btn btn-ec-regular" id="bulkDeleteDone" style="display: none" type="button" data-dismiss="modal">完了</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="productClassesModal" tabindex="-1" role="dialog" aria-labelledby="productClassesModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold"></h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button class="btn btn-v-sub" type="button" data-dismiss="modal">
+                        戻る
+                    </button>
+                    <a class="btn btn-ec-conversion" href="#">
+                        規格の編集
+                    </a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /#productClassesModal -->
+
+    </div>
+</div>
+
+    <script src="/html/template/admin/assets/js/vendor/moment.min.js"></script>
+    <script src="/html/template/admin/assets/js/vendor/moment-ja.js"></script>
+    <script src="/html/template/admin/assets/js/vendor/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $(function () {
+
+            var inputDate = document.createElement('input');
+            inputDate.setAttribute('type', 'date');
+            if (inputDate.type !== 'date') {
+                $('input[id$=_date_start]').datetimepicker({
+                    locale: 'ja',
+                    format: 'YYYY-MM-DD',
+                    useCurrent: false,
+                    showTodayButton: true
+                });
+
+                $('input[id$=_date_end]').datetimepicker({
+                    locale: 'ja',
+                    format: 'YYYY-MM-DD',
+                    useCurrent: false,
+                    showTodayButton: true
+                });
+            }
+
+            $('#bulkDelete').on('click', function() {
+
+                var modal = $('#bulkDeleteModal');
+
+                // 削除中のUI変更処理
+                modal.find('button').attr('disabled', 'disabled');
+                $('.modal-body p', modal).text("一括削除中");
+                $('.progress', modal).show();
+
+                var checkedList = $('input[type=checkbox][data-delete-url]:checked');
+                var totalCount = checkedList.length;
+                var currentCount = 0;
+
+                var promises = checkedList.map(function() {
+                    return $.ajax({
+                        'url': $(this).data('delete-url'),
+                        'type': 'delete',
+                        'data': { '_token': $(this).attr('token-for-anchor') }
+                    }).always(function() {
+                        $('.progress-bar', modal).css('width', (++currentCount / totalCount * 100) + '%');
+                    });
+                });
+
+                var addError = function(errorMessage) {
+                    $('&lt;li&gt;&lt;span class="badge badge-danger"&gt;ERROR&lt;/span&gt; &lt;/li&gt;')
+                        .append($('&lt;span&gt;&lt;/span&gt;').text(errorMessage))
+                        .appendTo('#bulkErrors');
+                };
+
+                $.when.apply($, promises)
+                    .done(function() {
+                        // 削除できなかった場合はエラーメッセージを表示
+                        var args = promises.length === 1 ? [arguments[0]] : [].slice.call(arguments).map(function(result) {
+                            return result[0];
+                        });
+                        args.filter(function(result) {
+                            return result.success === false;
+                        }).forEach(function(result) {
+                            addError(result.message);
+                        });
+                    })
+                    .fail(function() {
+                        // システムエラー
+                        addError("システムエラーが発生しました。");
+                    })
+                    .always(function() {
+                        $('.progress', modal).hide();
+                        $('.modal-body p', modal).text("一括削除完了");
+                        modal.find('button').removeAttr('disabled').toggle();
+                    })
+            });
+
+            $('#bulkDeleteDone').on('click', function() {
+                location.reload(true);
+            });
+
+            // フォーム値を確認し、アコーディオンを制御
+            // 値あり : 開く / 値なし : 閉じる
+            (function ($, f) {
+                //フォームがないページは処理キャンセル
+                var $ac = $(".accpanel");
+                if (!$ac) {
+                    return false
+                }
+
+                //フォーム内全項目取得
+                var c = f();
+                if (c.formState()) {
+                    if ($ac.css("display") == "none") {
+                        $ac.siblings('.toggle').addClass("active");
+                        $ac.slideDown(0);
+                    }
+                } else {
+                    $ac.siblings('.toggle').removeClass("active");
+                    $ac.slideUp(0);
+                }
+            })($, formPropStateSubscriber);
+
+            toggleBtnBulk('input[id^="check_"]', '#btn_bulk');
+            $('input[id^="check_"]').on('change', function() {
+                toggleBtnBulk('input[id^="check_"]', '#btn_bulk');
+            });
+
+
+            $('#check_all').on('change', function() {
+                var checked = $(this).prop('checked');
+                if (checked) {
+                    $('input[id^="check_"]').prop('checked', true);
+                } else {
+                    $('input[id^="check_"]').prop('checked', false);
+                }
+                toggleBtnBulk('input[id^="check_"]', '#btn_bulk');
+            });
+
+            $('#form_bulk').find('.action-submit').on('click', function(event) {
+                event.preventDefault();
+                var form = $(this).closest('form');
+                if (!form.find('input:checkbox[name^="ids"]:checked').length) {
+                                        alert('チェックボックスが選択されていません');
+                    return false;
+                }
+
+                $('&lt;input /&gt;').attr('type', 'hidden').attr('name', '_token')
+                    .val($(this).attr('token-for-anchor'))
+                    .appendTo(form);
+                form.attr('action', $(this).data('action')).submit();
+                return false;
+            });
+
+            var dataClass = [];
+            var modalClass = $('#productClassesModal');
+            $('form#form_bulk').on('click', 'table.table button[data-class-url]', function () {
+                var btnClass = $(this);
+                btnClass.attr('disabled', true);
+                var productId = btnClass.data('product-id');
+
+                if (dataClass[productId] != undefined) {
+                    renderClass(dataClass[productId], btnClass);
+                    return;
+                }
+
+                $.ajax({
+                    url: btnClass.data('class-load'),
+                    type: 'GET',
+                }).done(function (data) {
+                    dataClass[productId] = data;
+                    renderClass(dataClass[productId], btnClass);
+                }).fail(function () {
+                    alert('Failed');
+                });
+            });
+
+            // Append html and show popup
+            function renderClass(data, btnClass) {
+                $('div.modal-body', modalClass).html(data);
+                $('h5.modal-title', modalClass).html(btnClass.data('message'));
+                $('a.btn-ec-conversion', modalClass).attr('href', btnClass.data('class-url'));
+                modalClass.modal('show');
+                btnClass.attr('disabled', false);
+            }
+        });
+    </script>
+
+
+
+</body></html>
