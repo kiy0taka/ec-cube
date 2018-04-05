@@ -68,11 +68,14 @@ env:
             config:
                 WebDriver:
                     browser: chrome
-    phantomjs:
+    chrome-headless:
         modules:
             config:
                 WebDriver:
-                    browser: phantomjs
+                    browser: chrome
+                    capabilities:
+                      chromeOptions:
+                        args: ["--headless", "--disable-gpu"]
     mysql:
         modules:
             config:
