@@ -1,0 +1,41 @@
+version: "2"
+services:
+  db:
+    image: eccube/postgres
+    environment:
+      - TZ=Asia/Tokyo
+      - POSTGRES_USER=eccube_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=eccube_db
+  eccube3:
+    build:
+      context: .
+    environment:
+      - TZ=Asia/Tokyo
+      - APP_SECRET=s$cretf0rt3st
+      - MAILER_URL=smtp://mailcatcher:1025
+      - ECCUBE_AUTH_MAGIC=secret
+      - ECCUBE_FORCE_SSL=false
+      - ECCUBE_COOKIE_LIFETIME=0
+      - ECCUBE_COOKIE_NAME=eccube
+      - ECCUBE_LOCALE=ja
+      - ECCUBE_TIMEZONE=Asia/Tokyo
+      - ECCUBE_CURRENCY=JPY
+      - ECCUBE_ADMIN_ROUTE=admin
+    ports:
+      - 80
+      - 443
+    links:
+      - db
+      - mailcatcher
+    depends_on:
+      - db
+      - mailcatcher
+    restart: unless-stopped
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080
+      - 1025
+    environment:
+      - TZ=Asia/Tokyo
