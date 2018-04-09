@@ -56,12 +56,18 @@ install:
   - bin/console doctrine:schema:create --env=dev
   - bin/console eccube:fixtures:load --env=dev
 
-script:
-  - if [ $COVERAGE ]  ; then phpdbg -qrr ./bin/phpunit --exclude-group cache-clear --coverage-clover=coverage.clover ; fi
-  - if [ ! $COVERAGE ]; then ./bin/phpunit --exclude-group cache-clear; fi
-  - if [ ! $COVERAGE ]; then ./bin/phpunit --group cache-clear; fi
-
-after_script:
-  - if [ $COVERAGE ]; then wget https://scrutinizer-ci.com/ocular.phar ; fi
-  - if [ $COVERAGE ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover ; fi
-  - if [ $COVERAGE ]; then php vendor/bin/php-coveralls -v -x coverage.clover ; fi
+jobs:
+  include:
+    - script:
+      - if [ $COVERAGE ]  ; then phpdbg -qrr ./bin/phpunit --exclude-group cache-clear --coverage-clover=coverage.clover ; fi
+      - if [ ! $COVERAGE ]; then ./bin/phpunit --exclude-group cache-clear; fi
+      - if [ ! $COVERAGE ]; then ./bin/phpunit --group cache-clear; fi
+    - after_script:
+      - if [ $COVERAGE ]; then wget https://scrutinizer-ci.com/ocular.phar ; fi
+      - if [ $COVERAGE ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover ; fi
+      - if [ $COVERAGE ]; then php vendor/bin/php-coveralls -v -x coverage.clover ; fi
+    - stage: Codeception
+      script: ./codeception.sh admin01
+    - script: ./codeception.sh admin02
+    - script: ./codeception.sh admin03
+    - script: ./codeception.sh front
