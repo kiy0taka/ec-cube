@@ -3,6 +3,6 @@
 chromedriver --url-base=/wd/hub &
 CDPID="$!"
 trap "kill ${CDPID}" exit
-bin/console server:start
+php -S localhost:8000 &
 
-vendor/bin/codecept -vvv run acceptance --env pgsql,chrome "$@"
+vendor/bin/codecept -vvv run acceptance --env pgsql,chrome-headless "$@"

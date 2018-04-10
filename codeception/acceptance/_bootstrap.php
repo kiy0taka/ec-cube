@@ -19,8 +19,10 @@ $config = parse_ini_file(__DIR__.'/config.ini',true);
 if (file_exists($config['eccube_path'].'/vendor/autoload.php')) {
     require_once $config['eccube_path'].'/vendor/autoload.php';
 }
-(new \Dotenv\Dotenv(__DIR__.'/../../'))->overload();
-$kernel = new Kernel('test', false);
+if (file_exists(__DIR__.'/../../.env')) {
+    (new \Dotenv\Dotenv(__DIR__.'/../../'))->overload();
+}
+$kernel = new Kernel('dev', false);
 $kernel->boot();
 
 $container = $kernel->getContainer();
