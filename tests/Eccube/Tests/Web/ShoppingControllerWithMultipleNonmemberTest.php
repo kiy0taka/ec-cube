@@ -155,6 +155,9 @@ class ShoppingControllerWithMultipleNonmemberTest extends AbstractShoppingContro
         $this->verify();
 
         $body = $Message->getBody();
+
+        echo $body;
+
         $this->assertRegexp('/◎お届け先2/u', $body, '複数配送のため, お届け先2が存在する');
     }
 
