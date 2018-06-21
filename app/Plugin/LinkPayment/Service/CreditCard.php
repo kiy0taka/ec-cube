@@ -29,6 +29,11 @@ class CreditCard implements PaymentMethod
         // TODO: Implement setFormType() method.
     }
 
+    public function setRequest($request)
+    {
+
+    }
+
     public function setApplication($app)
     {
         // TODO: Implement setApplication() method.

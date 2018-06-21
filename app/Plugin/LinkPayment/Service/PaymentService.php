@@ -10,24 +10,23 @@ namespace Plugin\LinkPayment\Service;
 
 
 use Eccube\Service\Payment\PaymentMethod;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class PaymentService
 {
-
     /**
-     * @var Router
+     * @var RequestStack
      */
-    private $router;
+    private $requestStack;
 
-    public function __construct(Router $router)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->router = $router;
+        $this->requestStack = $requestStack;
     }
 
     public function dispatch(PaymentMethod $PaymentMethod)
     {
-        return new RedirectResponse($this->router->generate('payment_company'));
+        return new RedirectResponse('/payment_company');
     }
 }
