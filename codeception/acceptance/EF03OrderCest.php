@@ -629,6 +629,8 @@ class EF03OrderCest
         // 配送先が１個なので数量をまとめる
         $sum_quantity = $shipping1_quantity + $shipping2_quantity;
 
+        ShoppingPage::at($I);
+
         // 複数配送設定がされておらず、個数が１明細にまとめられていることを確認
         $I->see('お届け先', '#shopping-form > div > div.ec-orderRole__detail > div.ec-orderDelivery > div:nth-child(2)');
         $I->dontSee('お届け先(1)', '#shopping-form > div > div.ec-orderRole__detail > div.ec-orderDelivery > div:nth-child(2)');
@@ -649,6 +651,8 @@ class EF03OrderCest
             ->入力_数量('0', '1', $shipping2_quantity)
             ->選択したお届け先に送る()
         ;
+
+        ShoppingPage::at($I);
 
         // 名前を比較してお届け先が上下どちらに表示されるか判断
         $compared = strnatcmp($customer->getName01(), $nameSei);
@@ -808,6 +812,8 @@ class EF03OrderCest
             ->入力_数量('0', '1', $shipping2_quantity)
             ->選択したお届け先に送る()
         ;
+
+        ShoppingPage::at($I);
 
         // 名前を比較してお届け先が上下どちらに表示されるか判断
         $compared = strnatcmp($customer->getName01(), $nameSei);
