@@ -786,6 +786,8 @@ class EF03OrderCest
         // 配送先が１個なので数量をまとめる
         $sum_quantity = $shipping1_quantity + $shipping2_quantity;
 
+        ShoppingPage::at($I);
+
         // 複数配送設定がされておらず、個数が１明細にまとめられていることを確認
         $I->see('お届け先', '#shopping-form > div > div.ec-orderRole__detail > div.ec-orderDelivery > div:nth-child(2)');
         $I->dontSee('お届け先(1)', '#shopping-form > div > div.ec-orderRole__detail > div.ec-orderDelivery > div:nth-child(2)');
