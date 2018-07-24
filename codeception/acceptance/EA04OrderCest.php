@@ -32,10 +32,6 @@ class EA04OrderCest
         $I->loginAsAdmin();
     }
 
-    public function _after(\AcceptanceTester $I)
-    {
-    }
-
     public function order_受注検索(\AcceptanceTester $I)
     {
         $I->wantTo('EA0401-UC01-T01(& UC01-T02, UC01-T03) 受注検索');
@@ -54,6 +50,9 @@ class EA04OrderCest
         $I->see('検索条件に誤りがあります。', OrderManagePage::$検索結果_エラーメッセージ);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_受注CSVダウンロード(\AcceptanceTester $I)
     {
         $I->wantTo('EA0401-UC02-T01 受注CSVダウンロード');
@@ -91,6 +90,9 @@ class EA04OrderCest
         $I->assertEquals(3, $value);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_配送CSVダウンロード(\AcceptanceTester $I)
     {
         $I->wantTo('EA0401-UC02-T01 配送CSVダウンロード');
@@ -128,6 +130,9 @@ class EA04OrderCest
         $I->assertEquals(4, $value);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_受注編集(\AcceptanceTester $I)
     {
         $I->wantTo('EA0401-UC05-T01(& UC05-T02/UC05-T03/UC06-T01) 受注編集');
@@ -192,6 +197,9 @@ class EA04OrderCest
         $I->see('受注情報を保存しました。', OrderEditPage::$登録完了メッセージ);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_受注削除(\AcceptanceTester $I)
     {
         $I->wantTo('EA0401-UC08-T01(& UC08-T02) 受注削除');
@@ -224,6 +232,9 @@ class EA04OrderCest
         $I->assertEquals($OrderNumForDontDel, $OrderListPage->一覧_注文番号(1));
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_受注メール通知(\AcceptanceTester $I)
     {
         $I->wantTo('EA0402-UC01-T01 受注メール通知');
@@ -238,6 +249,9 @@ class EA04OrderCest
         $I->seeInLastEmailSubjectTo('admin@example.com', '[EC-CUBE SHOP] 商品出荷のお知らせ');
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_一括メール通知(\AcceptanceTester $I)
     {
         $I->wantTo('EA0402-UC02-T01(& UC02-T02) 一括メール通知');
@@ -251,6 +265,9 @@ class EA04OrderCest
         $I->seeEmailCount(20);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_受注登録(\AcceptanceTester $I)
     {
         $I->wantTo('EA0405-UC01-T01(& UC01-T02) 受注登録');
@@ -283,6 +300,9 @@ class EA04OrderCest
         $I->see('受注情報を保存しました。', OrderEditPage::$登録完了メッセージ);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_ー括受注のステータス変更(\AcceptanceTester $I)
     {
         $I->getScenario()->incomplete('ステータス変更処理の再実装待ち');

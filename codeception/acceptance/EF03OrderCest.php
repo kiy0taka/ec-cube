@@ -34,10 +34,6 @@ class EF03OrderCest
         $I->setStock(2, 20);
     }
 
-    public function _after(\AcceptanceTester $I)
-    {
-    }
-
     public function order_カート買い物を続ける(\AcceptanceTester $I)
     {
         $I->wantTo('EF0301-UC01-T01 カート 買い物を続ける');
@@ -58,6 +54,9 @@ class EF03OrderCest
         $I->see('新着情報', '.ec-news__title');
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_カート削除(\AcceptanceTester $I)
     {
         $I->wantTo('EF0301-UC01-T02 カート 削除');
@@ -74,6 +73,9 @@ class EF03OrderCest
             ->商品削除(1);
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_カート数量増やす(\AcceptanceTester $I)
     {
         $I->wantTo('EF0301-UC01-T03 カート 数量増やす');
@@ -115,6 +117,9 @@ class EF03OrderCest
         $I->assertEquals('1', $cartPage->商品数量(1));
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_ログインユーザ購入(\AcceptanceTester $I)
     {
         $I->wantTo('EF0302-UC01-T01 ログインユーザ購入');
@@ -161,6 +166,9 @@ class EF03OrderCest
         $I->see('新着情報', '.ec-news__title');
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_ゲスト購入(\AcceptanceTester $I)
     {
         $I->wantTo('EF0302-UC02-T01 ゲスト購入');
@@ -226,6 +234,9 @@ class EF03OrderCest
         $I->see('新着情報', '.ec-news__title');
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_ゲスト購入情報変更(\AcceptanceTester $I)
     {
         $I->wantTo('EF0305-UC02-T01 ゲスト購入 情報変更'); // EF0305-UC04-T01も一緒にテスト
@@ -308,6 +319,7 @@ class EF03OrderCest
 
     /**
      * @see https://github.com/EC-CUBE/ec-cube/pull/3133
+     * @group vaddy
      */
     public function order_ログインしてカートをマージ(\AcceptanceTester $I)
     {
@@ -373,6 +385,9 @@ class EF03OrderCest
         $I->see('新着情報', '.ec-news__title');
     }
 
+    /**
+     * @group vaddy
+     */
     public function order_ログインユーザ購入複数配送(\AcceptanceTester $I)
     {
         // チェック用変数
@@ -729,6 +744,8 @@ class EF03OrderCest
 
     /**
      * カートに変更があれば、お届け先の設定は初期化される.
+     *
+     * @group vaddy
      */
     public function order_購入確認画面からカートに戻るWithお届け先初期化(\AcceptanceTester $I)
     {

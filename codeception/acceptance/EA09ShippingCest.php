@@ -55,6 +55,9 @@ class EA09ShippingCest
         $I->see('検索条件に誤りがあります', ShippingManagePage::$検索結果_エラーメッセージ);
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping出荷編集(\AcceptanceTester $I)
     {
         $I->getScenario()->incomplete('受注管理画面に統合');
@@ -109,6 +112,9 @@ class EA09ShippingCest
         $I->seeEmailCount(2);
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping出荷削除(\AcceptanceTester $I)
     {
         $I->getScenario()->incomplete('受注管理画面に統合');
@@ -131,6 +137,9 @@ class EA09ShippingCest
         $ShippingListPage->一覧_削除キャンセル();
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping一括発送済み更新(\AcceptanceTester $I)
     {
         $I->getScenario()->incomplete('受注管理画面に統合');
@@ -165,6 +174,9 @@ class EA09ShippingCest
         $I->click(['id' => 'bulkChangeComplete']);
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping出荷登録(\AcceptanceTester $I)
     {
         $I->getScenario()->incomplete('受注管理画面に統合');
@@ -216,6 +228,9 @@ class EA09ShippingCest
         $I->see('出荷情報を登録しました。', ShippingEditPage::$登録完了メッセージ);
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping_出荷CSV登録(\AcceptanceTester $I)
     {
         $I->wantTo('EA0903-UC04-T01 出荷CSV登録');
@@ -290,6 +305,9 @@ class EA09ShippingCest
         }
     }
 
+    /**
+     * @group vaddy
+     */
     public function shipping_出荷CSV雛形ファイルダウンロード(\AcceptanceTester $I)
     {
         $I->wantTo('EA0093-UC04-T02 出荷CSV雛形ファイルのダウンロード');

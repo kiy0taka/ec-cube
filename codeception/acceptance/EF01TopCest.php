@@ -21,14 +21,6 @@ use Page\Front\TopPage;
  */
 class EF01TopCest
 {
-    public function _before(\AcceptanceTester $I)
-    {
-    }
-
-    public function _after(\AcceptanceTester $I)
-    {
-    }
-
     public function topページ_初期表示(\AcceptanceTester $I)
     {
         $I->wantTo('EF0101-UC01-T01 TOPページ 初期表示');

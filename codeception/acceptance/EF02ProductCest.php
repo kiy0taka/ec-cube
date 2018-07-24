@@ -144,6 +144,9 @@ class EF02ProductCest
         $I->see('2', ['css' => 'li.ec-pager__item--active']);
     }
 
+    /**
+     * @group vaddy
+     */
     public function product_商品詳細初期表示(\AcceptanceTester $I)
     {
         $I->wantTo('EF0202-UC01-T01 商品詳細 初期表示');

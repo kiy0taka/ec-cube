@@ -25,14 +25,6 @@ use Page\Front\ProductDetailPage;
  */
 class EF05MypageCest
 {
-    public function _before(\AcceptanceTester $I)
-    {
-    }
-
-    public function _after(\AcceptanceTester $I)
-    {
-    }
-
     public function mypage_初期表示(\AcceptanceTester $I)
     {
         $I->wantTo('EF0501-UC01-T01 Mypage 初期表示');
@@ -63,6 +55,9 @@ class EF05MypageCest
         $I->see('詳細を見る', 'div.ec-historyRole p.ec-historyListHeader__action a');
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_ご注文履歴詳細(\AcceptanceTester $I)
     {
         $I->wantTo('EF0503-UC01-T01 Mypage ご注文履歴詳細');
@@ -90,6 +85,9 @@ class EF05MypageCest
         $I->see('合計', 'div.ec-orderRole__summary div.ec-totalBox .ec-totalBox__total');
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_お気に入り一覧(\AcceptanceTester $I)
     {
         $I->wantTo('EF0508-UC01-T01 Mypage お気に入り一覧');
@@ -115,6 +113,9 @@ class EF05MypageCest
         $I->acceptPopup();
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_会員情報編集(\AcceptanceTester $I)
     {
         $I->wantTo('EF0504-UC01-T01 Mypage 会員情報編集');
@@ -179,6 +180,9 @@ class EF05MypageCest
         $I->see('お届け先一覧', 'div.ec-pageHeader h1');
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_お届け先編集作成変更(\AcceptanceTester $I)
     {
         $I->wantTo('EF0506-UC01-T02 Mypage お届け先編集作成変更');
@@ -236,6 +240,9 @@ class EF05MypageCest
         $I->see('大阪市南区', 'div.ec-addressList div:nth-child(1) div.ec-addressList__address');
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_お届け先編集削除(\AcceptanceTester $I)
     {
         $I->wantTo('EF0503-UC01-T01 Mypage お届け先編集削除');
@@ -287,6 +294,9 @@ class EF05MypageCest
         MyPage::at($I);
     }
 
+    /**
+     * @group vaddy
+     */
     public function mypage_退会手続き(\AcceptanceTester $I)
     {
         $I->wantTo('EF0507-UC03-T02 Mypage 退会手続き');
