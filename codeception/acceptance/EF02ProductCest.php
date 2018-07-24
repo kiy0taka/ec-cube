@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Codeception\Util\Fixtures;
 use Page\Front\CartPage;
 use Page\Front\ProductDetailPage;
@@ -140,7 +151,7 @@ class EF02ProductCest
         ProductDetailPage::go($I, 2);
 
         // 「カートに入れる」ボタンが、非活性となり「ただいま品切れ中です」と表示される。
-        $I->see('ただいま品切れ中です','#form1 button');
+        $I->see('ただいま品切れ中です', '#form1 button');
     }
 
     public function product_商品詳細カテゴリリンク(\AcceptanceTester $I)
@@ -245,7 +256,7 @@ class EF02ProductCest
     public function product_商品詳細カート4(\AcceptanceTester $I)
     {
         $I->wantTo('EF0202-UC02-T04 商品詳細(規格あり) カート 注文数＜販売制限数＜在庫数の注文');
-        $I->setStock(1, array(10, 10, 10, 10, 10, 10, 10, 10, 10));
+        $I->setStock(1, [10, 10, 10, 10, 10, 10, 10, 10, 10]);
 
         ProductDetailPage::go($I, 1)
             ->規格選択(['プラチナ', '150cm'])
@@ -267,7 +278,7 @@ class EF02ProductCest
     public function product_商品詳細カート5(\AcceptanceTester $I)
     {
         $I->wantTo('EF0202-UC02-T05 商品詳細(規格あり) カート 販売制限数＜注文数＜在庫数の注文');
-        $I->setStock(1, array(10, 10, 10, 10, 10, 10, 10, 10, 10));
+        $I->setStock(1, [10, 10, 10, 10, 10, 10, 10, 10, 10]);
 
         ProductDetailPage::go($I, 1)
             ->規格選択(['プラチナ', '150cm'])
@@ -289,7 +300,7 @@ class EF02ProductCest
     public function product_商品詳細カート6(\AcceptanceTester $I)
     {
         $I->wantTo('EF0202-UC02-T06 商品詳細(規格あり) カート 販売制限数＜在庫数＜注文数の注文');
-        $I->setStock(1, array(10, 10, 10, 10, 10, 10, 10, 10, 10));
+        $I->setStock(1, [10, 10, 10, 10, 10, 10, 10, 10, 10]);
 
         ProductDetailPage::go($I, 1)
             ->規格選択(['プラチナ', '150cm'])

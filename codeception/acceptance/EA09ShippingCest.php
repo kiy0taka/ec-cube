@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Codeception\Util\Fixtures;
 use Eccube\Entity\Customer;
 use Eccube\Entity\Order;
@@ -128,7 +139,7 @@ class EA09ShippingCest
         // 一括操作用の受注を生成しておく
         $createCustomer = Fixtures::get('createCustomer');
         $createOrders = Fixtures::get('createOrders');
-        $createOrders($createCustomer(), 10, array());
+        $createOrders($createCustomer(), 10, []);
 
         $I->resetEmails();
 
@@ -176,14 +187,13 @@ class EA09ShippingCest
             ->入力_電話番号('111-111-111')
             ->商品検索('パーコレーター')
             ->商品検索結果_選択(1)
-            ->入力_支払方法(['4'=> '郵便振替'])
+            ->入力_支払方法(['4' => '郵便振替'])
             ->受注情報登録();
 
         $ShippingRegisterPage = ShippingEditPage::go($I)->出荷情報登録();
 
         /* 異常系 */
         $I->dontSee('出荷情報を保存しました。', ShippingEditPage::$登録完了メッセージ);
-
 
         /* 正常系 */
         $ShippingRegisterPage
@@ -249,7 +259,6 @@ class EA09ShippingCest
         file_put_contents($csvFileName, $csv);
 
         try {
-
             ShippingCsvUploadPage::go($I)
                 ->入力_CSVファイル('shipping.csv')
                 ->CSVアップロード();
@@ -274,7 +283,6 @@ class EA09ShippingCest
             $I->assertEquals('2018/03/03', $ShippingManagePage->取得_出荷日(1));
             $I->assertEquals('2018/02/02', $ShippingManagePage->取得_出荷日(2));
             $I->assertEquals('2018/01/01', $ShippingManagePage->取得_出荷日(3));
-
         } finally {
             if (file_exists($csvFileName)) {
                 unlink($csvFileName);

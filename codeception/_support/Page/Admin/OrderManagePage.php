@@ -1,7 +1,17 @@
 <?php
 
-namespace Page\Admin;
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+namespace Page\Admin;
 
 class OrderManagePage extends AbstractAdminPageStyleGuide
 {
@@ -21,12 +31,14 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
     public static function go(\AcceptanceTester $I)
     {
         $page = new self($I);
+
         return $page->goPage('/order', '受注一覧受注管理');
     }
 
     public static function at(\AcceptanceTester $I)
     {
         $page = new self($I);
+
         return $page->atPage('受注一覧受注管理');
     }
 
@@ -34,6 +46,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
     {
         $this->tester->fillField(['id' => 'admin_search_order_multi'], $value);
         $this->tester->click('#search_form #search_submit');
+
         return $this;
     }
 
@@ -43,6 +56,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->wait(1);
         $this->tester->fillField(['id' => 'admin_search_order_phone_number'], $value);
         $this->tester->click('#search_form #search_submit');
+
         return $this;
     }
 
@@ -51,6 +65,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'csvDownloadDropDown']);
         $this->tester->waitForElementVisible(['id' => 'orderCsvDownload']);
         $this->tester->click(['id' => 'orderCsvDownload']);
+
         return $this;
     }
 
@@ -59,6 +74,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'csvSettingDropDown']);
         $this->tester->waitForElementVisible(['id' => 'orderCsvSetting']);
         $this->tester->click(['id' => 'orderCsvSetting']);
+
         return $this;
     }
 
@@ -67,6 +83,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'csvDownloadDropDown']);
         $this->tester->waitForElementVisible(['id' => 'shippingCsvDownload']);
         $this->tester->click(['id' => 'shippingCsvDownload']);
+
         return $this;
     }
 
@@ -75,6 +92,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'csvSettingDropDown']);
         $this->tester->waitForElementVisible(['id' => 'shippingCsvSetting']);
         $this->tester->click(['id' => 'shippingCsvSetting']);
+
         return $this;
     }
 
@@ -85,20 +103,23 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
 
     public function 一覧_削除()
     {
-        $this->tester->click("#form_bulk > div.row.justify-content-between.mb-2 .btn-bulk-wrapper button.btn.btn-ec-delete");
+        $this->tester->click('#form_bulk > div.row.justify-content-between.mb-2 .btn-bulk-wrapper button.btn.btn-ec-delete');
+
         return $this;
     }
 
     public function Accept_削除()
     {
         $this->tester->waitForElementVisible(['id' => 'btn_bulk_delete']);
-        $this->tester->click("#btn_bulk_delete");
+        $this->tester->click('#btn_bulk_delete');
+
         return $this;
     }
 
     public function Cancel_削除()
     {
-        $this->tester->click("#bulkDeleteModal > div > div > div.modal-footer > button.btn.btn-ec-sub");
+        $this->tester->click('#bulkDeleteModal > div > div > div.modal-footer > button.btn.btn-ec-sub');
+
         return $this;
     }
 
@@ -111,21 +132,23 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'bulkChange']);
         $this->tester->wait(5);
         $this->tester->waitForElementVisible(['id' => 'bulkChangeComplete']);
+
         return $this;
     }
 
     public function 一覧_選択($rowNum)
     {
         $this->tester->checkOption(['css' => "#search_result > tbody > tr:nth-child(${rowNum}) > td > input[type=checkbox]"]);
+
         return $this;
     }
 
     public function 一覧_全選択()
     {
         $this->tester->checkOption('#toggle_check_all');
+
         return $this;
     }
-
 
     public function 個別メール送信($rowNum)
     {
@@ -136,6 +159,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'bulkChange']);
         $this->tester->wait(5);
         $this->tester->waitForElementVisible(['id' => 'bulkChangeComplete']);
+
         return $this;
     }
 
@@ -147,6 +171,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'bulkChange']);
         $this->tester->wait(5);
         $this->tester->waitForElementVisible(['id' => 'bulkChangeComplete']);
+
         return $this;
     }
 
@@ -157,8 +182,9 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
 
     public function 受注ステータス検索($value = '')
     {
-        $this->tester->checkOption(['id' => 'admin_search_order_status_' . $value]);
+        $this->tester->checkOption(['id' => 'admin_search_order_status_'.$value]);
         $this->tester->click('#search_form #search_submit');
+
         return $this;
     }
 
@@ -168,6 +194,7 @@ class OrderManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click('#form_bulk #btn_bulk_status');
         $this->tester->waitForElementVisible('#confirmBulkModal', 5);
         $this->tester->click('#confirmBulkModal button[data-action="execute"]');
+
         return $this;
     }
 }

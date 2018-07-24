@@ -1,7 +1,17 @@
 <?php
 
-namespace Page\Admin;
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+namespace Page\Admin;
 
 class ShippingManagePage extends AbstractAdminPageStyleGuide
 {
@@ -20,12 +30,14 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
     public static function go(\AcceptanceTester $I)
     {
         $page = new self($I);
+
         return $page->goPage('/shipping', '出荷一覧出荷管理');
     }
 
     public static function at(\AcceptanceTester $I)
     {
         $page = new self($I);
+
         return $page->atPage('出荷管理出荷一覧');
     }
 
@@ -33,6 +45,7 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
     {
         $this->tester->fillField(['id' => 'admin_search_shipping_multi'], $value);
         $this->tester->click('#search_form > div.c-outsideBlock__contents.mb-3 > button');
+
         return $this;
     }
 
@@ -41,18 +54,21 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(self::$詳細検索ボタン);
         $this->tester->waitForElementVisible(['id' => 'searchDetail']);
         $this->tester->wait(0.5);
+
         return $this;
     }
 
     public function 入力_ご注文者お名前($value)
     {
         $this->tester->fillField(['id' => 'admin_search_shipping_order_name'], $value);
+
         return $this;
     }
 
     public function 入力_ご注文者お名前フリガナ($value)
     {
         $this->tester->fillField(['id' => 'admin_search_shipping_order_kana'], $value);
+
         return $this;
     }
 
@@ -62,18 +78,21 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
         $this->tester->wait(1);
         $this->tester->fillField(['id' => 'admin_search_shipping_phone_number'], $value);
         $this->tester->click('#search_form > div.c-outsideBlock__contents.mb-3 > button');
+
         return $this;
     }
 
     public function 出荷CSVダウンロード実行()
     {
         $this->tester->click(['xpath' => '//*[@id="form_bulk"]/div[1]/div[2]/div[2]/div/a[1]']);
+
         return $this;
     }
 
     public function 出荷CSV出力項目設定()
     {
         $this->tester->click(['xpath' => '//*[@id="form_bulk"]/div[1]/div[2]/div[2]/div/a[2]']);
+
         return $this;
     }
 
@@ -88,6 +107,7 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['xpath' => '//*[@id="btn_bulk"]/button[3]']);
         $this->tester->waitForElementVisible(['xpath' => '//*[@id="btn_bulk_delete"]']);
         $this->tester->click(['xpath' => '//*[@id="btn_bulk_delete"]']);
+
         return $this;
     }
 
@@ -95,6 +115,7 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
     {
         $this->tester->waitForElementVisible(['xpath' => '//*[@id="btn_bulk"]/button[1]']);
         $this->tester->click(['xpath' => '//*[@id="btn_bulk"]/button[1]']);
+
         return $this;
     }
 
@@ -105,6 +126,7 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
         $this->tester->wait(3);
         $this->tester->click(['id' => 'notificationMail']);
         $this->tester->click(['id' => 'bulkChange']);
+
         return $this;
     }
 
@@ -114,12 +136,14 @@ class ShippingManagePage extends AbstractAdminPageStyleGuide
         $this->tester->click(['xpath' => '//*[@id="btn_bulk"]/button[1]']);
         $this->tester->wait(3);
         $this->tester->click(['id' => 'bulkChange']);
+
         return $this;
     }
 
     public function 一覧_全選択()
     {
         $this->tester->checkOption(['id' => 'check-all']);
+
         return $this;
     }
 

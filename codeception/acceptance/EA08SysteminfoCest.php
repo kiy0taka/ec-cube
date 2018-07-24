@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Codeception\Util\Fixtures;
 use Page\Admin\AuthorityManagePage;
 
@@ -335,7 +346,7 @@ class EA08SysteminfoCest
         $I->see('ログ表示システム設定', '.c-pageTitle');
 
         $option = $I->grabTextFrom('#admin_system_log_files option:nth-child(1)');
-        $I->selectOption("#admin_system_log_files", $option);
+        $I->selectOption('#admin_system_log_files', $option);
 
         $I->fillField(['id' => 'line-max'], '1');
         $I->click(['css' => '#form1 button']);
@@ -374,7 +385,7 @@ class EA08SysteminfoCest
 
         $findPlugins = Fixtures::get('findPlugins');
         $Plugins = $findPlugins();
-        if (is_array($Plugins) && count($Plugins) > 0 ) {
+        if (is_array($Plugins) && count($Plugins) > 0) {
             $I->getScenario()->skip('プラグインのアンインストールが必要なため、テストをスキップします');
         }
 

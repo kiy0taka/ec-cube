@@ -1,12 +1,20 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Page\Admin;
 
-
 class ShippingEditPage extends AbstractAdminPageStyleGuide
 {
-
     public static $姓_エラーメッセージ = '#shippingerInfo > div > div:nth-child(2) > div.col > span > ul > p';
 
     public static $登録完了メッセージ = '#page_admin_shipping_edit > div > div.c-contentsArea > div.alert.alert-success.alert-dismissible.fade.show.m-3 > span';
@@ -23,6 +31,7 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     {
         $page = new self($I);
         $page->goPage('/shipping/new', '出荷登録出荷管理');
+
         return $page;
     }
 
@@ -30,12 +39,14 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     {
         $page = new self($I);
         $page->atPage('出荷登録出荷管理');
+
         return $page;
     }
 
     public function 入力_出荷日($value)
     {
         $this->tester->executeJS("document.getElementById('shipping_shipping_date').value = '{$value}'");
+
         return $this;
     }
 
@@ -43,30 +54,35 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     {
         $this->tester->click(['id' => 'edit-shipping-addr']);
         $this->tester->waitForElementVisible(['id' => 'shipping_name_name01']);
+
         return $this;
     }
 
     public function 入力_姓($value)
     {
         $this->tester->fillField(['id' => 'shipping_name_name01'], $value);
+
         return $this;
     }
 
     public function 入力_名($value)
     {
         $this->tester->fillField(['id' => 'shipping_name_name02'], $value);
+
         return $this;
     }
 
     public function 入力_セイ($value)
     {
         $this->tester->fillField(['id' => 'shipping_kana_kana01'], $value);
+
         return $this;
     }
 
     public function 入力_メイ($value)
     {
         $this->tester->fillField(['id' => 'shipping_kana_kana02'], $value);
+
         return $this;
     }
 
@@ -80,18 +96,21 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     public function 入力_都道府県($value)
     {
         $this->tester->selectOption(['id' => 'shipping_address_pref'], $value);
+
         return $this;
     }
 
     public function 入力_市区町村名($value)
     {
         $this->tester->fillField(['id' => 'shipping_address_addr01'], $value);
+
         return $this;
     }
 
     public function 入力_番地_ビル名($value)
     {
         $this->tester->fillField(['id' => 'shipping_address_addr02'], $value);
+
         return $this;
     }
 
@@ -105,18 +124,21 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     public function 入力_出荷伝票番号($value)
     {
         $this->tester->fillField(['id' => 'shipping_tracking_number'], $value);
+
         return $this;
     }
 
     public function 入力_配送業者($value)
     {
         $this->tester->selectOption(['id' => 'shipping_Delivery'], $value);
+
         return $this;
     }
 
     public function 入力_配達用メモ($value)
     {
         $this->tester->fillField(['id' => 'shipping_note'], $value);
+
         return $this;
     }
 
@@ -125,6 +147,7 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
         $this->tester->click(['xpath' => '//*[@id="shipmentItem"]/div/div/div/button']);
         $this->tester->waitForElementVisible(['id' => 'addProduct']);
         $this->tester->click(['id' => 'searchItemsButton']);
+
         return $this;
     }
 
@@ -133,12 +156,14 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
         $this->tester->click(['xpath' => "//*[@id='searchItemsResult']/table/tbody/tr[${rowNum}]/td[5]/i"]);
         $this->tester->click(['xpath' => '//*[@id="addProduct"]/div/div/div[1]/button']);
         $this->tester->wait(1);
+
         return $this;
     }
 
     public function 出荷情報登録()
     {
         $this->tester->click(['id' => 'btn_save']);
+
         return $this;
     }
 
@@ -146,6 +171,7 @@ class ShippingEditPage extends AbstractAdminPageStyleGuide
     {
         $this->tester->waitForElementVisible(['xpath' => '//*[@id="shippedNotifyModal"]/div/div/div[3]/button[2]']);
         $this->tester->click(['xpath' => '//*[@id="shippedNotifyModal"]/div/div/div[3]/button[2]']);
+
         return $this;
     }
 }

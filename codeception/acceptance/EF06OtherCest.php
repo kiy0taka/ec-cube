@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) LOCKON CO.,LTD. All Rights Reserved.
+ *
+ * http://www.lockon.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Codeception\Util\Fixtures;
-use Eccube\Entity\Master\CustomerStatus;
 
 /**
  * @group front
@@ -39,7 +49,7 @@ class EF06OtherCest
         $I->amOnPage('/mypage/login');
         $I->submitForm('#login_mypage', [
             'login_email' => $customer->getEmail(),
-            'login_pass' => 'password'
+            'login_pass' => 'password',
         ]);
 
         $I->see('ログインできませんでした。', 'div.ec-login p.ec-errorMessage');
@@ -56,7 +66,7 @@ class EF06OtherCest
         $I->amOnPage('/mypage/login');
         $I->submitForm('#login_mypage', [
             'login_email' => $customer->getEmail().'.bad',
-            'login_pass' => 'password'
+            'login_pass' => 'password',
         ]);
 
         $I->see('ログインできませんでした。', 'div.ec-login p.ec-errorMessage');
@@ -81,13 +91,13 @@ class EF06OtherCest
         $createCustomer = Fixtures::get('createCustomer');
         $customer = $createCustomer();
         $I->resetEmails();
-        $I->submitForm('#form1',[
-            'login_email' => $customer->getEmail()
+        $I->submitForm('#form1', [
+            'login_email' => $customer->getEmail(),
         ]);
         $I->see('パスワード発行メールの送信 完了', 'div.ec-pageHeader h1');
 
         $I->seeEmailCount(2);
-        foreach (array($customer->getEmail(), $BaseInfo->getEmail01()) as $email) {
+        foreach ([$customer->getEmail(), $BaseInfo->getEmail01()] as $email) {
             $I->seeInLastEmailSubjectTo($email, 'パスワード変更のご確認');
         }
         $url = $I->grabFromLastEmailTo($customer->getEmail(), '@/forgot/reset/(.*)@');
@@ -96,7 +106,7 @@ class EF06OtherCest
         $I->amOnPage($url);
         $I->see('パスワード変更(完了ページ)', 'div.ec-pageHeader h1');
         $I->seeEmailCount(2);
-        foreach (array($customer->getEmail(), $BaseInfo->getEmail01()) as $email) {
+        foreach ([$customer->getEmail(), $BaseInfo->getEmail01()] as $email) {
             $I->seeInLastEmailSubjectTo($email, 'パスワード変更のお知らせ');
         }
         $new_password = $I->grabFromLastEmailTo($customer->getEmail(), '@新しいパスワード：(.*)@');
@@ -178,7 +188,7 @@ class EF06OtherCest
 
         // メールチェック
         $I->seeEmailCount(2);
-        foreach (array($new_email, $BaseInfo->getEmail01()) as $email) {
+        foreach ([$new_email, $BaseInfo->getEmail01()] as $email) {
             $I->seeInLastEmailSubjectTo($email, 'お問い合わせを受け付けました');
             $I->seeInLastEmailTo($email, '姓 名 様');
             $I->seeInLastEmailTo($email, 'お問い合わせ内容の送信');
