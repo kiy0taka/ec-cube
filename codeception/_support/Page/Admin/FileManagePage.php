@@ -68,10 +68,10 @@ class FileManagePage extends AbstractAdminPageStyleGuide
         return $this;
     }
 
-    public function 一覧_削除_accept()
+    public function 一覧_削除_accept($rowNum)
     {
-        $this->tester->waitForElementVisible('#confirmModal-1 div.modal-footer a.btn-ec-delete');
-        $this->tester->click('#confirmModal-1 div.modal-footer a.btn-ec-delete');
+        $this->tester->waitForElementVisible("#confirmModal-${rowNum} div.modal-footer a.btn-ec-delete");
+        $this->tester->click("#confirmModal-${rowNum} div.modal-footer a.btn-ec-delete");
         return $this;
     }
 

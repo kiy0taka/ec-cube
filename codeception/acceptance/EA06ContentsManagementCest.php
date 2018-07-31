@@ -111,7 +111,7 @@ class EA06ContentsManagementCest
 
         FileManagePage::go($I)
             ->一覧_削除(1)
-            ->一覧_削除_accept();
+            ->一覧_削除_accept(1);
     }
 
     public function contentsmanagement_ページ管理(\AcceptanceTester $I)
