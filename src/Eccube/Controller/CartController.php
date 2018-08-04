@@ -14,7 +14,6 @@
 namespace Eccube\Controller;
 
 use Eccube\Entity\BaseInfo;
-use Eccube\Entity\Cart;
 use Eccube\Entity\ProductClass;
 use Eccube\Event\EccubeEvents;
 use Eccube\Event\EventArgs;
@@ -129,7 +128,7 @@ class CartController extends AbstractController
     /**
      * @param $Carts
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return bool
      */
     protected function execPurchaseFlow($Carts)
     {
@@ -153,16 +152,21 @@ class CartController extends AbstractController
         if ($hasError) {
             $this->cartService->clear();
 
-            return $this->redirectToRoute('cart');
+            return false;
         }
 
         $this->cartService->save();
 
+        $hasWarning = false;
+
         foreach ($flowResults as $index => $result) {
             foreach ($result->getWarning() as $warning) {
+                $hasWarning = true;
                 $this->addRequestError($warning->getMessage(), "front.cart.${index}");
             }
         }
+
+        return !$hasWarning;
     }
 
     /**
@@ -230,10 +234,19 @@ class CartController extends AbstractController
      */
     public function buystep(Request $request, $index)
     {
-        $Carts = $this->cartService->getCart();
-        if (!is_object($Carts)) {
+        if ($this->getUser()) {
+            $this->cartService->mergeFromPersistedCart($this->getUser());
+            $Carts = $this->cartService->getCarts();
+            if (!$this->execPurchaseFlow($Carts)) {
+                return $this->redirectToRoute('cart');
+            }
+        }
+
+        $Cart = $this->cartService->getCart();
+        if (!is_object($Cart)) {
             return $this->redirectToRoute('cart');
         }
+
         // FRONT_CART_BUYSTEP_INITIALIZE
         $event = new EventArgs(
             [],

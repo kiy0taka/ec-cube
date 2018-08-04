@@ -674,7 +674,6 @@ class CartValidationTest extends AbstractWebTestCase
 
         // shopping step
         $this->scenarioConfirm($Customer);
-        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         $message = $crawler->filter('.ec-layoutRole__main')->text();
@@ -702,7 +701,6 @@ class CartValidationTest extends AbstractWebTestCase
 
         $this->scenarioConfirm($Customer);
 
-        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         $message = $crawler->filter('.ec-layoutRole__main')->text();
@@ -732,8 +730,6 @@ class CartValidationTest extends AbstractWebTestCase
 
         $this->scenarioConfirm($Customer);
 
-        // two redirect???
-        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         // check message error
@@ -769,7 +765,6 @@ class CartValidationTest extends AbstractWebTestCase
 
         $this->scenarioConfirm($Customer);
 
-        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         // THEN
@@ -811,7 +806,6 @@ class CartValidationTest extends AbstractWebTestCase
 
         $this->scenarioConfirm($Customer);
 
-        $this->client->followRedirect();
         $crawler = $this->client->followRedirect();
 
         // THEN
