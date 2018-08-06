@@ -161,7 +161,7 @@ tools:
             globals: { _: false, Backbone: false, jQuery: false, eccube: false }
 
     external_code_coverage:
-        runs: 1
+        runs: 5
         timeout: 3600
 
     #php_code_sniffer:
