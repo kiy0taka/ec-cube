@@ -254,7 +254,7 @@ class EditControllerTest extends AbstractEditControllerTestCase
         $formData = $this->createFormData($Customer, $this->Product);
         $formData['OrderStatus'] = 8; // 購入処理中で受注を登録する
         // 管理画面から受注登録
-        $this->client->request(
+        $crawler = $this->client->request(
             'POST',
             $this->generateUrl('admin_order_edit', ['id' => $Order->getId()]),
             [
@@ -262,6 +262,9 @@ class EditControllerTest extends AbstractEditControllerTestCase
                 'mode' => 'register',
             ]
         );
+
+        var_dump($crawler->html());
+
         $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin_order_edit', ['id' => $Order->getId()])));
 
         $EditedOrder = $this->orderRepository->find($Order->getId());
@@ -376,13 +379,14 @@ class EditControllerTest extends AbstractEditControllerTestCase
         }
 
         // 管理画面で受注編集する
-        $this->client->request(
+        $crawler = $this->client->request(
             'POST', $this->generateUrl('admin_order_edit', ['id' => $Order->getId()]), [
             'order' => $formDataForEdit,
             'mode' => 'register',
             ]
         );
 
+        var_dump($crawler->html());
         $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin_order_edit', ['id' => $Order->getId()])));
         $EditedOrderafterEdit = $this->orderRepository->find($Order->getId());
 
