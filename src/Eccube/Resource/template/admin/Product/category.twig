@@ -113,6 +113,16 @@ file that was distributed with this source code.
                 current.find('.mode-view').addClass('d-none');
                 current.find('.mode-edit').removeClass('d-none');
             });
+
+            // 削除モーダルのhrefとmessageの変更
+            $('#layoutDelete').on('shown.bs.modal', function(event) {
+                var target = $(event.relatedTarget);
+                // hrefの変更
+                $(this).find('[data-method="delete"]').attr('href', target.data('url'));
+
+                // messageの変更
+                $(this).find('p.modal-message').text(target.data('message'));
+            });
         });
     </script>
 {% endblock %}
@@ -240,18 +250,15 @@ file that was distributed with this source code.
                                                            title="{{ 'admin.common.edit'|trans }}">
                                                             <i class="fa fa-pencil fa-lg text-secondary"></i>
                                                         </a>
-                                                        {% if Category.Children|length > 0 or Category.hasProductCategories %}
-                                                            {# TODO: Need fix css for tooltip to work (currently using `disabled` class) #}
-                                                            <a class="btn btn-ec-actionIcon mr-3 disabled"><i class="fa fa-close fa-lg text-secondary"></i></a>
-                                                        {% else %}
-                                                            <a class="btn btn-ec-actionIcon mr-3"
-                                                               href="{{ url('admin_product_category_delete', {id: Category.id}) }}"
-                                                               data-toggle="tooltip" data-placement="top"
-                                                               title="{{ 'admin.common.delete'|trans }}" {{ csrf_token_for_anchor() }}
-                                                               data-method="delete">
+                                                        <div class="d-inline-block mr-3" data-toggle="tooltip" data-placement="top"
+                                                             title="{{ 'admin.common.delete'|trans }}">
+                                                            <a class="btn btn-ec-actionIcon{% if Category.Children|length > 0 or Category.hasProductCategories %} disabled{% endif %}"
+                                                               data-toggle="modal" data-target="#layoutDelete"
+                                                               data-url="{{ url('admin_product_category_delete', {id: Category.id}) }}"
+                                                               data-message="{{ 'admin.common.delete_modal__message'|trans({ "%name%" : Category.name }) }}">
                                                                 <i class="fa fa-close fa-lg text-secondary"></i>
                                                             </a>
-                                                        {% endif %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <form class="form-row d-none mode-edit" method="POST" action="{{ (Parent and Parent.id) ? url('admin_product_category_show', {'parent_id': Parent.id}) : url('admin_product_category') }}">
@@ -272,6 +279,34 @@ file that was distributed with this source code.
                                     {% endfor %}
                                 {% endif %}
                             </ul>
+                            <!-- 削除モーダル -->
+                            <div class="modal fade" id="layoutDelete" tabindex="-1" role="dialog"
+                                 aria-labelledby="layoutDelete" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title font-weight-bold">
+                                                {{ 'admin.common.delete_modal__title'|trans }}
+                                            </h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            <p class="text-left modal-message"><!-- jsでメッセージを挿入 --></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-ec-sub" type="button" data-dismiss="modal">
+                                                {{ 'admin.common.cancel'|trans }}
+                                            </button>
+                                            <a class="btn btn-ec-delete" href="#" {{ csrf_token_for_anchor() }}
+                                               data-method="delete" data-confirm="false">
+                                                {{ 'admin.common.delete'|trans }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

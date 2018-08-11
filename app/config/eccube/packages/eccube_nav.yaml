@@ -27,7 +27,7 @@ parameters:
                     url: admin_product_category_csv_import
         order:
             name: admin.order.order_management
-            icon: fa-inbox
+            icon: fa-shopping-cart
             children:
                 order_master:
                     name: admin.order.order_list
@@ -49,76 +49,84 @@ parameters:
                     name: admin.customer.customer_registration
                     url: admin_customer_new
         content:
-            name: admin.nav.content
+            name: admin.content.contents_management
             icon: fa-file-text-o
             children:
                 news:
-                    name: admin.nav.content.news
+                    name: admin.content.news_management
                     url : admin_content_news
                 file:
-                    name: admin.nav.content.file
+                    name: admin.content.file_management
                     url: admin_content_file
                 layout:
-                    name: admin.nav.content.layout
+                    name: admin.content.layout_management
                     url: admin_content_layout
                 page:
-                    name: admin.nav.content.page
+                    name: admin.content.page_management
                     url: admin_content_page
                 block:
-                    name: admin.nav.content.block
+                    name: admin.content.block_management
                     url: admin_content_block
                 cache:
-                    name: admin.nav.content.cache
+                    name: admin.content.cache_management
                     url: admin_content_cache
         setting:
-            name: admin.nav.setting
+            name: admin.setting
             icon: fa-cog
             children:
                 shop:
-                    name: admin.nav.setting.shop
+                    name: admin.setting.shop
                     children:
                         shop_index:
-                            name: admin.nav.setting.shop.shop_index
+                            name: admin.setting.shop.shop_setting
                             url: admin_setting_shop
+                        shop_tradelaw:
+                            name: admin.setting.shop.tradelaw_setting
+                            url: admin_content_page_edit
+                            param: { id: !php/const Eccube\Entity\Page::TRADELAW_PAGE_ID }
+                        shop_agreement:
+                            name: admin.setting.shop.agreement_setting
+                            url: admin_content_page_edit
+                            param: { id: !php/const Eccube\Entity\Page::AGREEMENT_PAGE_ID }
                         shop_payment:
-                            name: admin.nav.setting.shop.shop_payment
+                            name: admin.setting.shop.payment_setting
                             url: admin_setting_shop_payment
                         shop_delivery:
-                            name: admin.nav.setting.shop.shop_delivery
+                            name: admin.setting.shop.delivery_setting
                             url: admin_setting_shop_delivery
                         shop_tax:
-                            name: admin.nav.setting.shop.shop_tax
+                            name: admin.setting.shop.tax_setting
                             url: admin_setting_shop_tax
                         shop_mail:
-                            name: admin.nav.setting.shop.shop_mail
+                            name: admin.setting.shop.mail_setting
                             url: admin_setting_shop_mail
                         shop_csv:
-                            name: admin.nav.setting.shop.shop_csv
+                            name: admin.setting.shop.csv_setting
                             url: admin_setting_shop_csv
                 system:
-                    name: admin.nav.setting.system
+                    name: admin.setting.system
                     children:
                         member:
-                            name: admin.nav.setting.system.member
+                            name: admin.setting.system.member_management
                             url: admin_setting_system_member
                         authority:
-                            name: admin.nav.setting.system.authority
+                            name: admin.setting.system.authority_management
                             url: admin_setting_system_authority
                         security:
-                            name: admin.nav.setting.system.security
+                            name: admin.setting.system.security_management
                             url: admin_setting_system_security
                         log:
-                            name: admin.nav.setting.system.log
+                            name: admin.setting.system.log_display
                             url: admin_setting_system_log
                         masterdata:
-                            name: admin.nav.setting.system.masterdata
+                            name: admin.setting.system.master_data_management
                             url: admin_setting_system_masterdata
                         system_index:
-                            name: admin.nav.setting.system.system_index
+                            name: admin.setting.system.system_info
                             url: admin_setting_system_system
         store:
-            name: admin.nav.store
-            icon: fa-info-circle
+            name: admin.store
+            icon: fa-plug
             children:
                 plugin:
                     name: admin.nav.store.plugin

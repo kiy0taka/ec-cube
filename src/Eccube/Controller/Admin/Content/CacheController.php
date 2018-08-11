@@ -15,10 +15,10 @@ namespace Eccube\Controller\Admin\Content;
 
 use Eccube\Controller\AbstractController;
 use Eccube\Util\CacheUtil;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CacheController extends AbstractController
 {
@@ -37,7 +37,7 @@ class CacheController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $result = $cacheUtil->clearCache();
 
-            $this->addSuccess('admin.content.cache.save.complete', 'admin');
+            $this->addSuccess('admin.common.delete_complete', 'admin');
         }
 
         return [
