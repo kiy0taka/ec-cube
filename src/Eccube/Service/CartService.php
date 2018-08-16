@@ -13,6 +13,7 @@
 
 namespace Eccube\Service;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
 use Eccube\Entity\Cart;
@@ -42,7 +43,7 @@ class CartService
     protected $session;
 
     /**
-     * @var \Doctrine\ORM\EntityManagerInterface
+     * @var EntityManager
      */
     protected $entityManager;
 
@@ -190,19 +191,16 @@ class CartService
         }
 
         $cartKeys = $this->session->get('cart_keys', []);
-        $Cart = null;
         if (count($cartKeys) > 0) {
             foreach ($Carts as $cart) {
                 if ($cart->getCartKey() === current($cartKeys)) {
-                    $Cart = $cart;
-                    break;
+                    return $cart;
                 }
             }
+            return null;
         } else {
-            $Cart = current($Carts);
+            return current($Carts);
         }
-
-        return $Cart;
     }
 
     /**
@@ -418,7 +416,7 @@ class CartService
                 $cartKeys = [];
                 foreach ($Carts as $key => $Cart) {
                     // テーブルから削除されたカートを除外する
-                    if ($Cart == $removed) {
+                    if ($Cart === $removed) {
                         unset($Carts[$key]);
                     }
                     $cartKeys[] = $Cart->getCartKey();
