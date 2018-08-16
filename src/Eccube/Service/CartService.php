@@ -28,7 +28,6 @@ use Eccube\Service\Cart\CartItemComparator;
 use Eccube\Util\StringUtil;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CartService
 {
@@ -198,7 +197,7 @@ class CartService
                     $Cart = $cart;
                     break;
                 }
-            } 
+            }
         } else {
             $Cart = current($Carts);
         }
@@ -482,6 +481,7 @@ class CartService
 
     /**
      * @param string $allocatedId
+     *
      * @return string
      */
     protected function createCartKey($allocatedId, Customer $Customer = null)
