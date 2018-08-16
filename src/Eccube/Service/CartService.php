@@ -90,21 +90,17 @@ class CartService
     protected $tokenStorage;
 
     /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authorizationChecker;
-
-    /**
      * CartService constructor.
      *
      * @param SessionInterface $session
      * @param EntityManagerInterface $entityManager
      * @param ProductClassRepository $productClassRepository
+     * @param CartRepository $cartRepository
      * @param CartItemComparator $cartItemComparator
      * @param CartItemAllocator $cartItemAllocator
      * @param OrderHelper $orderHelper
+     * @param OrderRepository $orderRepository
      * @param TokenStorageInterface $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         SessionInterface $session,
@@ -115,8 +111,7 @@ class CartService
         CartItemAllocator $cartItemAllocator,
         OrderHelper $orderHelper,
         OrderRepository $orderRepository,
-        TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authorizationChecker
+        TokenStorageInterface $tokenStorage
     ) {
         $this->session = $session;
         $this->entityManager = $entityManager;
@@ -127,7 +122,6 @@ class CartService
         $this->orderHelper = $orderHelper;
         $this->orderRepository = $orderRepository;
         $this->tokenStorage = $tokenStorage;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function getCarts()
@@ -488,6 +482,7 @@ class CartService
 
     /**
      * @param string $allocatedId
+     * @return string
      */
     protected function createCartKey($allocatedId, Customer $Customer = null)
     {
