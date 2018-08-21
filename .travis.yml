@@ -21,7 +21,6 @@ cache:
 
 php:
   - 7.1
-  - 7.2
 
 ## see https://github.com/symfony/symfony/blob/e0bdc0c35e9afdb3bee8af172f90e9648c4012fc/.travis.yml#L92-L97
 before_install: &php_setup |
