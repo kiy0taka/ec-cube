@@ -20,6 +20,7 @@ cache:
     - bin/.phpunit
 
 php:
+  - 7.1
   - 7.2
 
 ## see https://github.com/symfony/symfony/blob/e0bdc0c35e9afdb3bee8af172f90e9648c4012fc/.travis.yml#L92-L97
@@ -52,34 +53,23 @@ jobs:
       install:
         - *composer_install
         - *eccube_setup
+        - |
+          composer config repositories.eccube '{
+              "type": "composer",
+              "url": "https://dev-package-api.ec-cube.net",
+              "options": {
+                  "http": {
+                      "header": ["X-ECCUBE-KEY: key_1_1"]
+                  }
+              }
+          }'
+        - bin/console eccube:composer:require ec-cube/ProductReview
       env: DATABASE_URL=mysql://root:@localhost/cube4_dev DATABASE_SERVER_VERSION=5
       script:
         - ./bin/phpunit --exclude-group cache-clear
         - ./bin/phpunit --group cache-clear
     - <<: *unit_test
       env: DATABASE_URL=postgres://postgres:password@localhost/cube4_dev DATABASE_SERVER_VERSION=9
-    - &e2e_test
-      stage: E2E Test
-      before_install:
-        - *php_setup
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-        - wget -c -nc --retry-connrefused --tries=0 http://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
-        - unzip -o -q chromedriver_linux64.zip
-        - sudo mv -f ./chromedriver /usr/local/bin/
-        - sudo chmod +x /usr/local/bin/chromedriver
-        - gem install mailcatcher
-      install:
-        - *composer_install
-        - *eccube_setup
-      env: GROUP=admin01 APP_ENV=codeception DATABASE_URL=postgres://postgres:password@localhost/eccube_db DATABASE_SERVER_VERSION=9 MAILER_URL=smtp://localhost:1025
-      script: ./codeception.sh -g ${GROUP}
-    - <<: *e2e_test
-      env: GROUP=admin02 APP_ENV=codeception DATABASE_URL=postgres://postgres:password@localhost/eccube_db DATABASE_SERVER_VERSION=9 MAILER_URL=smtp://localhost:1025
-    - <<: *e2e_test
-      env: GROUP=admin03 APP_ENV=codeception DATABASE_URL=postgres://postgres:password@localhost/eccube_db DATABASE_SERVER_VERSION=9 MAILER_URL=smtp://localhost:1025
-    - <<: *e2e_test
-      env: GROUP=front APP_ENV=codeception DATABASE_URL=postgres://postgres:password@localhost/eccube_db DATABASE_SERVER_VERSION=9 MAILER_URL=smtp://localhost:1025
     # - stage: Code Coverage
     #   if: type != pull_request
     #   env: DATABASE_URL=sqlite:///%kernel.project_dir%/var/eccube.db DATABASE_SERVER_VERSION=3 COVERAGE=1
