@@ -194,7 +194,7 @@
             "url": "http://localhost:8080/",
             "options": {
                 "http": {
-                    "header": ["X-ECCUBE-KEY: SuatLVtHvqf6NZXSVBVfQS4VB8Bhgw2JY0r1Dx3n"]
+                    "header": ["X-ECCUBE-KEY: kSXPZrkr2JIKOYzA6JnB2SokiFhUySEoC8TjOE6A"]
                 }
             }
         }
