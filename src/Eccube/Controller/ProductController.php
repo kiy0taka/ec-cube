@@ -159,9 +159,12 @@ class ProductController extends AbstractController
         $this->eventDispatcher->dispatch(EccubeEvents::FRONT_PRODUCT_INDEX_SEARCH, $event);
         $searchData = $event->getArgument('searchData');
 
+        $query = $qb->getQuery();
+        $query->useResultCache(true);
+
         /** @var SlidingPagination $pagination */
         $pagination = $paginator->paginate(
-            $qb,
+            $query,
             !empty($searchData['pageno']) ? $searchData['pageno'] : 1,
             !empty($searchData['disp_number']) ? $searchData['disp_number']->getId() : $this->productListMaxRepository->findOneBy([], ['sort_no' => 'ASC'])->getId()
         );
