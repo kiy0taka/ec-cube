@@ -38,6 +38,7 @@ class PluginStoreInstallPage extends AbstractAdminPageStyleGuide
         $this->tester->waitForElementVisible(['id' => 'installBtn']);
         $this->tester->click(['id' => 'installBtn']);
         $this->tester->waitForElementVisible(['css' => '#installModal > div > div > div.modal-footer > a'], 60);
+        echo $this->tester->grabPageSource().PHP_EOL;
         $this->tester->see($message, ['css' => '#installModal > div > div > div.modal-body > p']);
         $this->tester->click(['css' => '#installModal > div > div > div.modal-footer > a']);
 
