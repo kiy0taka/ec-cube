@@ -110,6 +110,8 @@ class ProductRepository extends AbstractRepository
             ->leftJoin('p.ProductImage', 'pi')
             ->leftJoin('p.ProductTag', 'pt')
             ->where($qb->expr()->in('p.id', $ids))
+            ->andWhere($qb->expr()->in('pc.Product', $ids))
+            ->andWhere($qb->expr()->in('pi.Product', $ids))
             ->andWhere('pc.visible = :visible')
             ->setParameter('visible', true)
             ->orderBy('cc1.sort_no', 'DESC')
