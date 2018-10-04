@@ -404,6 +404,16 @@ class EA10PluginCest
         $Horizon->インストール();
     }
 
+    public function check(\AcceptanceTester $I)
+    {
+        $code = getenv('ECCUBE_TARGET_PLUGIN');
+        $plugin = new Store_Plugin($I, $code);
+        $plugin->インストール()
+            ->有効化()
+            ->無効化()
+            ->削除();
+    }
+
     private function publishPlugin($fileName)
     {
         copy(codecept_data_dir().'/'.'plugins/'.$fileName, codecept_root_dir().'/repos/'.$fileName);
