@@ -77,14 +77,10 @@ class EntityProxyService
             $traits = isset($addTraits[$targetEntity]) ? $addTraits[$targetEntity] : [];
             $rc = new ClassReflection($targetEntity);
             $fileName = str_replace('\\', '/', $rc->getFileName());
-            $baseName = basename($fileName);
             $entityTokens = Tokens::fromCode(file_get_contents($fileName));
 
             if (strpos($fileName, 'app/proxy/entity') === false) {
                 $this->removeClassExistsBlock($entityTokens); // remove class_exists block
-            } else {
-                // Remove to duplicate path of /app/proxy/entity
-                $fileName = str_replace('/app/proxy/entity', '', $fileName);
             }
 
             if (isset($removeTrails[$targetEntity])) {
@@ -96,15 +92,14 @@ class EntityProxyService
             foreach ($traits as $trait) {
                 $this->addTrait($entityTokens, $trait);
             }
-            $projectDir = str_replace('\\', '/', $this->container->getParameter('kernel.project_dir'));
 
-            // baseDir e.g. /src/Eccube/Entity and /app/Plugin/PluginCode/Entity
-            $baseDir = str_replace($projectDir, '', str_replace($baseName, '', $fileName));
-            if (!file_exists($outputDir.$baseDir)) {
-                mkdir($outputDir.$baseDir, 0777, true);
+            // baseDir e.g. Eccube/Entity and Plugin/PluginCode/Entity
+            $baseDir = dirname(str_replace('\\', '/', $targetEntity));
+            if (!file_exists($outputDir.'/'.$baseDir)) {
+                mkdir($outputDir.'/'.$baseDir, 0777, true);
             }
 
-            $file = ltrim(str_replace($projectDir, '', $fileName), '/');
+            $file = str_replace('\\', '/', $targetEntity).'.php';
             $code = $entityTokens->generateCode();
             $generatedFiles[] = $outputFile = $outputDir.'/'.$file;
 

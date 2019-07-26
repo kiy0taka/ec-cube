@@ -65,7 +65,7 @@ class EntityProxyServiceTest extends EccubeTestCase
     {
         $this->entityProxyService->generate([__DIR__], [], $this->tempOutputDir);
 
-        $generatedFile = $this->tempOutputDir.'/src/Eccube/Entity/Product.php';
+        $generatedFile = $this->tempOutputDir.'/Eccube/Entity/Product.php';
         self::assertTrue(file_exists($generatedFile));
 
         // Traitのuse句があるかどうか
@@ -88,7 +88,7 @@ class EntityProxyServiceTest extends EccubeTestCase
     {
         $this->entityProxyService->generate([__DIR__], [], $this->tempOutputDir);
 
-        $generatedFile = $this->tempOutputDir.'/src/Eccube/Entity/Product.php';
+        $generatedFile = $this->tempOutputDir.'/Eccube/Entity/Product.php';
         self::assertTrue(file_exists($generatedFile));
 
         $tokens = Tokens::fromCode(file_get_contents($generatedFile));
