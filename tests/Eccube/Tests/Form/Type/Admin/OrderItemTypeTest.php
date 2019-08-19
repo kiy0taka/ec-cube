@@ -118,36 +118,4 @@ class OrderItemTypeTest extends \Eccube\Tests\Form\Type\AbstractTypeTestCase
         $this->form->submit($this->formData);
         $this->assertFalse($this->form->isValid());
     }
-
-    public function testInvalidTaxRate_Blank()
-    {
-        $this->formData['tax_rate'] = '';
-
-        $this->form->submit($this->formData);
-        $this->assertFalse($this->form->isValid());
-    }
-
-    public function testInvalidTaxRate_OverMaxLength()
-    {
-        $this->formData['tax_rate'] = '12345678910'; // Max 9
-
-        $this->form->submit($this->formData);
-        $this->assertFalse($this->form->isValid());
-    }
-
-    public function testInvalidTaxRate_NotNumeric()
-    {
-        $this->formData['tax_rate'] = 'abcde';
-
-        $this->form->submit($this->formData);
-        $this->assertFalse($this->form->isValid());
-    }
-
-    public function testInvalidTaxRate_HasMinus()
-    {
-        $this->formData['tax_rate'] = '-12345';
-
-        $this->form->submit($this->formData);
-        $this->assertFalse($this->form->isValid());
-    }
 }
