@@ -49,8 +49,9 @@ class LayoutEditPage extends AbstractAdminPageStyleGuide
         return $this;
     }
 
-    public function コンテキストメニューを開く($blockName)
+    public function コンテキストメニューを開く($blockName, $offsetX = 0, $offsetY = 0)
     {
+        $this->tester->scrollTo(['xpath' => "//div[contains(@id, 'detail_box__layout_item')][div[div[1][span[text()='${blockName}']]]]/div/div[2]"], $offsetX, $offsetY);
         $this->tester->click(['xpath' => "//div[contains(@id, 'detail_box__layout_item')][div[div[1][span[text()='${blockName}']]]]/div/div[2]"]);
 
         return $this;
@@ -58,7 +59,7 @@ class LayoutEditPage extends AbstractAdminPageStyleGuide
 
     public function コンテキストメニューで上に移動($blockName)
     {
-        $this->コンテキストメニューを開く($blockName);
+        $this->コンテキストメニューを開く($blockName, 0, 200);
         $this->tester->waitForElementVisible(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[1]"]);
         $this->tester->click(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[1]"]);
 
@@ -67,7 +68,7 @@ class LayoutEditPage extends AbstractAdminPageStyleGuide
 
     public function コンテキストメニューで下に移動($blockName)
     {
-        $this->コンテキストメニューを開く($blockName);
+        $this->コンテキストメニューを開く($blockName, 0, 200);
         $this->tester->waitForElementVisible(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[2]"]);
         $this->tester->click(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[2]"]);
 
@@ -76,7 +77,7 @@ class LayoutEditPage extends AbstractAdminPageStyleGuide
 
     public function コンテキストメニューでセクションに移動($blockName)
     {
-        $this->コンテキストメニューを開く($blockName);
+        $this->コンテキストメニューを開く($blockName, 0, 200);
         $this->tester->waitForElementVisible(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[3]"]);
         $this->tester->wait(1);
         $this->tester->click(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[3]"]);
@@ -85,13 +86,12 @@ class LayoutEditPage extends AbstractAdminPageStyleGuide
         $this->tester->click(['id' => 'move-to-section']);
         $this->tester->waitForElementNotVisible(['id' => 'move-to-section']);
         $this->tester->wait(1);
-
         return $this;
     }
 
     public function コンテキストメニューでコードプレビュー($blockName, $element = null, $timeout = 10)
     {
-        $this->コンテキストメニューを開く($blockName);
+        $this->コンテキストメニューを開く($blockName, 0, -200);
         $this->tester->scrollTo(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[4]"], 0, 0);
         $this->tester->wait(1);
         $this->tester->click(['xpath' => "//div[contains(@id, 'popover')]/div[2]/div/a[4]"]);
