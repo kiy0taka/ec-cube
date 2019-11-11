@@ -614,6 +614,9 @@ class EA03ProductCest
             ->カテゴリ作成();
         $I->see('保存しました', CategoryManagePage::$登録完了メッセージ);
 
+        $x = $I->executeJS('return document.documentElement.outerHTML');
+        var_dump($x);
+
         // カテゴリ削除 (children)
         $CategoryPage->一覧_削除(3)
             ->acceptModal();
