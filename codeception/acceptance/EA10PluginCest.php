@@ -447,6 +447,7 @@ abstract class Abstract_Plugin
 
     public function tableExists()
     {
+        $this->I->wait(1);
         foreach ($this->tables as $table) {
             $exists = $this->conn->executeQuery("SELECT count(*) AS count FROM information_schema.columns WHERE table_name = '".$table."';")->fetch()['count'] > 0;
             $this->I->assertTrue($exists, 'テーブルがあるはず '.$table);
@@ -455,6 +456,7 @@ abstract class Abstract_Plugin
 
     public function tableNotExists()
     {
+        $this->I->wait(1);
         foreach ($this->tables as $table) {
             $exists = $this->conn->executeQuery("SELECT count(*) AS count FROM information_schema.columns WHERE table_name = '".$table."';")->fetch()['count'] > 0;
             $this->I->assertFalse($exists, 'テーブルがないはず '.$table);
@@ -463,6 +465,7 @@ abstract class Abstract_Plugin
 
     public function columnExists()
     {
+        $this->I->wait(1);
         foreach ($this->columns as $column) {
             list($tableName, $columnName) = explode('.', $column);
             $exists = $this->conn->executeQuery("SELECT count(*) AS count FROM information_schema.columns WHERE table_name = '${tableName}' AND column_name = '${columnName}';")->fetch()['count'] == 1;
@@ -472,6 +475,7 @@ abstract class Abstract_Plugin
 
     public function columnNotExists()
     {
+        $this->I->wait(1);
         foreach ($this->columns as $column) {
             list($tableName, $columnName) = explode('.', $column);
             $exists = $this->conn->executeQuery("SELECT count(*) AS count FROM information_schema.columns WHERE table_name = '${tableName}' AND column_name = '${columnName}';")->fetch()['count'] == 1;

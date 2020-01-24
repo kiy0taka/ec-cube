@@ -70,7 +70,7 @@ class PluginManagePage extends AbstractAdminPageStyleGuide
         $this->ストアプラグイン_ボタンクリック($pluginCode, '削除');
         $this->tester->waitForElementVisible(['id' => 'officialPluginDeleteButton']);
         $this->tester->click(['id' => 'officialPluginDeleteButton']);
-        $this->tester->waitForElementVisible(['css' => '#officialPluginDeleteModal > div > div > div.modal-footer > button:nth-child(3)'], 30);
+        $this->tester->waitForElementVisible(['css' => '#officialPluginDeleteModal > div > div > div.modal-footer > button:nth-child(3)'], 60);
         $this->tester->see($message, ['css' => '#officialPluginDeleteModal > div > div > div.modal-body.text-left > p']);
         $this->tester->click(['css' => '#officialPluginDeleteModal > div > div > div.modal-footer > button:nth-child(3)']);
 
@@ -122,7 +122,7 @@ class PluginManagePage extends AbstractAdminPageStyleGuide
     public function 独自プラグイン_削除($pluginCode)
     {
         $this->独自プラグイン_ボタンクリック($pluginCode, '削除');
-        $this->tester->waitForElementVisible(['css' => '#localPluginDeleteModal .modal-footer a']);
+        $this->tester->waitForElementVisible(['css' => '#localPluginDeleteModal .modal-footer a'], 60);
         $this->tester->click(['css' => '#localPluginDeleteModal .modal-footer a']);
 
         return $this;
@@ -141,6 +141,7 @@ class PluginManagePage extends AbstractAdminPageStyleGuide
     {
         $xpath = ['xpath' => $this->独自プラグイン_セレクタ($pluginCode).'/../td[6]//i[@data-original-title="'.$label.'"]/parent::node()'];
         $this->tester->click($xpath);
+        $this->tester->wait(1);
 
         return $this;
     }
