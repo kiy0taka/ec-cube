@@ -686,6 +686,7 @@ class Store_Plugin extends Abstract_Plugin
     {
         $published = copy(codecept_data_dir().'/'.'plugins/'.$fileName, codecept_root_dir().'/repos/'.$fileName);
         $this->I->assertTrue($published, "公開できた ${fileName}");
+        $this->I->wait(1);
     }
 }
 

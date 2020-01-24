@@ -68,7 +68,7 @@ class PluginManagePage extends AbstractAdminPageStyleGuide
     public function ストアプラグイン_削除($pluginCode, $message = '削除が完了しました。')
     {
         $this->ストアプラグイン_ボタンクリック($pluginCode, '削除');
-        $this->tester->waitForElementVisible(['id' => 'officialPluginDeleteButton']);
+        $this->tester->waitForElementVisible(['id' => 'officialPluginDeleteButton'], 60);
         $this->tester->click(['id' => 'officialPluginDeleteButton']);
         $this->tester->waitForElementVisible(['css' => '#officialPluginDeleteModal > div > div > div.modal-footer > button:nth-child(3)'], 60);
         $this->tester->see($message, ['css' => '#officialPluginDeleteModal > div > div > div.modal-body.text-left > p']);
@@ -130,6 +130,7 @@ class PluginManagePage extends AbstractAdminPageStyleGuide
 
     public function 独自プラグイン_アップデート($pluginCode, $fileName)
     {
+        $this->tester->wait(1);
         $this->tester->attachFile(['xpath' => $this->独自プラグイン_セレクタ($pluginCode).'/../td[5]//input[@type="file"]'], $fileName);
         $this->tester->click(['xpath' => $this->独自プラグイン_セレクタ($pluginCode).'/../td[5]//button']);
         $this->tester->see('アップデートしました。', self::完了メーッセージ);
