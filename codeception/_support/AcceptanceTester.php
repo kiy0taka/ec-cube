@@ -185,7 +185,7 @@ class AcceptanceTester extends \Codeception\Actor
 
                 return $this->getLastDownloadFile($fileNameRegex, $retryCount - 1);
             }
-            throw new FileNotFoundException($fileNameRegex);
+            throw new FileNotFoundException($downloadDir.$fileNameRegex);
         }
 
         return end($files);
