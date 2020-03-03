@@ -34,4 +34,5 @@ user_data:
          route: '([0-9a-zA-Z_\-]+\/?)+(?<!\/)'
     defaults:
         _controller: Eccube\Controller\UserDataController::index
+    methods: [GET]
 
