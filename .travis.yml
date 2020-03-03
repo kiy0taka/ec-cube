@@ -94,6 +94,7 @@ jobs:
     stage: E2E Test
     before_install:
       - echo APP_ENV=prod > .env
+      - composer install --dev --no-interaction -o
       - docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up -d ec-cube postgres mailcatcher
       - docker-compose exec ec-cube composer install --dev --no-interaction -o
       - docker-compose exec ec-cube chown -R www-data:www-data var app html
