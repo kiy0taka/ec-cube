@@ -21,6 +21,8 @@ use Faker\Factory as Faker;
 
 $config = parse_ini_file(__DIR__.'/config.ini', true);
 
+echo $config['eccube_path'].'/vendor/autoload.php'.PHP_EOL;
+
 /*
  * create fixture
  * このデータは$appを使って直接eccubeのデータベースに作成される
@@ -30,9 +32,18 @@ $config = parse_ini_file(__DIR__.'/config.ini', true);
 if (file_exists($config['eccube_path'].'/vendor/autoload.php')) {
     require_once $config['eccube_path'].'/vendor/autoload.php';
 }
+
+echo '****************************'.PHP_EOL;
+echo '****************************'.PHP_EOL;
+echo __DIR__.'/../../.env'.PHP_EOL;
+
 if (file_exists(__DIR__.'/../../.env')) {
+    echo 'Load .. '.__DIR__.'/../../.env'.PHP_EOL;
     (new \Dotenv\Dotenv(__DIR__.'/../../'))->overload();
 }
+echo '****************************'.PHP_EOL;
+echo '****************************'.PHP_EOL;
+
 $kernel = new Kernel('test', false);
 $kernel->boot();
 
