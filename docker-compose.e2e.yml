@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  ec-cube:
+    env_file:
+      - e2e.env
+  codecept:
+    build:
+      context: codeception
+      args:
+        - ECCUBE_PATH=/var/www/html
+        - DBTYPE=pgsql
+    links:
+      - mailcatcher
+    depends_on:
+      - browser
+    env_file:
+      - e2e.env
+    environment:
+      - TZ=Asia/Tokyo
+      - WEB_DRIVER_HOST=browser
+      - WEB_DRIVER_PORT=4444
+      - MAILCATCHER_HOST=mailcatcher
+      - SYMFONY_DEPRECATIONS_HELPER=weak
+      - BASE_URL=http://ec-cube/
+    volumes:
+      - ./:/var/www/html
+#      - ./ff_profile.zip.b64:/root/ff_profile.zip.b64
+#      - ./tests/_envs:/var/www/html/codeception/_envs
+#      - repos:/var/www/html/repos
+    networks:
+      - backend
+
+  browser:
+    image: selenium/standalone-chrome-debug:3.141.59-fluorine
+    shm_size: 1g
+    ports:
+      - 5900
+    dns: 8.8.4.4
+    environment:
+      - no_proxy=localhost
+    volumes:
+      - ./codeception/_support/_downloads:/home/seluser/Downloads
+    networks:
+      - backend
