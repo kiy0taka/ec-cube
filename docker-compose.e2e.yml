@@ -1,4 +1,7 @@
 version: "3"
+volumes:
+  downloads:
+    driver: local
 
 services:
   ec-cube:
@@ -24,6 +27,7 @@ services:
       - SYMFONY_DEPRECATIONS_HELPER=weak
       - BASE_URL=http://ec-cube/
     volumes:
+      - downloads:/var/www/html/codeception/_support/_downloads:ro
       - ./:/var/www/html
 #      - ./ff_profile.zip.b64:/root/ff_profile.zip.b64
 #      - ./tests/_envs:/var/www/html/codeception/_envs
@@ -33,13 +37,14 @@ services:
 
   browser:
     image: selenium/standalone-chrome-debug:3.141.59-fluorine
+    user: root
     shm_size: 1g
     ports:
-      - 5900
+      - 5900:5900
     dns: 8.8.4.4
     environment:
       - no_proxy=localhost
     volumes:
-      - ./codeception/_support/_downloads:/home/seluser/Downloads
+      - downloads:/home/seluser/Downloads:rw
     networks:
       - backend

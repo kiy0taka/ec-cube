@@ -102,7 +102,7 @@ jobs:
       - docker-compose exec -u www-data ec-cube bin/console e:i --no-interaction
     php: 7.3
     env: GROUP=admin01
-    script: docker-compose -f docker-compose.yml -f docker-compose.e2e.yml run -e --rm codecept run -d -g ${GROUP} --env travis,chrome,pgsql
+    script: docker-compose -f docker-compose.yml -f docker-compose.e2e.yml run -e --rm codecept run -d -g ${GROUP} --env chrome,pgsql,docker
   - <<: *e2e_test
     php: 7.3
     env: GROUP=admin02
