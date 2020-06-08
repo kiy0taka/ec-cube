@@ -20,6 +20,7 @@ use Page\Admin\TopPage;
  * @group admin01
  * @group toppage
  * @group ea1
+ * @group vaddy
  */
 class EA01TopCest
 {
