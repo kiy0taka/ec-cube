@@ -362,3 +362,7 @@ Fixtures::add('createNews', function ($publishDate, $title, $description, $url =
 
     return $News;
 });
+
+Fixtures::add('getService', function ($id) use ($container) {
+    return $container->get($id);
+});
